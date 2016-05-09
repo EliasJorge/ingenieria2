@@ -1,6 +1,0 @@
-1.	Login
-2.	Registrarse
-3.	Perfil
-4.	Publicación(individual)
-5.	Novedades(pagina principal)
-6.	

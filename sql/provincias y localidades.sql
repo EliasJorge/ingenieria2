@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `provincias` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `provincia` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- Volcar la base de datos para la tabla `provincias`
@@ -49,16 +49,16 @@ INSERT INTO `provincias` (`id`, `provincia`) VALUES
 DROP TABLE IF EXISTS `localidades`;
 CREATE TABLE IF NOT EXISTS `localidades` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_privincia` int(11) NOT NULL,
+  `id_provincia` int(11) NOT NULL,
   `localidad` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2383 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2383 ;
 
 --
 -- Volcar la base de datos para la tabla `localidades`
 --
 
-INSERT INTO `localidades` (`id`, `id_privincia`, `localidad`) VALUES
+INSERT INTO `localidades` (`id`, `id_provincia`, `localidad`) VALUES
 (1, 1, '25 de Mayo'),
 (2, 1, '3 de febrero'),
 (3, 1, 'A. Alsina'),
@@ -2132,7 +2132,7 @@ INSERT INTO `localidades` (`id`, `id_privincia`, `localidad`) VALUES
 (2071, 22, 'Palacios'),
 (2072, 22, 'Pavón'),
 (2073, 22, 'Pavón Arriba');
-INSERT INTO `localidades` (`id`, `id_privincia`, `localidad`) VALUES
+INSERT INTO `localidades` (`id`, `id_provincia`, `localidad`) VALUES
 (2074, 22, 'Pedro Gómez Cello'),
 (2075, 22, 'Pérez'),
 (2076, 22, 'Peyrano'),

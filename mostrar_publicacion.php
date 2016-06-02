@@ -13,14 +13,32 @@ include 'funciones.php';
 	<title>mi publicacion</title>
 	
 	<meta charset="utf-8">
+	<meta http-equiv="imagetoolbar" content="no" />
 	
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 	
 </head>
 
-<body>
-<div class="main">
-	<div class="right" id="content">
+<body id="fondoVerde">
+
+	<div class="main">
+	<img src="images/logo-couchinn1.png" align="center" />
+	<div id="menu-wrap">
+		<ul id="tab">
+			<li><a href="index.php">Inicio</a></li>
+			<li><a href="#">Sobre Nosotros</a></li>
+			<li><a href="#">Contacto</a></li>
+			<li><a href="#">Opciones</a>
+				<ul id="sub-tab">
+					<li><a href="#">Opcion 1</a></li>
+					<li><a href="#">Opcion 2</a></li>
+				</ul>
+			</li>
+		</ul>
+       
+	</div>
+
+	<div class="right" id="publicacion">
 
 		<?php 
 			$id = $_REQUEST['id'];
@@ -41,21 +59,25 @@ include 'funciones.php';
 			$consulta3 = "select * from lista_localidades where id = '$idLoc'";
 			$result3= mysql_query($consulta3,$con);
 			$fila3= mysql_fetch_array($result3);
-			
+			echo "<fieldset>";
 			echo "<h2>".htmlentities($fila['titulo'])."</h2>";
 			echo "<h4> Disponible desde:".htmlentities($fechaDesde)."</h4>";
 			echo "<h4> Disponible hasta:".htmlentities($fechaHasta)."</h4>";
 			echo "<p>Capacidad: ".htmlentities($capacidad)."</p>";
 			echo "<p>ubicado en: ".htmlentities($fila2['provincia']).", ".htmlentities($fila3['localidad'])."</p>";
+			echo "<fieldset> <legend> Descripcion: </legend>";
 			echo "<p>".htmlentities($fila['descripcion'])."</p>";
-			//echo "<img src='imagen.php?id=$id' />";		
+			echo "</fieldset>";
+			echo "</fieldset>";
+					
 
 		?>
 	</div>
-	<div class="left" id="imagen">
+	<div class="left">
 		<?php 
-		
+			echo "<fieldset>";
 			echo "<img class='imagen' src='imagen.php?id=$id' />";		
+			echo "</fieldset>";
 
 		?>
 

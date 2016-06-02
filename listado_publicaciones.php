@@ -18,17 +18,20 @@ include 'funciones.php';
 	
 </head>
 
-<body>
-	<div id="listados">
+<body id="fondoVerde">
+	<div class="main" id="listado">
 		<?php
 		
 			$consulta = "select * from publicaciones order by titulo asc";
 			$result = mysql_query($consulta, $con);
+			
+			echo "<hr/>";
 	
 			while ($fila= mysql_fetch_array($result)){
-			
+				
+		
 				$publicacion = $fila['id_publicacion'];				
-				echo "<h3>"."<a href='mostrar_publicacion.php?id=$publicacion' >".htmlentities($fila['titulo'])."</a>"."</h3>";				
+				echo "<a href='mostrar_publicacion.php?id=$publicacion' >"."<img class='imagen_lista' src='imagen.php?id=$publicacion' />"." "."<h3>".htmlentities($fila['titulo'])."</a>"."</h3>";				
 				
 				echo "<hr/>";
 				

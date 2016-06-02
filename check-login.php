@@ -1,6 +1,13 @@
 <?php
 	/* start the session */ 
 	session_start();
+	$host_db = "localhost";
+	$user_db = "root";
+	$pass_db = "";
+	$db_name = "couchinn";
+	$tbl_name = "usuarios";
+	// Connect to server and select databse.
+	$conexion = mysqli_connect("$host_db", "$user_db", "$pass_db","$db_name")or die("Cannot Connect to Data Base.");
 ?> 
 	<!DOCTYPE html>
 	<html lang="en">
@@ -12,24 +19,17 @@
 		<body>
 	 
 			<?php
-				$host_db = "localhost";
-				$user_db = "root";
-				$pass_db = "";
-				$db_name = "couchinn";
-				$tbl_name = "usuarios";
-				// Connect to server and select databse.
-				$conexion = mysqli_connect("$host_db", "$user_db", "$pass_db","$db_name")or die("Cannot Connect to Data Base.");
-				// data enviada desde el formulario
 				$mail = $_POST['mail'];
-				$password = $_POST['password'];
-				$sql= "SELECT*FROM $tbl_name WHERE email='$mail' and contrasenia='$password'";
+				$contrasenia= $_POST['password'];
+				$sql= "SELECT*FROM $tbl_name WHERE email='$mail' and contrasenia='$contrasenia'";
 				$result= mysqli_query($conexion,$sql) or die(mysqli_error($conexion));
+				$row = mysqli_fetch_array($result);
+				$nameu=$row["nombre"];
 				if (!$result || mysqli_num_rows($result) == 1)
 				{
 					$_SESSION['loggedin'] = true;
 					$_SESSION['mail'] = $mail;
-					$_SESSION['start'] = time();
-					$_SESSION['expire'] = $_SESSION['start'] + (5 * 60) ;	 
+					$_SESSION['nombre']= $nameu; 
 					header("location:index.php?msj=");	 
 				}
 				else 

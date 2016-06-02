@@ -6,7 +6,6 @@
 	$tbl_name = "usuarios";
 	// Connect to server and select databse.
 	$conexion = mysqli_connect("$host_db", "$user_db", "$pass_db","$db_name")or die("Cannot Connect to Data Base.");
-	// data enviada desde el formulario
 	$contrasenia= $_POST['contrasenia'];
 	$rcontrasenia= $_POST['rcontrasenia'];
 	$nom=$_POST['nombre'];
@@ -31,7 +30,7 @@
 			}
 			else
 			{
-				echo 'sucedio un error al ingresar los datos a la base'
+				echo 'sucedio un error al ingresar los datos a la base';
 			}
 		}
 	}

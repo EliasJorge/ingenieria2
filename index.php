@@ -24,13 +24,13 @@
 			<div class="main">
 				<img src="images/logo-couchinn1.png" align="center" />
 				<nav>
-				<li>
+				
 				<?php
 					if(isset($_SESSION['loggedin'])) 
 					{
 				?>
 						<li id="in">Bienvenido <a href="perfil.php?mail=<?=$_SESSION['mail']?>"><strong><?=$_SESSION['nombre']?></strong></a>! 
-						<a href="cerrarsesion.php">Cerrar Sesión</a></li>
+						<a href="cerrar_sesion.php">Cerrar Sesión</a></li>
 						<?php $opcion = $_REQUEST['msj'];
 							if($opcion == "exito")
 							{
@@ -46,7 +46,7 @@
 					<?php
 					}
 				?>
-				</li> 
+				
 				</nav>
 				<nav>
 					<ul id="menu">
@@ -76,10 +76,10 @@
 				<div class="wrapper">
 					<div class="kwicks-wrapper marg_bot1">
 						<ul class="kwicks horizontal"> <!-- las imagenes deben tener 640x414px -->
-							<li><a href="publicacion.php"><img src="images/bariloche-640x414.jpg" alt=""> </a></li>
-							<li><a href="publicacion.php"><img src="images/cafayate-640x414.jpg" alt=""></a></li>
-							<li><a href="publicacion.php"><img src="images/mar-del-plata-640x414.jpg" alt=""></a></li>
-							<li><a href="publicacion.php"><img src="images/tilcara-640x414.jpg" alt=""></a></li>
+							<li><a href="mostrar_publicacion.php?id=19"><img src="images/bariloche-640x414.jpg" alt=""> </a></li>
+							<li><a href="mostrar_publicacion.php?id=18"><img src="images/cafayate-640x414.jpg" alt=""></a></li>
+							<li><a href="mostrar_publicacion.php?id=17"><img src="images/mar-del-plata-640x414.jpg" alt=""></a></li>
+							<li><a href="mostrar_publicacion.php?id=16"><img src="images/tilcara-640x414.jpg" alt=""></a></li>
 						</ul>
 					</div>
 				</div>
@@ -88,9 +88,9 @@
 			<ul class="foot">
 								<li class="active"><a href="login.php">iniciar sesion</a></li>
 								<li><a href="registro.php">registrarse</a></li>
-								<li><a href="index.php">contacto</a></li>
-								<li><a href="index.php">acerca de nosotros</a></li>
-								<li><a href="index.php">ayuda</a></li>
+								<li><a href="index.php?msj=">contacto</a></li>
+								<li><a href="index.php?msj=">acerca de nosotros</a></li>
+								<li><a href="index.php?msj=">ayuda</a></li>
 			</ul>
 			</div>
 			<div class="main" id="pie"></div>

@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
@@ -14,16 +17,38 @@
 		<script type="text/javascript" src="js/jquery.jqtransform.js" ></script>
 		<script type="text/javascript" src="js/script.js" ></script>
 		<script type="text/javascript" src="js/kwicks-1.5.1.pack.js" ></script>
-		<script type="text/javascript" src="js/atooltip.jquery.js"></script>
-		
-		
+		<script type="text/javascript" src="js/atooltip.jquery.js"></script>	
 	</head>
 	<body id="page1" >
 		<div class="bg1">
 			<div class="main">
 				<img src="images/logo-couchinn1.png" align="center" />
 				<nav>
-					
+				<li>
+				<?php
+					if(isset($_SESSION['loggedin'])) 
+					{
+				?>
+						<li id="in">Bienvenido <a href="perfil.php?mail=<?=$_SESSION['mail']?>"><strong><?=$_SESSION['nombre']?></strong></a>! 
+						<a href="cerrarsesion.php">Cerrar Sesión</a></li>
+						<?php $opcion = $_REQUEST['msj'];
+							if($opcion == "exito")
+							{
+								echo "sesión cerrada";
+							}
+						?>
+				<?php
+					}
+					else 
+					{
+					?>
+						<li id="in"><a href="registro.php">Registrarse</a> | <a href="login.php">Ingresar</a></li> 
+					<?php
+					}
+				?>
+				</li> 
+				</nav>
+				<nav>
 					<ul id="menu">
 						<form method="POST" action="buscador.php">
 							<label>Destino:</label>
@@ -59,11 +84,21 @@
 					</div>
 				</div>
 			</div>
-			
+			<div class="main">
+			<ul class="foot">
+								<li class="active"><a href="login.php">iniciar sesion</a></li>
+								<li><a href="registro.php">registrarse</a></li>
+								<li><a href="index.php">contacto</a></li>
+								<li><a href="index.php">acerca de nosotros</a></li>
+								<li><a href="index.php">ayuda</a></li>
+			</ul>
+			</div>
+			<div class="main" id="pie"></div>
 		</div>
-			<script type="text/javascript"> Cufon.now(); </script>
-		
-		<script>
+			<script
+				type="text/javascript"> Cufon.now(); 
+			</script>	
+			<script>
 				$(document).ready(function(){
 					$('.kwicks').kwicks({
 						max : 500,
@@ -72,6 +107,6 @@
 					});
 							   
 				})
-		</script>
+			</script>
 	</body>
 </html 	>

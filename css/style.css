@@ -26,6 +26,13 @@ header {height:116px}
 .kwicks li {/* these are required, but the values are up to you (must be pixel) */width:160px;height:414px;/*do not change these */display:block;overflow:hidden;padding:0 !important; /* if you need padding, do so with an inner div (or implement your own box-model hack) */cursor:pointer;background:none !important;}
 .kwicks.horizontal li {/* This is optional and will be disregarded by the script. However, it should be provided for non-JS enabled browsers. */margin-right:0;/*Set to same as spacing option. */	float:left}
 
+/*modificar*/
+
+#fondo {color:#FFFFFF;text-align:center}
+#registrar {background:url(../images/footer-background.png);padding:10px 15px;height:20px;margin-bottom:10px;}
+#registrar > a {display:block;padding:0.90px;font-size:24px;color:#000000;text-align:center; text-decoration:none;line-height:20px}
+#in {background:url(../images/footer-background.png);padding:10px 15px;height:20px;margin-bottom:10px;}
+#in > a {text-align:left; text-decoration:none; line-height:0px}
 
 /*.pad_bot1 {padding-bottom:10px}
 .pad_bot2 {padding-bottom:24px}

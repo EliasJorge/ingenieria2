@@ -35,7 +35,7 @@
 				else 
 				{
 					echo "Username o Password estan incorrectos.";	 
-					echo "<a href='login.html'>Volver a Intentarlo</a>";
+					echo "<a href='login.php'>Volver a Intentarlo</a>";
 				}
 	 
 			?>

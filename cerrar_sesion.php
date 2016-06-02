@@ -12,10 +12,16 @@
     {
 		session_unset();
         session_destroy();
-        
-       header("Location: index.php?msj=exito");
-        
-    }else {
-        echo "Operación incorrecta.";
+        echo '<script type="text/javascript">
+					alert("sesion cerrada correctamente");
+					window.location="index.php"
+				</script>';
+    }
+    else 
+    {
+		echo '<script type="text/javascript">
+					alert("operacion incorrecta");
+					window.location="index.php"
+				</script>';
     }
 ?> 

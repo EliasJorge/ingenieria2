@@ -18,26 +18,36 @@
 	{
 		if($contrasenia != $rcontrasenia) 
 	    {
-			echo "Las contraseñas ingresadas no coinciden. <a href='javascript:history.back();'>Reintentar</a>";
-        }
+			echo '<script type="text/javascript">
+						alert("las contraseñas ingresadas no coinciden");
+						window.location="registro.php"
+					</script>';
+		}
         else
 		{
 			$query = "INSERT INTO usuarios (nombre,apellido,email,contrasenia,tipo) 
 					VALUES ('$nom','$ape','$mail', '$contrasenia','normal')";
 			if($conexion->query($query))
 			{
-				echo 'Los datos han sido insertados en la base de datos';
+			echo '<script type="text/javascript">
+						alert("los datos han sido guardados correctamente);
+						window.location="index.php"
+					</script>';
 			}
 			else
 			{
-				echo 'sucedio un error al ingresar los datos a la base';
+				echo '<script type="text/javascript">
+							alert("error, no se pudo almacenar los datos");
+							window.location="registro.php"
+						</script>';
 			}
 		}
 	}
 	else
-	{	 
-		echo "<br>". "El E-mail ya se encuentra reistrado." . "<br>";
-		echo "<a href='crearUsuario.html'>Por favor escoga otro E-mail</a>";
-	}
-	
+	{	
+		echo '<script type="text/javascript">
+					alert("el e-mail ya se encuentra registrado, or favor ingrese otro e-mail");
+					window.location="registro.php"
+				</script>'; 
+	}	
 ?>

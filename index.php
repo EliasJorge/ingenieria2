@@ -52,7 +52,7 @@
 					<ul id="menu">
 						<form method="POST" action="buscador.php">
 							<label>Destino:</label>
-							<input type="text" name="destino" id="destino" size="20" />
+							<input type="text" name="destino" id="destino" size="20" onClick="location.href = 'buscador.php'"/>
 							<label> Fecha Inicio:</label>
 							<input type="date" name="datepicker" id="datepicker" size="10" />
 							<label> Fecha Fin:</label>

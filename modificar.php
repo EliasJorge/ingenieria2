@@ -1,7 +1,7 @@
 <?php
 include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
 $con = conectar1();	
-
+	session_start();
 ?>
 
 <?php 
@@ -66,6 +66,7 @@ $con = conectar1();
 </head>
 
 <body>
+	<fieldset>
 	<?php
 	     if ($op == "autor")
 		 {
@@ -74,6 +75,7 @@ $con = conectar1();
 		 	{
 				echo "<form action='form_modificar.php?opcion=edicion' method='POST' name='mod'>";
 			 } else {
+					echo "<legend> <h3> Modificar un tipo de alojamiento </h3> </legend>";
 					echo "<form action='tAlojamiento_modificar.php' method='POST' name='mod'>";
 			 }
 	?>
@@ -83,6 +85,7 @@ $con = conectar1();
 		</SELECT> 
         <input name="modificar" type="submit" value="modificar" />
     </form>
+	</fieldset>
 
 
 </body>

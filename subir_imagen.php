@@ -17,7 +17,8 @@
 
 
 	</head>
-	<body>
+	<body id="fondoVerde">
+		<div class="main">
 		<div class="bg3">
 			<fieldset>
 				<legend>
@@ -30,6 +31,7 @@
 					<?php echo "<input type='hidden' name='publicacion' id='publicacion' value=$opcion>"; ?>
 				</form>
 			</fieldset>
+		</div>
 		</div>
 	</body>
 

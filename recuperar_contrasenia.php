@@ -38,11 +38,7 @@
 			</nav>
 			<div class="main">
 				<div id="fondo">
-					<head>
-					<meta charset="UTF-8">
-					<title>Recuperar contraseña</title>
-					</head>
-					<body>
+					
 						<?php
 						$mail= $_POST['mail'];
 						$sql="SELECT * FROM usuarios WHERE email='$mail'";
@@ -61,9 +57,9 @@
 								<br><br>
 								<input type="submit" name="enviar" value="Enviar" />
 								<input type="button" name="Cancelar" value="Cancelar" OnClick= "self.location.href = 'index.php'">
-								<input type="hidden" name="mail" value="<?echo $mail;?>" />   
+								<input type="hidden" name="mail" value="<?php echo $mail;?>" />   
 							</form> 
-						<?
+						<?php
 						}
 						else
 						{
@@ -73,33 +69,21 @@
 								</script>';
 						}
 						?>
-					</body>
+					
 				</div>
 			</div>
 			<div class="main">
 			<ul class="foot">
-						<li class="active"><a href="login.php">iniciar sesion</a></li>
+								<li class="active"><a href="login.php">iniciar sesion</a></li>
 								<li><a href="index.php">contacto</a></li>
 								<li><a href="index.php">acerca de nosotros</a></li>
 								<li><a href="index.php">ayuda</a></li>
 			</ul>
 			</div>
-			<div class="main" id="pie"></div>
+			
 			
 		</div>
-			<script type="text/javascript"> Cufon.now(); </script>
-		
-		<script>
-				$(document).ready(function(){
-					$('.kwicks').kwicks({
-						max : 500,
-						spacing : 0,
-						event : 'mouseover'
-					});
-							   
-				})
-		</script>
-		
+					
 	</body>
 </html>
 	

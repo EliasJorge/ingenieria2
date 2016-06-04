@@ -5,7 +5,7 @@
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 	<head>
-		<title></title>
+		<title>CouchInn</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 		
@@ -17,39 +17,17 @@
 		<script type="text/javascript" src="js/jquery.jqtransform.js" ></script>
 		<script type="text/javascript" src="js/script.js" ></script>
 		<script type="text/javascript" src="js/kwicks-1.5.1.pack.js" ></script>
-		<script type="text/javascript" src="js/atooltip.jquery.js"></script>	
+		<script type="text/javascript" src="js/atooltip.jquery.js"></script>
+		
+		
 	</head>
-	<body id="page1" >
+	<body  class="bg1" >
 		<div class="bg1">
 			<div class="main">
-				<img src="images/logo-couchinn1.png" align="center" />
-				<nav>
-				
-				<?php
-					if(isset($_SESSION['loggedin'])) 
-					{
-				?>
-						<li id="in">Bienvenido <a href="perfil.php?mail=<?=$_SESSION['mail']?>"><strong><?=$_SESSION['nombre']?></strong></a>! 
-						<a href="cerrar_sesion.php">Cerrar Sesión</a></li>
-						<?php $opcion = $_REQUEST['msj'];
-							if($opcion == "exito")
-							{
-								echo "sesión cerrada";
-							}
-						?>
-				<?php
-					}
-					else 
-					{
-					?>
-						<li id="in"><a href="registro.php">Registrarse</a> | <a href="login.php">Ingresar</a></li> 
-					<?php
-					}
-				?>
-				
-				</nav>
-				<nav>
-					<ul id="menu">
+				<img src="images/logo-couchinn1.png" style= "height:200px; align:center"/>
+				</div>
+				<nav>					
+					<ul id="menu" >
 						<form method="POST" action="buscador.php">
 							<label>Destino:</label>
 							<input type="text" name="destino" id="destino" size="20" onClick="location.href = 'buscador.php'"/>
@@ -67,10 +45,38 @@
 							<OPTION VALUE=5>5 </option>			
 							</SELECT> 
 							<input name='buscar' type='submit' value='buscar' />
+							<?php
+							if(isset($_SESSION['loggedin'])) 
+							{
+							?>
+								
+								 <a href="perfil.php?mail=<?=$_SESSION['mail']?>">Bienvenido <strong><?=$_SESSION['nombre']?></strong></a>!  
+								<a href="cerrar_sesion.php">Cerrar Sesión</a>
+							<?php
+							}
+							else 
+							{
+							?>
+							<a href="registro.php">Registrarse</a> | <a href="login.php">Iniciar Sesion</a>
+							<?php
+							}
+							?>
+							
+							
 						</form>
+						<div>
+							<?php
+							if(isset($_SESSION['loggedin'])) 
+							{
+							?>
+								<a href="admin.php">Mas opciones</a>
+							<?php
+							}
+							?>
+						</div>
+						
 					</ul>
 				</nav> 
-				
 			</div>
 			<div class="main">
 				<div class="wrapper">
@@ -86,19 +92,20 @@
 			</div>
 			<div class="main">
 			<ul class="foot">
+								<li><a href="listado_publicaciones.php">Ver Publicaciones</a></li>
 								<li class="active"><a href="login.php">iniciar sesion</a></li>
 								<li><a href="registro.php">registrarse</a></li>
-								<li><a href="index.php?msj=">contacto</a></li>
-								<li><a href="index.php?msj=">acerca de nosotros</a></li>
-								<li><a href="index.php?msj=">ayuda</a></li>
+								<li><a href="index.php">contacto</a></li>
+								<li><a href="index.php">acerca de nosotros</a></li>
+								<li><a href="index.php">ayuda</a></li>
 			</ul>
 			</div>
 			<div class="main" id="pie"></div>
+			
 		</div>
-			<script
-				type="text/javascript"> Cufon.now(); 
-			</script>	
-			<script>
+			<script type="text/javascript"> Cufon.now(); </script>
+		
+		<script>
 				$(document).ready(function(){
 					$('.kwicks').kwicks({
 						max : 500,
@@ -107,6 +114,7 @@
 					});
 							   
 				})
-			</script>
+		</script>
+		
 	</body>
 </html 	>

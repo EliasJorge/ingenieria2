@@ -15,9 +15,9 @@
         $row = mysqli_fetch_array($perfil);
         $email = $row["email"];
         $nameu = $row["nombre"];
+		$apellido=$row["apellido"];
         $id=$row["id_usuario"];	
 		$foto = $row["foto"];
-		$tipo = $row["tipo_foto"];
     }
     else 
     {
@@ -31,7 +31,7 @@
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 	<head>
-		<title>couchinn</title>
+		<title>CouchInn-Perfil</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 		
@@ -51,21 +51,14 @@
 				<img src="images/logo-couchinn1.png" align="center" />
 			</div>
 			<nav>
-				<li id="registrar"><a>Perfil de <?echo $nameu?> </a></li>
+				<li id="registrar"><a>Perfil de <?=$nameu?> </a></li>
 			</nav>
 			<div class="main">
 				<div id="fondo">
-					<head>
-						<meta charset="UTF-8">
-						<title>Perfil</title>
-					</head>
-					<body>
-						<!--<?php 
-							header("Content-type:" .$tipo);
-							echo $foto;
-						?>-->
+						<?php echo "<img class='imagen' src='imagenUsuario.php?id=$id' />"; ?>
 						<br>
 						<strong>Nombre:</strong> <?=$nameu?>
+						<strong></strong> <?=$apellido?>
 						<br>
 						<strong>Email:</strong> <?=$email?>
 						<br>
@@ -86,7 +79,6 @@
 							mysqli_close($conexion);
 						?> 
 						</div>
-					</body>
 				</div>
 			</div>
 			<div class="main">
@@ -112,6 +104,5 @@
 							   
 				})
 		</script>
-		
 	</body>
-</html 	>
+</html>

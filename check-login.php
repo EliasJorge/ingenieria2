@@ -30,7 +30,7 @@
 					$_SESSION['loggedin'] = true;
 					$_SESSION['mail'] = $mail;
 					$_SESSION['nombre']= $nameu; 
-					header("location:index.php?msj=");	 
+					header("location:admin.php");	 
 				}
 				else 
 				{

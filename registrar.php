@@ -25,12 +25,13 @@
 		}
         else
 		{
-			$query = "INSERT INTO usuarios (nombre,apellido,email,contrasenia,tipo) 
-					VALUES ('$nom','$ape','$mail', '$contrasenia','normal')";
-			if($conexion->query($query))
+			$consulta= "INSERT INTO usuarios (nombre,apellido,email,contrasenia,tipo,foto) 
+					VALUES ('$nom','$ape','$mail', '$contrasenia','normal','./images/senor_x.jpg')";
+			$sql= mysqli_query($conexion,$consulta);
+			if($sql)
 			{
-			echo '<script type="text/javascript">
-						alert("los datos han sido guardados correctamente);
+				echo '<script type="text/javascript">
+						alert("los datos han sido ingresados correctamente");
 						window.location="index.php"
 					</script>';
 			}

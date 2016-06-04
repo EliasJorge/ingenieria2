@@ -4,8 +4,12 @@ include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abr
 $con = conectar1();
 
 //comprobamos si ha ocurrido un error.
-if ( !isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] > 0){
-	echo "ha ocurrido un error";
+if ( !isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] > 0)
+{
+			echo '<script type="text/javascript">
+						alert("ha ocurrido un error");
+						window.location="crear_publicacion.php"
+					</script>';
 } else {
 	//ahora vamos a verificar si el tipo de archivo es un tipo de imagen permitido.
 	//y que el tamano del archivo no exceda los 16MB
@@ -30,12 +34,21 @@ if ( !isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] > 0){
 		$resultado = @mysql_query("INSERT INTO imagenes (id_publicacion, imagen, tipo_imagen) VALUES ('$publicacion', '$data', '$tipo')") ;
 
 		if ($resultado){
-			echo "el archivo ha sido copiado exitosamente";
+			echo '<script type="text/javascript">
+									alert("la publicacion se subio correctamente");
+									window.location="admin.php"
+								</script>';
 		} else {
-			echo "ocurrio un error al copiar el archivo.";
+			echo '<script type="text/javascript">
+									alert("ocurrio un error al ingresar los datos");
+									window.location="subir_imagen.php"
+								</script>';
 		}
 	} else {
-		echo "archivo no permitido, es tipo de archivo prohibido o excede el tamano de $limite_kb Kilobytes";
+		echo '<script type="text/javascript">
+					alert("archivo no permitido, es tipo de archivo prohibido o excede el tamano de $limite_kb Kilobytes");
+					window.location="subir_imagen.php"
+			</script>';
 	}
 }
 mysql_close($con);

@@ -57,23 +57,23 @@ function generaTipoHospedaje()
 		
 </head>
 
-<body>
-
+<body id="fondoVerde">
+	<div class="main">
 	<div class="bg3">
 	<h4>Publica tu couch </h4>
-	<fieldset>
-		<legend>
-			<h4>Cual es tu direccion? </h4>
-		</legend>
-		<form action="insertar.php?opcion=publicacion" method="POST" name="publicacion">
-		<div id="demo" style="width:600px;">
+		<fieldset>
+			<legend>
+				<h4>Cual es tu direccion? </h4>
+			</legend>
+			<form action="insertar.php?opcion=publicacion" method="POST" name="publicacion">
+			<div id="demo" style="width:600px;">
 				<div id="demoDer">
 					<select disabled="disabled" name="localidades" id="localidades">
 						<option value="0">Selecciona opci&oacute;n...</option>
 					</select>
 				</div>
 				<div id="demoIzq"><?php generaProvincia(); ?></div>
-		</div><br/>
+			</div><br/>
 		</fieldset>
 		<fieldset>
 			<legend>
@@ -101,8 +101,11 @@ function generaTipoHospedaje()
 			Disponible hasta: <input type="date" name="fechaHasta" id="datepicker" size="10" />
 			<br>
 			<input id="enviar1" name="siguiente" type="submit" value="siguiente" />
+			<input id="enviar2" name="cancelar" type="button" value="cancelar" onClick="location.href = 'admin.php'"/>
+			
 		</fieldset>
     </form>
     </div>
+	</div>
 </body>
 </html> 

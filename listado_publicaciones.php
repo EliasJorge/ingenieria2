@@ -13,6 +13,8 @@ include 'funciones.php';
 	<title>hospedajes en couchinn</title>
 	
 	<meta charset="utf-8">
+	<meta http-equiv="imagetoolbar" content="no" />
+
 	
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 	
@@ -20,6 +22,19 @@ include 'funciones.php';
 
 <body id="fondoVerde">
 	<div class="main" id="listado">
+		<div id="menu-wrap">
+			<ul id="tab">
+				<li><a href="index.php">Inicio</a></li>
+				<li><a href="#">Sobre Nosotros</a></li>
+				<li><a href="#">Contacto</a></li>
+				<li><a href="#">Opciones</a>
+					<ul id="sub-tab">
+						<li><a href="#">Opcion 1</a></li>
+						<li><a href="#">Opcion 2</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
 		<?php
 		
 			$consulta = "select * from publicaciones order by titulo asc";

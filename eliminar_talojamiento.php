@@ -1,7 +1,7 @@
 <?php
 include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
 $con = conectar1();	
-
+	session_start();
 ?>
 
 <?php 
@@ -38,16 +38,28 @@ $con = conectar1();
 <body>
 	<div class="bg3">
 	<?php 
-		$mensaje = $_REQUEST['msj'];
+	$mensaje = $_REQUEST['msj'];
 		if ($mensaje == "error"){
-			echo "El tipo de hospedaje elegido esta en uso, elimine primero las publicaciones en las que esta siendo utilizado<br/>";
+			echo '<script type="text/javascript">
+					alert("El tipo de hospedaje elegido esta en uso, elimine primero las publicaciones en las que esta siendo utilizado");
+					window.location="eliminar_talojamiento.php?msj=eliminar"
+				</script>';
+		} 
+		elseif ($mensaje == "vacio")
+		{
+				echo '<script type="text/javascript">
+									alert("el campo tipo de hospedaje esta vacio");
+									window.location="eliminar_talojamiento.php?msj=eliminar"
+								</script>';
+		} 
+		elseif ($mensaje == "exito")
+		{
+				echo '<script type="text/javascript">
+						alert("el tipo de hospedaje fue eliminado con exito ");
+						window.location="eliminar_talojamiento.php?msj=eliminar"
+					</script>';		
 		}
-		if ($mensaje == "vacio"){
-			echo "El campo tipo de hospedaje esta vacio<br/>";
-		}
-		if ($mensaje == "exito"){
-			echo "El tipo de hospedaje fue eliminado con exito <br/>";
-		}
+
 	?>
 	</div>
 	<div class="bg3">

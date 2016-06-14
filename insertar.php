@@ -51,12 +51,18 @@ include 'funciones.php';
 			if (validar_tipoAlojamiento ($tHospedaje)){
 				$consulta = "INSERT INTO tipo_alojamiento(nombre) VALUES ('{$tHospedaje}')";
 			} else {
-					header("location:agregar_hospedaje.php?msj=error");
+					echo '<script type="text/javascript">
+									alert("el tipo de hospedaje ingresado ya existe");
+									window.location="agregar_hospedaje.php?msj=hospedaje"
+								</script>';
 				
 			}
 					
 		} else {
-				 header("location:agregar_hospedaje.php?msj=vacio");
+				 echo '<script type="text/javascript">
+									alert("el campo tipo de hospedaje esta vacio");
+									window.location="agregar_hospedaje.php?msj=hospedaje"
+								</script>';
 
 			}
 	}
@@ -106,7 +112,10 @@ include 'funciones.php';
 		{
 			if ($consulta)
 			{ 
-				header("location:agregar_hospedaje.php?msj=exito");
+				echo '<script type="text/javascript">
+									alert("el tipo de hospedaje fue agregado con exito");
+									window.location="listado_tHospedaje.php"
+								</script>';
 			} else {
 				echo "No se pudo ingresar el registro - ";
 				echo "Error mysql:".mysql_error();

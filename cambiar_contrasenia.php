@@ -8,45 +8,64 @@
 	// Connect to server and select databse.
 	$conexion = mysqli_connect("$host_db", "$user_db", "$pass_db","$db_name")or die("Cannot Connect to Data Base.");
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
-	<head>
-		<title>couchinn</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Couch Inn</title>
+	
+	<!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body class="homepage">
+
+    <header id="header">
+        
+		<?php
 		
-		<script type="text/javascript" src="js/index.js"></script>
-		<script type="text/javascript" src="js/jquery-1.6.js" ></script>
-		<script type="text/javascript" src="js/cufon-yui.js"></script>
-		<script type="text/javascript" src="js/cufon-replace.js"></script>  
-		<script type="text/javascript" src="js/Adamina_400.font.js"></script>
-		<script type="text/javascript" src="js/jquery.jqtransform.js" ></script>
-		<script type="text/javascript" src="js/script.js" ></script>
-		<script type="text/javascript" src="js/kwicks-1.5.1.pack.js" ></script>
-		<script type="text/javascript" src="js/atooltip.jquery.js"></script>
-		</head>
-		<body id="page1" >
-		<div class="bg1">
-			<div class="main">
-				<img src="images/logo-couchinn1.png" align="center" />
-			</div>
-			<nav>
-				<li id="registrar"><a>Cambiar Contraseña</a></li>
-			</nav>
+			//---Incluimos la barra superior
+			include_once('view/topBar.php');
+			
+			//---Incluimos el nav
+			include_once('view/navBar.php');
+
+		?>
+		
+    </header><!--/header-->
+	<!-- Contenido de la pagina -->
+	
+	<section>
+       <div class="center">
+			
+				<h2>Cambiar Contraseña</h2>
+			
 			<div class="main">
 				<div id="fondo">
-				<head>
-					<meta charset="UTF-8">
-					<title>Cambiar Contraseña</title>
-				</head>
-				<body>
+				
     <?php
 				if(isset($_SESSION['loggedin'])) 
 				{ // comprobamos que la sesión esté iniciada
 					if(isset($_POST['enviar'])) 
 					{
-						if($_POST['contrasenia'] != $_POST['rcontraenia']) 
+						if($_POST['contrasenia'] != $_POST['rcontrasenia']) 
 						{
 								echo '<script type="text/javascript">
 									alert("las contraseñas ingresadas no coinciden");
@@ -55,9 +74,10 @@
 						}
 						else 
 						{
-							$nameu = $_SESSION['nombre'];
-							$contrasenia = mysqli_real_escape_string($_POST['contrasenia']);
-							$sql = mysqli_query("UPDATE usuarios SET contrasenia='".$contrasenia."' WHERE nombre='".$nombre."'");
+							$id = $_SESSION['idU'];
+							$contrasenia = mysqli_real_escape_string($conexion,$_POST['contrasenia']);
+							$consulta = "UPDATE usuarios SET contrasenia='".$contrasenia."' WHERE id_usuario='".$id."'";
+							$sql = mysqli_query($conexion,$consulta);
 							if($sql) 
 							{
 								echo '<script type="text/javascript">
@@ -69,7 +89,7 @@
 							{
 								echo '<script type="text/javascript">
 									alert("error, no se pudo cambiar la contraseña");
-									window.location="cambiar_contraseña.php"
+									window.location="cambiar_contrasenia.php"
 								</script>';
 							}
 						}
@@ -86,8 +106,8 @@
 							<br>
 							<input type="password" name="rcontrasenia" />
 							<br>
-							<input type="submit" name="enviar" value="Enviar" /> 
-							<input type="button" name="Cancelar" value="Cancelar" OnClick= "self.location.href = 'index.php'">
+							<input class="btn btn-primary btn-lg" type="submit" name="enviar" value="Enviar" /> 
+							<input class="btn btn-primary btn-lg" type="button" name="Cancelar" value="Cancelar" OnClick= "self.location.href = 'perfil.php?mail=<?=$_SESSION['mail']?>'">
 						   
 						</form>
     <?php
@@ -97,36 +117,29 @@
 				{
 					echo '<script type="text/javascript">
 									alert("acceso denegado");
-									window.location="cambiar_contraseña.php"
+									window.location="index.php"
 								</script>';
 				}
     ?> 
-				</body>
 			</div>
 		</div>
-			<div class="main">
-			<ul class="foot">
-						<li class="active"><a href="login.php">iniciar sesion</a></li>
-								<li><a href="index.php">contacto</a></li>
-								<li><a href="index.php">acerca de nosotros</a></li>
-								<li><a href="index.php">ayuda</a></li>
-			</ul>
-			</div>
-			<div class="main" id="pie"></div>
+    </section><!--/section-->
+	
+	<!-- /contenido -->
+	
+	<!-- Footer -->
+	<?php
+		
+			//---Incluimos el footer
+			include_once('view/footer.php');
 			
-		</div>
-			<script type="text/javascript"> Cufon.now(); </script>
-		
-		<script>
-				$(document).ready(function(){
-					$('.kwicks').kwicks({
-						max : 500,
-						spacing : 0,
-						event : 'mouseover'
-					});
-							   
-				})
-		</script>
-		
-	</body>
-</html 	>
+	?>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
+</body>
+</html>

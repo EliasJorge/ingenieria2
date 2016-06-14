@@ -25,17 +25,23 @@
 				$result= mysqli_query($conexion,$sql) or die(mysqli_error($conexion));
 				$row = mysqli_fetch_array($result);
 				$nameu=$row["nombre"];
+				$tipo=$row["tipo"];
+				$id= $row["id_usuario"];
 				if (!$result || mysqli_num_rows($result) == 1)
 				{
 					$_SESSION['loggedin'] = true;
 					$_SESSION['mail'] = $mail;
 					$_SESSION['nombre']= $nameu; 
-					header("location:admin.php");	 
+					$_SESSION['tipoUsuario']= $tipo;
+					$_SESSION['idU'] = $id;
+					header("location:index.php");	 
 				}
 				else 
 				{
-					echo "Username o Password estan incorrectos.";	 
-					echo "<a href='login.php'>Volver a Intentarlo</a>";
+					echo '<script type="text/javascript">
+					alert("E-Mail o Contraseña incorrectos, intente nuevamente");
+					window.location="login.php"
+				</script>';
 				}
 	 
 			?>

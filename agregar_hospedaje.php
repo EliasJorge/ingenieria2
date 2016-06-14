@@ -1,48 +1,93 @@
 <?php
-	session_start();
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
 	
-		<title>Nuevo tipo de hospedaje</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-		
-		
-</head>
+	session_start();
+	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
+	$con = conectar1();	
+?>
 
-<body id='fondoVerde'>
-	<?php
-		$mensaje = $_REQUEST['msj'];
-		if ($mensaje == "error"){
-			echo '<script type="text/javascript">
-									alert("el tipo de hospedaje ingresado ya existe");
-									window.location="agregar_hospedaje.php?msj=hospedaje"
-								</script>';
-		} elseif ($mensaje == "vacio"){
-			echo '<script type="text/javascript">
-									alert("el campo tipo de hospedaje esta vacio");
-									window.location="agregar_hospedaje.php?msj=hospedaje"
-								</script>';
-		} elseif ($mensaje == "exito"){
-			echo '<script type="text/javascript">
-									alert("el tipo de hospedaje fue agregado con exito");
-									window.location="agregar_hospedaje.php?msj=hospedaje"
-								</script>';		}
-	?>
-	<div class="main">
-	<div class="bg3">
-		<fieldset>
+<?php
+			if(!isset($_SESSION['loggedin'])) 
+			{
+				echo '<script type="text/javascript">
+					alert("no esta autorizado para ver esta seccion");
+					window.location="index.php"
+				</script>';							
+			}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Couch Inn</title>
+	
+	<!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body class="homepage">
+	
+
+    <header id="header">
+        
+		<?php
+		
+			//---Incluimos la barra superior
+			include_once('view/topBar.php');
+			
+			//---Incluimos el nav
+			include_once('view/navBar.php');
+
+		?>
+		
+    </header><!--/header-->
+	<!-- Contenido de la pagina -->
+	
+	<section>
+		<div class= "center" >
+       <fieldset>
 			<legend>
-				<h4>Agregar un nuevo tipo de hospedaje </h4>
+				<h2>Agregar un nuevo tipo de hospedaje </h2>
 			</legend>
 			<form action="insertar.php?opcion=tipoHospehaje" method="POST" name="talojamiento" id="talojamiento" >
 			<input class="caja" name="alojamiento" id="alojamiento" type="text" size="60" maxlength="60" /> <br/>
-			<input id="enviar" name="agregar" type="submit" value="agregar" />
-		</fieldset>	
+			<input class="btn btn-primary btn-lg" id="enviar" name="agregar" type="submit" value="agregar" />
+		</fieldset>
+		</div>
+    </section><!--/section-->
 	
-	</div>
-	</div>
+	<!-- /contenido -->
+	
+	<!-- Footer -->
+	<?php
+		
+			//---Incluimos el footer
+			include_once('view/footer.php');
+			
+	?>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
 </body>
+</html>

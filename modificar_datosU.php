@@ -24,37 +24,60 @@
     {
 		echo '<script type="text/javascript">
 					alert("El usuario no esta registrado o elimino su cuenta");
-					window.location="cambiar_contraseña.php"
+					window.location="perfil.php?mail=$mail"
 				</script>';
 	}
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
-	<head>
-		<title>CouchInn-Modificar Datos</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Couch Inn</title>
+	
+	<!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body class="homepage">
+
+    <header id="header">
+        
+		<?php
 		
-		<script type="text/javascript" src="js/index.js"></script>
-		<script type="text/javascript" src="js/jquery-1.6.js" ></script>
-		<script type="text/javascript" src="js/cufon-yui.js"></script>
-		<script type="text/javascript" src="js/cufon-replace.js"></script>  
-		<script type="text/javascript" src="js/Adamina_400.font.js"></script>
-		<script type="text/javascript" src="js/jquery.jqtransform.js" ></script>
-		<script type="text/javascript" src="js/script.js" ></script>
-		<script type="text/javascript" src="js/kwicks-1.5.1.pack.js" ></script>
-		<script type="text/javascript" src="js/atooltip.jquery.js"></script>
-	</head>
-	<body id="page1" >
-		<div class="bg1">
-			<div class="main">
-				<img src="images/logo-couchinn1.png" align="center" />
-			</div>
-			<nav>
-				<li id="registrar"><a>Modificar mis datos </a></li>
-			</nav>
-			<div class="main">
+			//---Incluimos la barra superior
+			include_once('view/topBar.php');
+			
+			//---Incluimos el nav
+			include_once('view/navBar.php');
+
+		?>
+		
+    </header><!--/header-->
+	
+	<!-- Contenido de la pagina -->
+	
+	<section>
+		<div class="center">
+			<h2>Modificar mis datos </h2>
+		</div>
+			<div class="center">
 				<div id="fondo">
 					<?php
 						if(isset($_SESSION['loggedin'])) 
@@ -97,46 +120,44 @@
 								<br>
 								<input type="text" name="telefono" value="<?=$telefono?>" required  />
 								<br><br>
-								Incluir foto <input type="file" name="foto" id="foto" />
+								<div class="center">
+								Incluir foto <input  type="file" name="foto" id="foto" />
+								</div>
 								<br><br>
-								<input type="submit" name="enviar" value="Guardar cambios" />
-								<input type="reset" name="limpiar" value="Borrar los datos introducidos" />
-								<input type="button" name="Cancelar" value="Cancelar" OnClick= "self.location.href = 'index.php'">  
+								<input class="btn btn-primary btn-lg" type="submit" name="enviar" value="Guardar cambios" />
+								<input class="btn btn-primary btn-lg" type="reset" name="limpiar" value="Borrar los datos introducidos" />
+								<input class="btn btn-primary btn-lg" type="button" name="Cancelar" value="Cancelar" OnClick= "self.location.href = 'perfil.php'">  
 							</form>
 						<?php
 						}
 					}
 					else 
 					{
-						echo "Acceso denegado.";
+						echo '<script type="text/javascript">
+												alert("Acceso denegado, no posee permisos para ingresar a esta pagina");
+												window.location="index.php"
+											</script>';
 					}
 					?> 
 				</div>
 			</div>
-			<div class="main">
-			<ul class="foot">
-						<li class="active"><a href="login.php">iniciar sesion</a></li>
-								<li><a href="index.php">contacto</a></li>
-								<li><a href="index.php">acerca de nosotros</a></li>
-								<li><a href="index.php">ayuda</a></li>
-			</ul>
-			</div>
-			<div class="main" id="pie"></div>
+    </section><!--/section-->
+	
+	<!-- /contenido -->
+	
+	<!-- Footer -->
+	<?php
+		
+			//---Incluimos el footer
+			include_once('view/footer.php');
 			
-		</div>
-			<script type="text/javascript"> Cufon.now(); </script>
-		
-		<script>
-				$(document).ready(function(){
-					$('.kwicks').kwicks({
-						max : 500,
-						spacing : 0,
-						event : 'mouseover'
-					});
-							   
-				})
-		</script>
-		
-	</body>
-</html 	>
+	?>
 
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
+</body>
+</html>

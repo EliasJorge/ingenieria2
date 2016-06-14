@@ -1,8 +1,20 @@
 <?php
-include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
-$con = conectar1();	
-
+	
+	session_start();
+	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
+	$con = conectar1();	
 ?>
+
+<?php
+			if(!isset($_SESSION['loggedin'])) 
+			{
+				echo '<script type="text/javascript">
+					alert("no esta autorizado para ver esta seccion");
+					window.location="index.php"
+				</script>';							
+			}
+?>
+
 <?php 
 $id = $_REQUEST['id'];
 if (!$id)	// comprueba que se haya seleccionado un tipo de alojamiento para modificar
@@ -20,29 +32,79 @@ $nombre= $fila['nombre'];
 
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<link type="text/css" rel="stylesheet" href="css/style-admin.css"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
-	<title>Modificar tipo de hospedaje</title>
-</head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Couch Inn</title>
+	
+	<!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
 
-<body>
-	<div >
-    <form action="modificar_bd.php?opcion=alojamiento&id=<?php echo $id ?>" method="POST" name="alojamiento1">
+<body class="homepage">
+
+    <header id="header">
+        
+		<?php
+		
+			//---Incluimos la barra superior
+			include_once('view/topBar.php');
+			
+			//---Incluimos el nav
+			include_once('view/navBar.php');
+
+		?>
+		
+    </header><!--/header-->
+	<!-- Contenido de la pagina -->
+	
+	<section>
+       <div class= "center" >
+			<form action="modificar_bd.php?opcion=alojamiento&id=<?php echo $id ?>" method="POST" name="alojamiento1">
     	
     	<fieldset>
 			<legend>
-				<h4>Modificar un nuevo tipo de hospedaje </h4>
+				<h2>Modificar un nuevo tipo de hospedaje </h2>
 			</legend>
 			<input class="caja" name="alojamiento" type="text" size="60" maxlength="60"  value="<?php echo $fila['nombre']; ?>"/> <br/>
-    	    <input id="button3" name="enviar" type="submit" value="guardar" />
-    </form>
-    </div>
+    	    <input class="btn btn-primary btn-lg" id="button3" name="enviar" type="submit" value="guardar" />
+			</form>
+		</div>
+    </section><!--/section-->
+	
+	<!-- /contenido -->
+	
+	<!-- Footer -->
+	<?php
+		
+			//---Incluimos el footer
+			include_once('view/footer.php');
+			
+	?>
 
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
 </body>
-
 </html>

@@ -15,13 +15,22 @@ include 'funciones.php';
 			$consulta="delete from tipo_alojamiento where id_talojamiento = '$id'";
 	
 			mysql_query($consulta);	
-			header("location:eliminar_talojamiento.php?msj=exito");
+			echo 	'<script type="text/javascript">
+						alert("el tipo de hospedaje fue eliminado con exito ");
+						window.location="listado_tHospedaje.php"
+					</script>';
 			
 		} else {
-		header("location:eliminar_talojamiento.php?msj=error");		
+		echo 	'<script type="text/javascript">
+					alert("El tipo de hospedaje elegido esta en uso, elimine primero las publicaciones en las que esta siendo utilizado");
+					window.location="eliminar_talojamiento.php"
+				</script>';		
 		}
 	} else {
-		header("location:eliminar_talojamiento.php?msj=vacio");		
+		echo 	'<script type="text/javascript">
+					alert("el campo tipo de hospedaje esta vacio");
+					window.location="eliminar_talojamiento.php"
+				</script>';		
 		}
 //**********************************************************************************************************************
 

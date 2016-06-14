@@ -1,59 +1,119 @@
 <?php
-
-include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
-$con = conectar1();		
-include 'funciones.php';
+	
+		session_start();
+		include 'funciones.php';
 ?>
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>hospedajes en couchinn</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Couch Inn</title>
 	
-	<meta charset="utf-8">
-	<meta http-equiv="imagetoolbar" content="no" />
+	<!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
 
-	
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-	
-</head>
+<body class="homepage">
 
-<body id="fondoVerde">
-	<div class="main" id="listado">
-		<div id="menu-wrap">
-			<ul id="tab">
-				<li><a href="index.php">Inicio</a></li>
-				<li><a href="#">Sobre Nosotros</a></li>
-				<li><a href="#">Contacto</a></li>
-				<li><a href="#">Opciones</a>
-					<ul id="sub-tab">
-						<li><a href="#">Opcion 1</a></li>
-						<li><a href="#">Opcion 2</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
+    <header id="header">
+        
 		<?php
 		
-			$consulta = "select * from publicaciones order by titulo asc";
-			$result = mysql_query($consulta, $con);
+			//---Incluimos la barra superior
+			include_once('view/topBar.php');
 			
-			echo "<hr/>";
-	
-			while ($fila= mysql_fetch_array($result)){
-				
+			//---Incluimos el nav
+			include_once('view/navBar.php');
+
+		?>
 		
-				$publicacion = $fila['id_publicacion'];				
-				echo "<a href='mostrar_publicacion.php?id=$publicacion' >"."<img class='imagen_lista' src='imagen.php?id=$publicacion' />"." "."<h3>".htmlentities($fila['titulo'])."</a>"."</h3>";				
-				
-				echo "<hr/>";
-				
-			}
+    </header><!--/header-->
+	<!-- Contenido de la pagina -->
 	
-			mysql_close($con);
+	<section>
+		<div>
+		<?php		
+			$consulta = "select * from publicaciones order by titulo asc";
+			$resultado = busqueda($consulta);			
+		?>
+			<table class="table table hover">
+							<tr>
+								<th>Fotos</th>
+								<th>Titulo</th>
+								<th>Descripcion</th>
+								<th></th>
+							</tr>
+						<?php
+						$num = 27;
+						foreach ($resultado as $r){?>
+							<tr><?php
+								$idUser= $r['id_usuario'];
+								$sql = "SELECT * FROM usuarios WHERE id_usuario='$idUser'";
+								$result1 = busqueda($sql);
+								//if(!empty($result1)){
+								foreach($result1 as $array){
+										if(($array['tipo'] == 'premium') or ($array['tipo'] == 'admin')){
+											echo "<td><img src=imagen.php?id=$r[id_publicacion] id='imagen_lista' class='img-rounded'></td>";
+										}
+										else{
+											//echo "<td><img src=imagen.php?id=$num id='imagen_lista' class='img-rounded'></td>";
+											?>
+											<td><img src="images/sillon.png" id='imagen_lista' class='img-rounded'></td>
+											<?php
+											
+										}
+									echo "<td><br><a href=mostrar_publicacion.php?id=$r[id_publicacion]>$r[titulo]</a></td>";
+									}
+								//}
+								?>
+								<td><br><div class="descripcion"><?php echo $r['descripcion']; ?></div></td>
+								<td>
+									<div>
+										<br>
+										<input class="btn btn-primary btn-lg" type="button" value="Ver couch" onclick="window.location.href='mostrar_publicacion.php?id=<?php echo $r['id_publicacion'];?>'">
+									</div>	
+								</td>
+							</tr>
+							<?php
+						}?>
+						</table>
+			
 	
-		?> 
-	</div>
+		</div>       
+    </section><!--/section-->
+	
+	<!-- /contenido -->
+	
+	<!-- Footer -->
+	<?php
+		
+			//---Incluimos el footer
+			include_once('view/footer.php');
+			
+	?>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
 </body>
+</html>

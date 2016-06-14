@@ -1,4 +1,5 @@
-<?php
+<?php	
+	include 'funciones.php';
 	session_start();
 	$host_db = "localhost";
 	$user_db = "root";
@@ -18,91 +19,112 @@
 		$apellido=$row["apellido"];
         $id=$row["id_usuario"];	
 		$foto = $row["foto"];
+		$tel = $row["telefono"];
     }
     else 
     {
 		echo '<script type="text/javascript">
 					alert("El usuario no esta registrado o elimino su cuenta");
-					window.location="cambiar_contraseña.php"
+					window.location="cambiar_contrasenia.php"
 				</script>';
 	}
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
-	<head>
-		<title>CouchInn-Perfil</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+?>	
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Couch Inn</title>
+	
+	<!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body class="homepage">
+
+    <header id="header">
+        
+		<?php
 		
-		<script type="text/javascript" src="js/index.js"></script>
-		<script type="text/javascript" src="js/jquery-1.6.js" ></script>
-		<script type="text/javascript" src="js/cufon-yui.js"></script>
-		<script type="text/javascript" src="js/cufon-replace.js"></script>  
-		<script type="text/javascript" src="js/Adamina_400.font.js"></script>
-		<script type="text/javascript" src="js/jquery.jqtransform.js" ></script>
-		<script type="text/javascript" src="js/script.js" ></script>
-		<script type="text/javascript" src="js/kwicks-1.5.1.pack.js" ></script>
-		<script type="text/javascript" src="js/atooltip.jquery.js"></script>
-	</head>
-	<body id="page1" >
-		<div class="bg1">
-			<div class="main">
-				<img src="images/logo-couchinn1.png" align="center" />
-			</div>
-			<nav>
-				<li id="registrar"><a>Perfil de <?=$nameu?> </a></li>
-			</nav>
-			<div class="main">
-				<div id="fondo">
-						<?php echo "<img class='imagen' src='imagenUsuario.php?id=$id' />"; ?>
+			//---Incluimos la barra superior
+			include_once('view/topBar.php');
+			
+			//---Incluimos el nav
+			include_once('view/navBar.php');
+
+		?>
+		
+    </header><!--/header-->
+	<!-- Contenido de la pagina -->
+	
+	<section id="perfil">
+		<div class="center">
+			<h2>Perfil de <?=$nameu?> </h2>
+		</div>
+			<div class="center">
+				<div id="perfil">
+						<img class='imagen_perfil' src='images/foto-de-perfil.png' />
 						<br>
 						<strong>Nombre:</strong> <?=$nameu?>
-						<strong></strong> <?=$apellido?>
+						<strong> </strong> <?=$apellido?>
 						<br>
 						<strong>Email:</strong> <?=$email?>
+						<br>
+						<strong>Telefono:</strong> <?=$tel?>
 						<br>
 						<a href="modificar_datosU.php?mail=<?=$email?>">modificar mis datos</a>
 						<br>
 						<a href="cambiar_contrasenia.php">Cambiar contraseña</a>
 						<br>
-						<div id="listados">
-						<?php
-							$consulta = "SELECT * FROM publicaciones WHERE id_usuario=$id  ORDER BY titulo asc";
-							$result = mysqli_query($conexion,$consulta) or die(mysqli_error($conexion));
-							while ($fila= mysqli_fetch_array($result))
-							{
-								$publicacion = $fila['id_publicacion'];				
-								echo "<h3>"."<a href='mostrar_publicacion.php?id=$publicacion' >".htmlentities($fila['titulo'])."</a>"."</h3>";
-								echo "<hr/>";			
-							}
-							mysqli_close($conexion);
-						?> 
 						</div>
-				</div>
+						
+						 </section>
+						 		
 			</div>
-			<div class="main">
-			<ul class="foot">
-						<li><a href="index.php">Inicio</a></li>
-						<li><a href="index.php">Contacto</a></li>
-						<li><a href="index.php">Acerca de nosotros</a></li>
-						<li><a href="index.php">Ayuda</a></li>
-			</ul>
-			</div>
-			<div class="main" id="pie"></div>
-			
 		</div>
-			<script type="text/javascript"> Cufon.now(); </script>
+	 <section id="listados">
+						<div class="center" id="listados">
+						<hr/>
+							<h2>Mis publicaciones </h2>
+						<hr/>
+						
+						<?php include_once('listado.php'); ?>
+						</div>
 		
-		<script>
-				$(document).ready(function(){
-					$('.kwicks').kwicks({
-						max : 500,
-						spacing : 0,
-						event : 'mouseover'
-					});
-							   
-				})
-		</script>
-	</body>
+    </section><!--/section-->
+	
+	<!-- /contenido -->
+	
+	<!-- Footer -->
+	<?php
+		
+			//---Incluimos el footer
+			include_once('view/footer.php');
+			
+	?>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
+</body>
 </html>

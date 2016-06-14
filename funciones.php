@@ -1,5 +1,22 @@
 <?php
 //*****************************************************************************************************
+function busqueda($consulta){
+		require_once('abrir_conexion.php');
+		$con = conectar1();
+		$res = mysql_query($consulta,$con);
+		mysql_close($con);
+		if(mysql_num_rows($res) > 0){
+			while ($fila = mysql_fetch_assoc($res)) {
+				$row[] = $fila;
+			}
+			return $row;
+		}
+		else{
+			$row=[];
+			return $row;
+		}
+	}
+//*****************************************************************************************************
 function validar_tipoAlojamiento ($tHospedaje){
 	
 	$consulta= "SELECT * FROM tipo_alojamiento WHERE nombre = '$tHospedaje'";

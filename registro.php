@@ -1,34 +1,59 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
-	<head>
-		<title>CouchInn</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+<?php
+	
+	session_start();
+	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
+	$con = conectar1();	
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Couch Inn</title>
+	
+	<!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body class="homepage">
+
+    <header id="header">
+        
+		<?php
 		
-		<script type="text/javascript" src="js/index.js"></script>
-		<script type="text/javascript" src="js/jquery-1.6.js" ></script>
-		<script type="text/javascript" src="js/cufon-yui.js"></script>
-		<script type="text/javascript" src="js/cufon-replace.js"></script>  
-		<script type="text/javascript" src="js/Adamina_400.font.js"></script>
-		<script type="text/javascript" src="js/jquery.jqtransform.js" ></script>
-		<script type="text/javascript" src="js/script.js" ></script>
-		<script type="text/javascript" src="js/kwicks-1.5.1.pack.js" ></script>
-		<script type="text/javascript" src="js/atooltip.jquery.js"></script>
-	</head>
-	<body id="page1" >
-		<div class="bg1">
-			<div class="main">
-				<img src="images/logo-couchinn1.png" align="center" />
-			</div>
-			<nav>
-				<li id="registrar">
-					<a>Crea tu cuenta de CouchInn</a>
-				</li>
-			</nav>
-			<div class="main">
+			//---Incluimos la barra superior
+			include_once('view/topBar.php');
+			
+			//---Incluimos el nav
+			include_once('view/navBar.php');
+
+		?>
+		
+    </header><!--/header-->
+	<!-- Contenido de la pagina -->
+	
+	<section>
+       <div class="center">
 				<div id="fondo">
-					<form  action="registrar.php" method="post" enctype="multipart/form-data">	
+					<form  class="form-horizontal" action="registrar.php" method="post" enctype="multipart/form-data">	
+						<h2>Registrarse</h2>
+						<br>
 						<label for="mail">Correo Electronico:</label> 							
 						<br>
 						<input type="e-mail" name="mail" required placeholder="example@example.com">
@@ -49,34 +74,29 @@
 						<br>
 						<input type="password" name="rcontrasenia" value="" required maxlength="10" />
 						<br><br>
-						<input type="submit" name="enviar" value="Guardar cambios" />
-						<input type="reset" name="limpiar" value="Borrar los datos introducidos" />
-						<input type="button" name="Cancelar" value="Cancelar" OnClick= "self.location.href = 'index.php'">
+						<input type="submit" class="btn btn-primary btn-lg" name="enviar" value="Guardar cambios" />
+						<input type="reset" class="btn btn-primary btn-lg" name="limpiar" value="Borrar los datos introducidos" />
+						<input type="button" class="btn btn-primary btn-lg" name="Cancelar" value="Cancelar" OnClick= "self.location.href = 'index.php'">
 					</form>
 				</div>
 			</div>
-			<div class="main">
-			<ul class="foot">
-						<li class="active"><a href="login.php">iniciar sesion</a></li>
-								<li><a href="index.php">contacto</a></li>
-								<li><a href="index.php">acerca de nosotros</a></li>
-								<li><a href="index.php">ayuda</a></li>
-			</ul>
-			</div>
-			<script type="text/javascript"> Cufon.now(); </script>
+    </section><!--/section-->
+	
+	<!-- /contenido -->
+	
+	<!-- Footer -->
+	<?php
 		
-			<script>
-				$(document).ready(function()
-				{
-					$('.kwicks').kwicks(
-					{
-						max : 500,
-						spacing : 0,
-						event : 'mouseover'
-					});
-							   
-				})
-			</script>
-		
-	</body>
-</html 	>
+			//---Incluimos el footer
+			include_once('view/footer.php');
+			
+	?>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
+</body>
+</html>

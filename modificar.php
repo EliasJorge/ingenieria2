@@ -1,13 +1,24 @@
 <?php
-include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
-$con = conectar1();	
+	
 	session_start();
+	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
+	$con = conectar1();	
+?>
+
+<?php
+			if(!isset($_SESSION['loggedin'])) 
+			{
+				echo '<script type="text/javascript">
+					alert("no esta autorizado para ver esta seccion");
+					window.location="index.php"
+				</script>';							
+			}
 ?>
 
 <?php 
-	$op= $_REQUEST['opcion'];
-	if ($op == 'tipoAlojamiento')
-	{
+	
+	
+	
 		$consulta="SELECT * FROM tipo_alojamiento order by nombre"; 
 		$result=mysql_query($consulta); 
 
@@ -19,75 +30,87 @@ $con = conectar1();
 		    $nombre=$fila["nombre"]; 
 		    $opcion.="<OPTION VALUE=\"$id\">".$nombre."</option>"; 
 		}
-	}
-	if ($op == 'edicion')
-	{
-		$consulta="SELECT * FROM ediciones"; 
-		$result=mysql_query($consulta); 
-
-		$opcion=""; 
-
-		while ($fila=mysql_fetch_array($result)) { 
-
-	    	$id=$fila["id"]; 
-    		$edicion=$fila["fecha"]; 
-    		$opcion.="<OPTION VALUE=\"$id\">".$edicion."</option>"; 
 	
-		} 
-	}
-	if ($op == 'autor')
-	{
-		$consulta="SELECT * FROM autores order by apellido"; 
-		$result=mysql_query($consulta); 
-
-		$opcion="";
-		while ($fila=mysql_fetch_array($result)) 
-		{ 
-			$id=$fila["id"]; 
-    		$autor=$fila["apellido"].", ".$fila["nombre"]; 
-    		$opcion.="<OPTION VALUE=\"$id\">".$autor."</option>"; 
-		} 	
-	}
-
+	
 	mysql_close($con); // se cierra la conexion a la base de datos
-
-
 ?>
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<link type="text/css" rel="stylesheet" href="css/style-admin.css"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
-	<title>Modificar</title>
-</head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Couch Inn</title>
+	
+	<!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
 
-<body>
-	<fieldset>
+<body class="homepage">
+
+    <header id="header">
+        
+		<?php
+		
+			//---Incluimos la barra superior
+			include_once('view/topBar.php');
+			
+			//---Incluimos el nav
+			include_once('view/navBar.php');
+
+		?>
+		
+    </header><!--/header-->
+	<!-- Contenido de la pagina -->
+	
+	<section>
+	<div class= "center" >
+       <fieldset>
+		<?php
+			echo "<legend> <h2> Modificar un tipo de alojamiento </h2> </legend>";
+			echo "<form action='tAlojamiento_modificar.php' method='POST' name='mod'>";
+			
+		?>
+			<SELECT NAME= "id"> 
+			<OPTION VALUE=0>Seleccione... </option>
+			<?=$opcion?> 
+			</SELECT> 
+			<input class="btn btn-primary btn-lg" name="modificar" type="submit" value="modificar" />
+		</form>
+		</fieldset>
+	</div>
+    </section><!--/section-->
+	
+	<!-- /contenido -->
+	
+	<!-- Footer -->
 	<?php
-	     if ($op == "autor")
-		 {
-			echo "<form action='form_modificar.php?opcion=autor' method='POST' name='mod'>";
-		 }elseif ($op == "edicion")
-		 	{
-				echo "<form action='form_modificar.php?opcion=edicion' method='POST' name='mod'>";
-			 } else {
-					echo "<legend> <h3> Modificar un tipo de alojamiento </h3> </legend>";
-					echo "<form action='tAlojamiento_modificar.php' method='POST' name='mod'>";
-			 }
+		
+			//---Incluimos el footer
+			include_once('view/footer.php');
+			
 	?>
-    	<SELECT NAME= "id"> 
-		<OPTION VALUE=0>Seleccione... </option>
-		<?=$opcion?> 
-		</SELECT> 
-        <input name="modificar" type="submit" value="modificar" />
-    </form>
-	</fieldset>
 
-
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
 </body>
-
 </html>

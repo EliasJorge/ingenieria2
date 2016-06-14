@@ -17,9 +17,15 @@ if ($op == 'alojamiento')
 	
 		mysql_query($consulta);
 	
-		echo "Los datos se han modificado exitosamente";
+		echo '<script type="text/javascript">
+									alert("el tipo de hospedaje fue modificado con exito");
+									window.location="listado_tHospedaje.php"
+								</script>';
 	} else {
-		header("location:modificar.php?opcion=tipo_alojamiento");		
+		echo '<script type="text/javascript">
+									alert("Ha ocurrido un error, intentelo nuevamente");
+									window.location="modificar.php"
+								</script>';		
 		}
 }
 //**********************************************************************************************************************

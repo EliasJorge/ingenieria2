@@ -1,6 +1,6 @@
 <?php
 	
-	function conectar()
+	function conectar1()
 	{
 		$con = mysql_connect("localhost","root","");
 		if (!$con)
@@ -14,7 +14,7 @@
 		{		
 			die('No se pudo utilizar couchinn:'.mysql_error() );
 		}
-			
+		mysql_set_charset('utf8');	
 		return $con;
 	
 	}

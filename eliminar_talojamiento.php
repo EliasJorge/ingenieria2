@@ -1,7 +1,18 @@
 <?php
-include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
-$con = conectar1();	
+	
 	session_start();
+	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
+	$con = conectar1();	
+?>
+
+<?php
+			if(!isset($_SESSION['loggedin'])) 
+			{
+				echo '<script type="text/javascript">
+					alert("no esta autorizado para ver esta seccion");
+					window.location="index.php"
+				</script>';							
+			}
 ?>
 
 <?php 
@@ -23,62 +34,84 @@ $con = conectar1();
 
 ?>
 
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-	<title>eliminar tipo de alojamiento</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Couch Inn</title>
 	
-</head>
+	<!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
 
-<body>
-	<div class="bg3">
-	<?php 
-	$mensaje = $_REQUEST['msj'];
-		if ($mensaje == "error"){
-			echo '<script type="text/javascript">
-					alert("El tipo de hospedaje elegido esta en uso, elimine primero las publicaciones en las que esta siendo utilizado");
-					window.location="eliminar_talojamiento.php?msj=eliminar"
-				</script>';
-		} 
-		elseif ($mensaje == "vacio")
-		{
-				echo '<script type="text/javascript">
-									alert("el campo tipo de hospedaje esta vacio");
-									window.location="eliminar_talojamiento.php?msj=eliminar"
-								</script>';
-		} 
-		elseif ($mensaje == "exito")
-		{
-				echo '<script type="text/javascript">
-						alert("el tipo de hospedaje fue eliminado con exito ");
-						window.location="eliminar_talojamiento.php?msj=eliminar"
-					</script>';		
-		}
+<body class="homepage">
 
-	?>
-	</div>
-	<div class="bg3">
-		<fieldset>
-			<legend>
-				<h4>eliminar un tipo de hospedaje </h4>
-			</legend>
-			<?php
-				echo "<form action='eliminar.php' method='POST' name='del'>";
-			?>
+    <header id="header">
+        
+		<?php
+		
+			//---Incluimos la barra superior
+			include_once('view/topBar.php');
+			
+			//---Incluimos el nav
+			include_once('view/navBar.php');
+
+		?>
+		
+    </header><!--/header-->
+	<!-- Contenido de la pagina -->
+	
+	<section>
+		<div class="center">
+			<fieldset>
+				<legend>
+					<h2>Eliminar un tipo de hospedaje </h2>
+				</legend>
+				<?php
+					echo "<form action='eliminar.php' method='POST' name='del'>";
+				?>
 				<SELECT NAME= "id"> 
-				<OPTION VALUE=0>Seleccione... </option>
-				<?=$opcion?> 
+					<OPTION VALUE=0>Seleccione... </option>
+					<?=$opcion?> 
 				</SELECT> 
-				<input name="eliminar" type="submit" value="eliminar" />
-			</form>
-		</fieldset>
-	</div>
+				<input class="btn btn-primary btn-lg" name="eliminar" type="submit" value="eliminar" />
+				</form>
+			</fieldset>
+		</div>
+    </section><!--/section-->
+	
+	<!-- /contenido -->
+	
+	<!-- Footer -->
+	<?php
+		
+			//---Incluimos el footer
+			include_once('view/footer.php');
+			
+	?>
 
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
 </body>
-
 </html>

@@ -78,6 +78,40 @@ function generaTipoHospedaje()
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="stylesheet" href="css/smoothness/jquery-ui.css">
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/jquery-ui.js"></script> 
+	
+	<script>
+		$(function() {
+			$( "#datepicker, #datepicker2" ).datepicker({
+				showOn: "button",
+				buttonImage: "images/calender_green_16.png",
+				buttonImageOnly: true,
+				buttonText: "Select date"
+			});
+			$( "#datepicker, #datepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+		});
+	</script>
+	<script>
+		$(function() {
+			$.datepicker.setDefaults({ 
+				dateFormat: 'yy-mm-dd',
+				changeMonth: true,
+				changeYear: true,
+				yearRange:"c-80:c",
+				defaultDate:"m d y",
+                dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+                dayNamesShort: [ "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab" ],
+                monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ]
+			});
+			$( "#fechaNacimiento" ).datepicker();
+		});
+	</script>
+	
 </head><!--/head-->
 
 <body class="homepage">
@@ -131,15 +165,23 @@ function generaTipoHospedaje()
 				<label> Cantidad de huespedes:</label>
 				<input class="caja" name="huespedes" type="text" size="30" maxlength="30" /> 
 				<br><br>
-				Disponible desde: <input type="date" name="fechaDesde" id="datepicker" size="10" /><br>
-				<br>
-				Disponible hasta: <input type="date" name="fechaHasta" id="datepicker" size="10" />
-				<br><br>
-				<label> Sube fotos de tu couch: </label>
-				<div class="center" id="subeFotos">
-						<input type="file" name="imagen[]" value="" multiple>
+				<div class="izquierda">
+				<div class="form-group">
+						<label for="fecha">Disponible desde:</label>
+						<input class="" type="text" id="datepicker" name="fechaDesde" placeholder="Ingrese la fecha desde" readonly>
+					</div>
+					<div class="form-group">
+						<label for="fecha">Disponible hasta:</label>
+						<input class="" type="text" id="datepicker2" name="fechaHasta" placeholder="Ingrese la fecha hasta" readonly>
+					</div>
 				</div>
-			
+				
+				<div class="form-group">
+					<label> Sube fotos de tu couch: </label>
+					<div class="center" id="subeFotos">
+							<input type="file" name="imagen[]" value="" multiple>
+					</div>
+				</div>
 			<br>
 			<input class="btn btn-primary btn-lg" id="enviar1" name="siguiente" type="submit" value="siguiente" />
 			<input class="btn btn-primary btn-lg" id="enviar2" name="cancelar" type="button" value="cancelar" onClick="location.href = 'admin.php'"/>
@@ -160,11 +202,11 @@ function generaTipoHospedaje()
 			
 	?>
 	<script type="text/javascript" src="js/select_dependientes.js"></script>
-    <script src="js/jquery.js"></script>
+  
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/jquery.isotope.min.js"></script>
+   
     <script src="js/main.js"></script>
     <script src="js/wow.min.js"></script>
+		
 </body>
 </html>

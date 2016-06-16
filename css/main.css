@@ -2579,9 +2579,16 @@ select { width:220px; }
 }
 
 #columnaa {
-	margin-top: 20px;
+	margin-top: 20px; 
 }
-
+.izquierda {
+	margin-left:-80px;
+	
+}
+.descripcion{
+	word-wrap:break-word;
+	width: 250px;
+}
 #registrar {background:url(../images/footer-background.png);padding:10px 15px;height:20px;margin-bottom:10px;}
 #registrar > a {display:block;padding:0.90px;font-size:24px;color:#000000;text-align:center; text-decoration:none;line-height:20px}
 #in {background:url(../images/footer-background.png);padding:10px 15px;height:20px;margin-bottom:10px;}

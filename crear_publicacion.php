@@ -30,7 +30,7 @@ function generaTipoHospedaje()
 	$consulta2=mysql_query($sql,$con1);
 	
 
-	// Voy imprimiendo el primer select compuesto por las provincias
+	// Voy imprimiendo el select compuesto por los tipos de alojamiento
 	echo "<select name='alojamiento' id='alojamiento'>";
 	echo "<option value='0'>Elige</option>";
 	while($registro2=mysql_fetch_row($consulta2))
@@ -163,7 +163,7 @@ function generaTipoHospedaje()
 				<label>Tipo de hospedaje: 	<?php generaTipoHospedaje(); ?><br>
 				<br>
 				<label> Cantidad de huespedes:</label>
-				<input class="caja" name="huespedes" type="text" size="30" maxlength="30" /> 
+				<input class="caja" name="huespedes" type="number" size="30" maxlength="30" /> 
 				<br><br>
 				<div class="izquierda">
 				<div class="form-group">

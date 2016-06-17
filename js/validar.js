@@ -4,11 +4,24 @@ function validarCouch(){
 	var desc = document.getElementById("descrip");
 	var prov = document.getElementById("provincias").selectedIndex;
 	var loc = document.getElementById("localidades").selectedIndex;
-	var plazas = document.getElementById("cantplazas");
-	var tipo = document.getElementById("tipo").selectedIndex;
+	var plazas = document.getElementById("capacidad");
+	var desde = document.getElementById("datepicker");
+	var hasta = document.getElementById("datepicker2");
+	var tipo = document.getElementById("alojamiento").selectedIndex;
 	var foto = document.getElementById("foto");
 	var expr = /^(?:[\w]\:|\\)(\\[a-z_\-\s0-9\.]+)+\.(png|gif|jpg|jpeg)$/;
 	
+	
+	if(desde.value != null){
+		if(hasta.value != null){
+			if(hasta.value.length > 0){
+				if(desde.value > hasta.value){
+					alert('La fecha desde es mayor que la fecha hasta.');
+					return false;
+				}
+			}
+		}
+	}
 	if(titulo.value == null || titulo.value == ""){
 		alert('El campo titulo esta vacio.');
 		return false;
@@ -25,7 +38,7 @@ function validarCouch(){
 	}
 	else{
 		if(isNaN(desc.value) == false){
-			alert('NO estan permitidos los numeros en el campo descripcion.');
+			alert('No debe completar el campo descripcion unicamente con numeros.');
 			return false;
 		}	
 	}
@@ -38,15 +51,16 @@ function validarCouch(){
 		return false;
 	}
 	if(plazas.value == null || plazas.value == 0){
-		alert('El campo cantidad de plazas esta vacio.');
+		alert('El campo cantidad de huespedes esta vacio.');
 		return false;
 	}
 	if(tipo == null || tipo == 0){
-		alert('Debe seleccionar un tipo de couch.');
+		alert('Debe seleccionar un tipo de hospedaje.');
 		return false;
 	}
+	
 	if(!expr.test(foto.value)){
-		alert('Debe seleccionar una foto.');
+		alert('Debe seleccionar al menos una foto.');
 		return false;
 	}
 }
@@ -56,7 +70,7 @@ function validarBusqueda(){
 	var busqueda = document.getElementById("busqueda");
 
 	if(busqueda.value == null || busqueda.value == 0){
-		alert('Ingrese un valor a buscar.');
+		alert('Ingrese un termino para buscar.');
 		return false;
 	}
 	else{
@@ -76,7 +90,7 @@ function validarBusquedaAvanzada(){
 	var desde = document.getElementById("datepicker");
 	var hasta = document.getElementById("datepicker2");
 	var plazas = document.getElementById("plazas");
-	var tipo = document.getElementById("Tipos").selectedIndex;
+	var tipo = document.getElementById("alojamiento").selectedIndex;
 
 	if(desde.value != null){
 		if(hasta.value != null){

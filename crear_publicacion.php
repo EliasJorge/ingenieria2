@@ -81,6 +81,7 @@ function generaTipoHospedaje()
 	<link rel="stylesheet" href="css/smoothness/jquery-ui.css">
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/jquery-ui.js"></script> 
+	<script src="js/validar.js"></script> 
 	
 	<script>
 		$(function() {
@@ -140,7 +141,7 @@ function generaTipoHospedaje()
 			<legend>
 				<h4>Cual es tu direccion? </h4>
 			</legend>
-			<form action="insertar.php?opcion=publicacion" method="POST" name="publicacion" enctype="multipart/form-data">
+			<form action="insertar.php?opcion=publicacion" method="POST" onsubmit=" return validarCouch(this)" name="publicacion" enctype="multipart/form-data">
 			<div class="dependientes" id="demo" style="width:600px;">
 				<div id="demoDer">
 					<select disabled="disabled" name="localidades" id="localidades">
@@ -155,15 +156,15 @@ function generaTipoHospedaje()
 				<h4>Acerca del lugar </h4>
 			</legend>
 			<div class="col-sm-5 col-sm-offset-1">
-				<h4 class="palabras">Titulo:</h4><input class="caja" name="titulo" type="text" size="60" maxlength="60" /> <br/>
-				<h4 class="palabras">Descripcion:</h4><textarea class="caja" name="descripcion"  cols="60" rows="14"></textarea><br/>
+				<h4 class="palabras">Titulo:</h4><input class="caja" name="titulo" id="titulo" type="text" size="60" maxlength="60" /> <br/>
+				<h4 class="palabras">Descripcion:</h4><textarea class="caja" name="descripcion" id="descrip" cols="60" rows="14"></textarea><br/>
 				<br/>
 			</div>
 			<div class="col-sm-5" id="columnaa">
 				<label>Tipo de hospedaje: 	<?php generaTipoHospedaje(); ?><br>
 				<br>
 				<label> Cantidad de huespedes:</label>
-				<input class="caja" name="huespedes" type="number" size="30" maxlength="30" /> 
+				<input class="caja" name="huespedes" id="capacidad" type="number" size="30" maxlength="30" /> 
 				<br><br>
 				<div class="izquierda">
 				<div class="form-group">
@@ -179,12 +180,12 @@ function generaTipoHospedaje()
 				<div class="form-group">
 					<label> Sube fotos de tu couch: </label>
 					<div class="center" id="subeFotos">
-							<input type="file" name="imagen[]" value="" multiple>
+							<input type="file" name="imagen[]" id="foto" value="" multiple>
 					</div>
 				</div>
 			<br>
 			<input class="btn btn-primary btn-lg" id="enviar1" name="siguiente" type="submit" value="siguiente" />
-			<input class="btn btn-primary btn-lg" id="enviar2" name="cancelar" type="button" value="cancelar" onClick="location.href = 'admin.php'"/>
+			<input class="btn btn-primary btn-lg" id="enviar2" name="cancelar" type="button" value="cancelar" onClick="location.href = 'index.php'"/>
 			</div>
 		</fieldset>
     </form>

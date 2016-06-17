@@ -81,6 +81,7 @@ function generaTipoHospedaje()
 	<link rel="stylesheet" href="css/smoothness/jquery-ui.css">
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/jquery-ui.js"></script> 
+	<script src="js/validar.js"></script> 
 	
 	<script>
 		$(function() {
@@ -159,7 +160,7 @@ function generaTipoHospedaje()
 				<label>Tipo de hospedaje: 	<?php generaTipoHospedaje(); ?><br>
 				<br>
 				<label> Cantidad de huespedes:</label>
-				<input class="caja" name="huespedes" type="number" size="30" maxlength="30" /> 
+				<input class="caja" name="huespedes" id="plazas" type="number" size="30" maxlength="30" /> 
 				<br><br>
 				<div class="izquierda">
 				<div class="form-group">

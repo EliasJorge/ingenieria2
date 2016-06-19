@@ -39,7 +39,7 @@
                     <div class="widget">
                         
                         <ul>
-                            <img src="images/sillon.png" style= "height:200px;width:200px;"/>
+                            <a href="index.php"><img src="images/sillon.png" style= "height:200px;width:200px;"/></a>
                         </ul>
                     </div>    
                 </div><!--/.col-md-3-->

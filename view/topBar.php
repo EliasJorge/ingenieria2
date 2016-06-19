@@ -29,7 +29,7 @@
                             </ul>
                             <div class="search">
                                 <form role="form">
-                                    <input type="text" class="search-form" autocomplete="off" placeholder="Buscar">
+                                    <input type="text" class="search-form" autocomplete="off" placeholder="Ingrese un destino...">
                                     <i class="fa fa-search"></i>
                                 </form>
                            </div>

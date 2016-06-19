@@ -94,6 +94,13 @@ include 'funciones.php';
 				 header("location:usuario.php?opcion=alta");				
 				}
 	}
+//************** insertar donación ***************************************************************************
+	if ($opcion == "donar")
+	{
+		$usuario = $_SESSION['idU'];	
+		$monto = $_REQUEST['monto'];
+		$consulta = "INSERT INTO donaciones(id_usuario, monto, fecha_donacion) VALUES ('{$usuario}','{$monto}', CURRENT_DATE)";
+	}
 //*********************************************************************************************************************
 
 	
@@ -101,8 +108,7 @@ include 'funciones.php';
 	
 	
 	
-	if ($opcion == "publicacion")
-	{
+	if ($opcion == "publicacion"){
 		if ($consulta)
 		{
 			$publicacion = mysql_insert_id();
@@ -143,33 +149,32 @@ include 'funciones.php';
 			echo "No se pudo ingresar el registro - ";
 			echo "Error mysql:".mysql_error();
 		
-		}
-			
-		
-	} elseif ($opcion == "tipoHospehaje")
-		{
-			if ($consulta)
-			{ 
+		}		
+	} 
+	elseif ($opcion == "tipoHospehaje"){
+			if ($consulta){ 
 				echo '<script type="text/javascript">
-									alert("el tipo de hospedaje fue agregado con exito");
-									window.location="listado_tHospedaje.php"
-								</script>';
-			} else {
+						alert("el tipo de hospedaje fue agregado con exito");
+						window.location="listado_tHospedaje.php"
+					</script>';
+			} 
+			else {
 				echo "No se pudo ingresar el registro - ";
-				echo "Error mysql:".mysql_error();
-		
-			}
-			
-		
-		}elseif ($opcion == "edicion")
-			{
-				echo "<br/> <a href='nuevo.php?opcion=edicion'>volver</a>";
-				
-			}else 
-				{
-					echo "<br/> <a href='usuario.php?opcion=alta'>volver</a>";
-				}
-			
+				echo "Error mysql:".mysql_error();		
+			}		
+	}
+	elseif ($opcion == "edicion"){
+		echo "<br/> <a href='nuevo.php?opcion=edicion'>volver</a>";
+	}
+	elseif ($opcion == "donar"){
+			echo '<script type="text/javascript">
+				alert ("Su donación se ha realizado correctamente");
+				window.location="index.php"
+				</script>';
+	}
+	else{
+		echo "<br/> <a href='usuario.php?opcion=alta'>volver</a>";
+	}	
 		
 	mysql_close($con);
 ?>

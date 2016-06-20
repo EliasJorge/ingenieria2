@@ -18,8 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Couch Inn | Donar</title>
-	
+    <title>Couch Inn | Donar</title>	
 	<!-- core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -37,11 +36,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
-
 <body class="homepage">
-
-    <header id="header">
-        
+    <header id="header">        
 		<?php
 		
 			//---Incluimos la barra superior
@@ -54,12 +50,10 @@
 		
     </header><!--/header-->
 	<!-- Contenido de la pagina -->
-	
 	   <section id="main-slider" class="center">
 			<script language="JavaScript">
 				<!--
-				function validarDonacion () 
-				{
+				function validarDonacion (){
 					var formulario = document.validate;
 					var blancos = false;
 					for (var i=0; i<formulario.length; i++) {
@@ -74,19 +68,29 @@
 							}
 						}
 					}
-					if ((!blancos) && (validarTarjeta() == true))
-					{
-						if(!isNaN(formulario.monto.value))
-						{
-							return true
+					if (!blancos){
+						if(validarTarjeta()){
+							if(!isNaN(formulario.monto.value)){
+								return true //todo ok 
+							}
+							else{
+								alert("ingrese un valor numerico en el campo monto");
+								formulario.reset();
+								return false;
+							}
 						}
-						else alert("ingrese un valor numerico en el campo monto")						
+						else{
+							alert ("Tarjeta de Credito no Valida!");
+							formulario.reset();
+							return false;
+						}
 					}
-					else
-						if (blancos) alert ('No puede dejar campos vacíos o sólo con espacios en blanco');
-						else	alert ("Tarjeta de Credito no Valida!")
+					else{
+						alert ('No puede dejar campos vacíos o sólo con espacios en blanco');
+						formulario.reset();
+						return false;	
+					}
 				}
-
 				function validarTarjeta () {
 				 tarjetaValida = false;
 				 ret = stripNonNumbers (document.validate.accountnumber.value);
@@ -114,7 +118,6 @@
 				 }
 				 return (tarjetaValida);
 				}
-
 				function stripNonNumbers (InString) {
 				 OutString="";
 				 for (Count=0; Count < InString.length; Count++) {

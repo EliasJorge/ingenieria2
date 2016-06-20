@@ -30,6 +30,7 @@
 									if ($_SESSION['tipoUsuario'] == 'admin'){
 								?>		
 									<li><a href="listado_tHospedaje.php">Ver tipos de hospedajes</a></li>
+									<li><a href="iDonaciones.php">Donaciones</a></li>
 									<li><a href="agregar_hospedaje.php?msj=hospedaje.php">Agregar tipo de hospedaje</a></li>
 									<li><a href="modificar.php">Modificar tipo de hospedaje</a></li>
 									<li><a href="eliminar_talojamiento.php">Eliminar tipo de hospedaje</a></li>	

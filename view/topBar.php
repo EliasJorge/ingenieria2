@@ -28,9 +28,12 @@
                                 <li><a href="http://twitter.com/"><i class="fa fa-twitter"></i></a></li>
                             </ul>
                             <div class="search">
-                                <form role="form">
-                                    <input type="text" class="search-form" autocomplete="off" placeholder="Ingrese un destino...">
-                                    <i class="fa fa-search"></i>
+                                <form role="search" action="busquedaResult.php" method="POST" onsubmit=" return validarBusqueda(this)">
+                                    <input type="text" name="busqueda" id="busqueda" class="search-form" autocomplete="off" placeholder="Ingrese un destino...">
+                                    <i class="fa fa-search">
+										<input class="btn btn-success btn-xs" id="enviar1" name="buscar" type="submit" value="buscar" />
+										<input class="btn btn-success btn-xs" id="enviar2" name="avanzada" type="button" value="avanzada" onClick="location.href = 'avanzado.php'"/>
+									</i>
                                 </form>
                            </div>
                        </div>

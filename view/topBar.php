@@ -1,4 +1,5 @@
 <div class="top-bar">
+	<script src="js/validar.js"></script> 
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-xs-4">

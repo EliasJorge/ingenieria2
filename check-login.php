@@ -24,16 +24,15 @@
 				$sql= "SELECT*FROM $tbl_name WHERE email='$mail' and contrasenia='$contrasenia'";
 				$result= mysqli_query($conexion,$sql) or die(mysqli_error($conexion));
 				$row = mysqli_fetch_array($result);
-				$nameu=$row["nombre"];
-				$tipo=$row["tipo"];
-				$id= $row["id_usuario"];
 				if (!$result || mysqli_num_rows($result) == 1)
 				{
 					$_SESSION['loggedin'] = true;
 					$_SESSION['mail'] = $mail;
-					$_SESSION['nombre']= $nameu; 
-					$_SESSION['tipoUsuario']= $tipo;
-					$_SESSION['idU'] = $id;
+					$_SESSION['nombre']= $row["nombre"];
+					$_SESSION['tipoUsuario']= $row["tipo"];
+					$_SESSION['idU'] = $row["id_usuario"];
+					$_SESSION['foto'] = $row["foto"];
+					$_SESSION['tipo_foto'] = $row["tipo_foto"];
 					header("location:index.php");	 
 				}
 				else 

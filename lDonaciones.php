@@ -3,12 +3,11 @@
 	session_start();
 	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
 	$con = conectar1();	
-	if(!isset($_SESSION['loggedin'])) 
-	{
+	if(!isset($_SESSION['loggedin']) || ($_SESSION['tipoUsuario'] != 'admin')){
 		echo '<script type="text/javascript">
 				alert("no esta autorizado para ver esta seccion");
 				window.location="index.php"
-			</script>';							
+			</script>';
 	}
 ?>
 <!DOCTYPE html>
@@ -99,39 +98,53 @@
 										 y la fecha fin: ' . $_REQUEST['fechaFin'] . '
 									</strong>
 								</font>
-							</p>
-							<br><br>';
+							</p>';
 						echo '<table class="table">'; //inicio de tabla						
 						/* consulta sql de donde saco los datos */
-						$query="SELECT * FROM `donaciones` WHERE fecha_donacion BETWEEN '{$fechaInicio}' AND '{$fechaFin}'";
+						$query="SELECT u.nombre nombre, u.apellido apellido, d.monto monto, d.fecha_donacion fecha 
+								FROM donaciones d INNER JOIN usuarios u ON d.id_usuario = u.id_usuario 
+								WHERE fecha_donacion BETWEEN '{$fechaInicio}' AND '{$fechaFin}'";
 						$registro = mysql_query($query,$con); /* envio la consulta a la BBDD */
-						if(mysql_num_rows($registro) == 0) echo 'No hay donaciones para las fechas indicadas';
-						else echo
-						//<!-- encabezado de la tabla y la fila0 ---> 
-						'
-						<tr>
-						<td><b>#</b></td><!-- columna1  --->
-						<td><b>usuario</b></td><!-- columna2  --->
-						<td><b>monto</b></td><!-- columna3  --->
-						<td><b>fecha donacion</b></td><!-- columna4  --->
-						</tr>						
-						';
-						$numero=1; //numero de filas que voy imprimiendo
-						while($row=mysql_fetch_array($registro))// por c/ fila devuelta en la consulta
-						{ 
-							echo "<tr>"; // abro una nueva fila
-							echo " <td>" . $numero . "</td>"; // imprimo numero de fila
-							echo "<td>" . $row["id_usuario"] . "</td>"; // imprimo el valor correspondiente a columna1 fila $numero
-							echo "<td>" . $row["monto"] . "</td>";	// imprimo el valor correspondiente a columna2 fila $numero
-							echo "<td>" . $row["fecha_donacion"] . "</td>"; // imprimo el valor correspondiente a columna3 fila $numero
-							echo "</tr>"; // cierro la fila
-							$numero++; // incremento numero de filas hechas
+						if(mysql_num_rows($registro) == 0) echo '<hr>No hay donaciones para las fechas indicadas<hr>';
+						else { 
+							echo	//<!-- encabezado de la tabla y la fila0 ---> 
+								'
+								<tr>
+								<td><b>#</b></td><!-- columna1  --->
+								<td><b>Usuario</b></td><!-- columna2  --->
+								<td><b>Monto</b></td><!-- columna3  --->
+								<td><b>Fecha donacion</b></td><!-- columna4  --->
+								</tr>						
+								';
+							$numero = 1; //numero de filas que voy imprimiendo
+							$recaudacion = 0;
+							while($row=mysql_fetch_array($registro))// por c/ fila devuelta en la consulta
+							{ 
+								$recaudacion = $recaudacion + $row["monto"];// acumulo los montos para un total
+								echo "<tr>"; // abro una nueva fila
+								echo " <td>" . $numero . "</td>"; // imprimo numero de fila
+								echo "<td>" . $row["nombre"] . '  ' . $row["apellido"] . "</td>"; // imprimo el valor correspondiente a columna1 fila $numero
+								echo "<td>" . $row["monto"] . "</td>";	// imprimo el valor correspondiente a columna2 fila $numero
+								echo "<td>" . $row["fecha"] . "</td>"; // imprimo el valor correspondiente a columna3 fila $numero
+								echo "</tr>"; // cierro la fila
+								$numero++; // incremento numero de filas hechas
+							}
+							echo	//<!-- encabezado de la tabla y la fila0 ---> 
+								"
+								<tr>
+								<td><b></b></td><!-- columna1  --->
+								<td><b></b>Total recaudado:</td><!-- columna2  --->
+								<td><b>" . $recaudacion . "</b></td><!-- columna3  --->
+								<!--<td><b></b></td>columna4  --->
+								</tr>					
+								";
+							echo '</table><hr>';// Fin de tabla
 						}
-						echo '</table><hr>';// Fin de tabla
 						echo '
 							<div>
 								<input class="btn btn-primary btn-lg" id="volver" name="volver" type="button" value="Hacer otra Busqueda" onClick="location.href = \'iDonaciones.php\' "/>
-							</div>';					
+								<br><br><br>
+							</div>';
 						mysql_free_result($registro);
 						mysql_close($con);
 					}

@@ -101,7 +101,24 @@ include 'funciones.php';
 		$monto = $_REQUEST['monto'];
 		$consulta = "INSERT INTO donaciones(id_usuario, monto, fecha_donacion) VALUES ('{$usuario}','{$monto}', CURRENT_DATE)";
 	}
-//*********************************************************************************************************************
+//************** insertar un comentario ***************************************************************************
+	if ($opcion == "pregunta")
+	{
+		$pregunta = $_REQUEST['pregunta'];	
+		$idUsu = $_REQUEST['usuId'];
+		$idPub = $_REQUEST['idPub'];
+		$consulta = "insert into comentarios (id_usuario, id_publicacion, fecha, comentario) VALUES ('{$idUsu}','{$idPub}', CURRENT_DATE, '{$pregunta}' )";
+	}
+
+//************** insertar Respuesta a un comentario ***************************************************************************
+	if ($opcion == "respuesta")
+	{
+		$com = $_REQUEST['comentario'];	
+		$resp = $_REQUEST['respuesta'];
+		$idPub = $_REQUEST['idPub'];
+		$consulta = "update comentarios set respuesta = '$resp' where id_comentario = '$com' ";
+	}
+//*************************************************************************************************************
 
 	
 	mysql_query($consulta);
@@ -163,9 +180,22 @@ include 'funciones.php';
 				echo "Error mysql:".mysql_error();		
 			}		
 	}
-	elseif ($opcion == "edicion"){
-		echo "<br/> <a href='nuevo.php?opcion=edicion'>volver</a>";
-	}
+	elseif ($opcion == "respuesta"){
+	?>
+							<script type="text/javascript">
+									alert("Respuesta enviada con exito");
+									window.location="mostrar_publicacion.php?id=<?php echo $idPub?>"
+							</script>;
+<?php						
+	} 
+	elseif ($opcion == "pregunta"){
+	?>
+							<script type="text/javascript">
+									alert("pregunta enviada con exito");
+									window.location="mostrar_publicacion.php?id=<?php echo $idPub?>"
+							</script>;
+<?php						
+	} 
 	elseif ($opcion == "donar"){
 			echo '<script type="text/javascript">
 				alert ("Su donación se ha realizado correctamente");

@@ -2441,6 +2441,28 @@ ul.sidebar-gallery {
   margin-bottom: 50px;
   margin-top: 60px;
 }
+/******************************/
+
+.post_reply_comments1 {
+  background:#d9ed87;
+  border-radius: 4px;
+  padding: 30px;
+}
+
+.post_reply_comments1:before {
+  border-color: transparent #F0F0F0 transparent transparent;
+  border-style: solid;
+  border-width: 15px;
+  content: " ";
+  height: 0;
+  left: 75px;
+  position: absolute;
+  top: 20px;
+}
+
+.post_reply_comments1 p {
+  padding-bottom: 30px;
+}
 
 
 /******************
@@ -2605,10 +2627,25 @@ select { width:220px; }
 	word-wrap:break-word;
 	width: 350px;
 }
+.descripcion1{
+	word-wrap:break-word;
+	width: 500px;
+}
 #imagenPub {
 	max-width: 400px;
 	max-height: 400px;
 	margin-left:30%;
+}
+#imagenRow {
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+	padding-left: 30%;
+	padding-bottom: 15%;
+	
+}
+#fotoPub {
+	margin-left: 30%;
 }
 #registrar {background:url(../images/footer-background.png);padding:10px 15px;height:20px;margin-bottom:10px;}
 #registrar > a {display:block;padding:0.90px;font-size:24px;color:#000000;text-align:center; text-decoration:none;line-height:20px}

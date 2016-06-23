@@ -66,6 +66,7 @@
 			$idLoc= $fila['id_localidad'];
 			$capacidad= $fila['capacidad'];
 			$usu= $fila['id_usuario'];
+			$est= $fila['estado'];
 			
 			$consulta2 = "select * from lista_provincias where id = '$idProv'";
 			$result2= mysql_query($consulta2,$con);
@@ -181,8 +182,26 @@
 							
 						?>
 <!-- ######################################### /comentarios ############################## -->
-
-    </section><!--/section-->          
+		<?php 	if(isset($_SESSION['loggedin'])){
+					if ($usu == $_SESSION['idU']){
+						if ($est != 'eliminada'){?>
+						<hr/>
+						<fieldset>
+							<h3> <strong>Opciones de la publicacion</strong></h3>
+							<div class="derecha">
+								<input class="btn btn-primary btn-lg" id="eliminar" name="eliminar" type="button" value="eliminar" onClick="location.href = 'eliminarPub.php?id=<?php echo $id; ?>'"/>
+								<input class="btn btn-primary btn-lg" id="modificar" name="modificar" type="button" value="modificar" onClick="location.href = 'modificarPub.php'"/>
+							</div>
+						</fieldset>
+		<?php			}
+					}
+				}	
+		?>
+    </section><!--/section-->  
+	
+	<hr/>
+		
+	
 	<br>
 	<!-- /contenido -->
 	

@@ -30,6 +30,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	
 </head><!--/head-->
 
 <body class="homepage">
@@ -103,8 +104,8 @@
 							while ($fils = mysql_fetch_array($resul)) {
 								$id1 = $fils['id_imagen'];
 						
-								echo "<div class='col-md-2'>";
-								echo "<img class='' src='imagenes.php?id=$id1' id='imagenRow' />";
+								echo "<div class='col-sm-3' id='imagenRow'>";
+								echo "<a href='#' title='Couchinn'><img class='thumbnail img-responsive>' src='imagenes.php?id=$id1'  /></a>";
 								echo "</div>";
 							}
 						?>
@@ -129,6 +130,22 @@
                                     
                                 </div>
                             </div>
+							<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">×</button>
+											<h3 class="fotoMod modal-title">Heading</h3>
+										</div>
+										<div class="foto modal-body">
+		
+										</div>
+										<div class="modal-footer">
+											<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+										</div>
+									</div>
+								</div>
+							</div>
                     </div><!--/.blog-item-->
 					 
 						
@@ -183,5 +200,14 @@
     <script src="js/jquery.isotope.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/wow.min.js"></script>
+	<script language="javascript">
+		$('.thumbnail').click(function(){
+			$('.foto').empty();
+			var title = $(this).parent('a').attr("title");
+			$('.fotoMod').html(title);
+			$($(this).parents('div').html()).appendTo('.foto');
+			$('#myModal').modal({show:true});
+		});
+	</script>
 </body>
 </html>

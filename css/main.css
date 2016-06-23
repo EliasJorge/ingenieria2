@@ -2636,12 +2636,9 @@ select { width:220px; }
 	max-height: 400px;
 	margin-left:30%;
 }
-#imagenRow {
+#imagenRow .thumbnail {
 	width: 100px;
 	height: 100px;
-	display: inline-block;
-	padding-left: 30%;
-	padding-bottom: 15%;
 	
 }
 #fotoPub {
@@ -2651,3 +2648,10 @@ select { width:220px; }
 #registrar > a {display:block;padding:0.90px;font-size:24px;color:#000000;text-align:center; text-decoration:none;line-height:20px}
 #in {background:url(../images/footer-background.png);padding:10px 15px;height:20px;margin-bottom:10px;}
 #in > a {text-align:left; text-decoration:none; line-height:0px}
+
+.modal-dialog {max-width:600px; max-height:600px;}
+.thumbnail {
+	margin-bottom:6px;
+	max-width:400px; 
+	max-height:400px;
+}

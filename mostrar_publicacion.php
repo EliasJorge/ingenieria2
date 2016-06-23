@@ -1,5 +1,5 @@
 <?php
-	
+	// cargar a git todas las modificaciones desde las 21.30
 	session_start();
 	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
 	$con = conectar1();	
@@ -30,6 +30,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	
 </head><!--/head-->
 
 <body class="homepage">
@@ -50,7 +51,7 @@
 	
 	<!-- Contenido de la pagina -->
 	
-	<section>
+	
        <div class="right" id="publicacion">
 
 		<?php 
@@ -65,6 +66,7 @@
 			$idLoc= $fila['id_localidad'];
 			$capacidad= $fila['capacidad'];
 			$usu= $fila['id_usuario'];
+			$est= $fila['estado'];
 			
 			$consulta2 = "select * from lista_provincias where id = '$idProv'";
 			$result2= mysql_query($consulta2,$con);
@@ -93,7 +95,23 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="blog-item"><!--fotos + carrusel + descripcion-->
-                        <?php echo "<img class='img-responsive img-blog' src='imagen.php?id=$id' width='100%' alt='' />"; ?>
+                        <?php echo "<img class='img-responsive img-blog' src='imagen.php?id=$id' id='imagenPub' />"; ?>
+						<div class="center" id="fotoPub">
+						<div class="row">
+						<?php 
+							$consul= "select id_imagen from imagenes where id_publicacion = $id";
+							$resul= mysql_query($consul,$con);
+							
+							while ($fils = mysql_fetch_array($resul)) {
+								$id1 = $fils['id_imagen'];
+						
+								echo "<div class='col-sm-3' id='imagenRow'>";
+								echo "<a href='#' title='Couchinn'><img class='thumbnail img-responsive>' src='imagenes.php?id=$id1'  /></a>";
+								echo "</div>";
+							}
+						?>
+							</div>
+							</div>
                             <div class="row">  
                                 <div class="col-xs-12 col-sm-2 text-center">
                                     <div class="entry-meta">
@@ -106,96 +124,85 @@
 									<div class="post-tags">
                                         <?php echo "<h4>Ubicado en: </h4><p>".htmlentities($fila2['provincia']).", ".htmlentities($fila3['localidad'])."</p>"; ?>
                                     </div>
-                                    <h2>Descripcion</h2>
-                                    <p> <?php echo htmlentities($fila['descripcion']); ?> </p>
-
+									<div class="descripcion1">
+										<h2>Descripcion</h2>
+										<p> <?php echo htmlentities($fila['descripcion']); ?> </p>
+									</div>
                                     
                                 </div>
                             </div>
-                        </div><!--/.blog-item-->
-                        
-                                               
-                        <h1 id="comments_title">Ejemplos de comentarios y sus respuestas</h1> <!--preguntas/comentarios-->
-                        <div class="media comment_section">
-                            <div class="pull-left post_comments">
-                                <a href="#"><img src="images/blog/girl.png" class="img-circle" alt="" /></a>
-                            </div>
-                            <div class="media-body post_reply_comments">
-                                <h3>Usuario 1</h3>
-                                
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                <a href="#">Responder</a>
-                            </div>
-                        </div> 
-                        <div class="media comment_section">
-                            <div class="pull-left post_comments">
-                                <a href="#"><img src="images/blog/boy2.png" class="img-circle" alt="" /></a>
-                            </div>
-                            <div class="media-body post_reply_comments">
-                                <h3>otro usuario</h3>
-                                
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                <a href="#">Responder</a>
-                            </div>
-                        </div> 
-                        <div class="media comment_section">
-                            <div class="pull-left post_comments">
-                                <a href="#"><img src="images/blog/boy3.png" class="img-circle" alt="" /></a>
-                            </div>
-                            <div class="media-body post_reply_comments">
-                                <h3>Soy un usuario</h3>
-                                
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                <a href="#">Responder</a>
-                            </div>
-                        </div> 
+							<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">×</button>
+											<h3 class="fotoMod modal-title">Heading</h3>
+										</div>
+										<div class="foto modal-body">
+		
+										</div>
+										<div class="modal-footer">
+											<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+                    </div><!--/.blog-item-->
+					 
+						
+				</div><!--/.col-md-8-->		
+				<aside class="col-md-4">
+					<div class="widget categories"> <!--datos de usuario-->
+						<img class='img-circle imagen_perfil' src='imagenUsuario.php?id= <?php echo $usu ?> 'width="150" height="150" /><br><br>
+						<a href="perfil.php?mail=<?=$mail?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>
+					</div>
+					<div class="widget categories"> <!--puntuaciones usuario/publicacion-->
+						<h3>Puntuaciones</h3>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="single_comments">
+									<p>Aqui va a estar la puntuacion del usuario </p>                                    
+								</div>
+								<div class="single_comments">
+									<p>Aqui va a estar la puntuacion de la publicacion </p>                                    
+								</div>    							
+							</div>
+						</div>                     
+					</div><!--/.recent comments-->
+				
+		    </div><!--/.row-->
+		</div><!--/.blog-->
 
-
-                        <div id="contact-page clearfix"><!--reemplazar por textarea para dejar mensaje-->
-                            <div class="status alert alert-success" style="display: none"></div>
-                            <div class="message_heading">
-                                <h4>Aqui se van a poder dejar las preguntas</h4>
-                                
-                            </div> 
-      
-                            <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="sendemail.php" role="form">
-                                <div class="row">
-                                    
-                                    <div class="col-sm-7">                        
-                                        <div class="form-group">
-                                            <label>Deja tu pregunta</label>
-                                            <textarea name="message" id="message" required="required" class="form-control" rows="8"></textarea>
-                                        </div>                        
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-lg" required="required">Enviar Pregunta</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>     
-                        </div><!--/#contact-page-->
-                    </div><!--/.col-md-8-->
-
-                <aside class="col-md-4">
-                    <div class="widget categories"> <!--datos de usuario-->
-						<img class='imagen_perfil' src='images/foto-de-perfil.png' /><br><br>
-                       <a href="perfil.php?mail=<?=$mail?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>
-                    </div>
-    				
-    				<div class="widget categories"> <!--puntuaciones usuario/publicacion-->
-                        <h3>Puntuaciones</h3>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="single_comments">
-    								<p>Aqui va a estar la puntuacion del usuario </p>                                    
-    							</div>
-    							<div class="single_comments">
-    								<p>Aqui va a estar la puntuacion de la publicacion </p>                                    
-    							</div>    							
-                            </div>
-                        </div>                     
-                    </div><!--/.recent comments-->
-    </section><!--/section-->
+   
+ <!-- ######################################## Comentarios ############################### -->                                              
+                        <?php
+		
+							//---Incluimos los comentarios
+							include_once('comentarios.php');
+							
+						?>
+<!-- ######################################### /comentarios ############################## -->
+		<?php 	if(isset($_SESSION['loggedin'])){
+					if ($usu == $_SESSION['idU']){
+						if ($est != 'eliminada'){?>
+						<hr/>
+						<fieldset>
+							<h3> <strong>Opciones de la publicacion</strong></h3>
+							<div class="derecha">
+								<input class="btn btn-primary btn-lg" id="eliminar" name="eliminar" type="button" value="eliminar" onClick="location.href = 'eliminarPub.php?id=<?php echo $id; ?>'"/>
+								<input class="btn btn-primary btn-lg" id="modificar" name="modificar" type="button" value="modificar" onClick="location.href = 'modificarPub.php'"/>
+							</div>
+						</fieldset>
+		<?php			}
+					}
+				}	
+		?>
+    </section><!--/section-->  
 	
+	<hr/>
+		
+	
+	<br>
 	<!-- /contenido -->
 	
 	<!-- Footer -->
@@ -212,5 +219,14 @@
     <script src="js/jquery.isotope.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/wow.min.js"></script>
+	<script language="javascript">
+		$('.thumbnail').click(function(){
+			$('.foto').empty();
+			var title = $(this).parent('a').attr("title");
+			$('.fotoMod').html(title);
+			$($(this).parents('div').html()).appendTo('.foto');
+			$('#myModal').modal({show:true});
+		});
+	</script>
 </body>
 </html>

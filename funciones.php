@@ -47,7 +47,21 @@ function validar_usoAlojamiento ($id){
 		
 	} else return true;
 }
-
+//*****************************************************************************************************
+function validar_eliminarPub ($id){
+	
+	$consulta= "SELECT * FROM usuariosolicita WHERE id_publicacion = '$id' and estado = 'aceptada'";
+	$resul= mysql_query($consulta);
+	
+	$fila= mysql_fetch_array($resul);
+	
+	if ($fila){
+		
+		return false;
+		
+		
+	} else return true;
+}
 //**********************************************************************************************************
 	function mostrar_notas($result)
 	{

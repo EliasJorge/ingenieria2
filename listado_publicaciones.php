@@ -50,7 +50,7 @@
 	<section>
 		<div>
 		<?php		
-			$consulta = "select * from publicaciones order by titulo asc";
+			$consulta = "select * from publicaciones where estado = 'activo' order by titulo asc";
 			$resultado = busqueda($consulta);			
 		?>
 			<table class="table table hover">
@@ -94,7 +94,7 @@
 							<?php
 						}?>
 						</table>
-			
+			<hr/>
 	
 		</div>       
     </section><!--/section-->

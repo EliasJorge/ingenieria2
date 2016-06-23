@@ -263,6 +263,10 @@ input.search-form:hover {
   width: 180px;
 }
 
+input.search-form:focus {
+  width: 180px;
+}
+
 .navbar-brand {
   padding: 0;
   margin:0;
@@ -2373,7 +2377,7 @@ ul.sidebar-gallery {
 }
 
 .post_reply_comments {
-  background:#f5f5f5;
+  background:#d7d7d7;
   border-radius: 4px;
   padding: 30px;
 }
@@ -2437,12 +2441,46 @@ ul.sidebar-gallery {
   margin-bottom: 50px;
   margin-top: 60px;
 }
+/******************************/
+
+.post_reply_comments1 {
+  background:#d9ed87;
+  border-radius: 4px;
+  padding: 30px;
+}
+
+.post_reply_comments1:before {
+  border-color: transparent #F0F0F0 transparent transparent;
+  border-style: solid;
+  border-width: 15px;
+  content: " ";
+  height: 0;
+  left: 75px;
+  position: absolute;
+  top: 20px;
+}
+
+.post_reply_comments1 p {
+  padding-bottom: 30px;
+}
 
 
 /******************
  404 page css
  ******************/
-
+.btn-success {
+	background: #191919;
+	border-color: #191919;
+}
+.btn-success:hover, 
+.btn-success:focus,.btn-success:active, .btn-success.active, 
+.btn-success .btn-xs {
+	background-color: #899d36;
+	border-color:#899d36;
+	
+}
+ 
+ 
 #error .btn-success:hover, 
 .btn-success:focus, 
 .btn-success:active, 
@@ -2587,9 +2625,33 @@ select { width:220px; }
 }
 .descripcion{
 	word-wrap:break-word;
-	width: 250px;
+	width: 350px;
+}
+.descripcion1{
+	word-wrap:break-word;
+	width: 500px;
+}
+#imagenPub {
+	max-width: 400px;
+	max-height: 400px;
+	margin-left:30%;
+}
+#imagenRow .thumbnail {
+	width: 100px;
+	height: 100px;
+	
+}
+#fotoPub {
+	margin-left: 30%;
 }
 #registrar {background:url(../images/footer-background.png);padding:10px 15px;height:20px;margin-bottom:10px;}
 #registrar > a {display:block;padding:0.90px;font-size:24px;color:#000000;text-align:center; text-decoration:none;line-height:20px}
 #in {background:url(../images/footer-background.png);padding:10px 15px;height:20px;margin-bottom:10px;}
 #in > a {text-align:left; text-decoration:none; line-height:0px}
+
+.modal-dialog {max-width:600px; max-height:600px;}
+.thumbnail {
+	margin-bottom:6px;
+	max-width:400px; 
+	max-height:400px;
+}

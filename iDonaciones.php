@@ -4,12 +4,11 @@
 	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
 	$con = conectar1();	
 	include 'funciones.php';
-	if(!isset($_SESSION['loggedin'])) 
-	{
+	if(!isset($_SESSION['loggedin']) || ($_SESSION['tipoUsuario'] != 'admin')){
 		echo '<script type="text/javascript">
-			alert("no esta autorizado para ver esta seccion");
-			window.location="index.php"
-			</script>';							
+				alert("no esta autorizado para ver esta seccion");
+				window.location="index.php"
+			</script>';
 	}
 ?>
 <!DOCTYPE html>

@@ -7,19 +7,21 @@
 	$db_name = "couchinn";
 	$tbl_name = "usuarios";
 	// Connect to server and select databse.
-	$conexion = mysqli_connect("$host_db", "$user_db", "$pass_db","$db_name")or die("Cannot Connect to Data Base.");
-	$mail= $_SESSION['mail'];
-	$sql="SELECT * FROM usuarios WHERE email='$mail'";
-	$perfil = mysqli_query($conexion,$sql) or die(mysqli_error($conexion));
+	$con = mysqli_connect("$host_db", "$user_db", "$pass_db","$db_name")or die("Cannot Connect to Data Base.");
+	$id = $_REQUEST['id'];//no reconoce id ?
+	$consulta = "SELECT * FROM publicaciones WHERE id_publicacion = '$id'";
+	$result= mysql_query($consulta,$con);
+	$sql="SELECT id_usuario FROM publicaciones WHERE id_publicacion=";
+	$perfil = mysqli_query($con,$sql) or die(mysqli_error($con));
     if(mysqli_num_rows($perfil))
     {
         $row = mysqli_fetch_array($perfil);
         $email = $row["email"];
         $nameu = $row["nombre"];
-		$apellido=$row["apellido"];
+				$apellido=$row["apellido"];
         $id=$row["id_usuario"];
-		$foto = $row["foto"];
-		$tel = $row["telefono"];
+				$foto = $row["foto"];
+				$tel = $row["telefono"];
     }
     else
     {
@@ -90,6 +92,8 @@
 						<strong>Telefono:</strong> <?=$tel?>
 						<br>
 						<a href="modificar_datosU.php?mail=<?=$email?>">modificar mis datos</a>
+						<br>
+						<a href="cambiar_contrasenia.php">Cambiar contraseña</a>
 						<br>
 						</div>
 

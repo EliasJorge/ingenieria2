@@ -2,7 +2,7 @@
 	// cargar a git todas las modificaciones desde las 21.30
 	session_start();
 	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
-	$con = conectar1();	
+	$con = conectar1();
 	include 'funciones.php';
 ?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Couch Inn</title>
-	
+
 	<!-- core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -24,41 +24,41 @@
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
-    <![endif]-->       
+    <![endif]-->
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-	
+
 </head><!--/head-->
 
 <body class="homepage">
 
     <header id="header">
-        
+
 		<?php
-		
+
 			//---Incluimos la barra superior
 			include_once('view/topBar.php');
-			
+
 			//---Incluimos el nav
 			include_once('view/navBar.php');
 
 		?>
-		
+
     </header><!--/header-->
-	
+
 	<!-- Contenido de la pagina -->
-	
-	
+
+
        <div class="right" id="publicacion">
 
-		<?php 
+		<?php
 			$id = $_REQUEST['id'];
 			$consulta = "select * from publicaciones where id_publicacion = '$id'";
 			$result= mysql_query($consulta,$con);
-		
+
 			$fila= mysql_fetch_array($result);
 			$fechaDesde= $fila['disp_desde'];
 			$fechaHasta= $fila['disp_hasta'];
@@ -67,28 +67,28 @@
 			$capacidad= $fila['capacidad'];
 			$usu= $fila['id_usuario'];
 			$est= $fila['estado'];
-			
+
 			$consulta2 = "select * from lista_provincias where id = '$idProv'";
 			$result2= mysql_query($consulta2,$con);
 			$fila2= mysql_fetch_array($result2);
-			
+
 			$consulta3 = "select * from lista_localidades where id = '$idLoc'";
 			$result3= mysql_query($consulta3,$con);
 			$fila3= mysql_fetch_array($result3);
-			
+
 			$consulta4 = "select * from usuarios where id_usuario = '$usu'";
 			$result4= mysql_query($consulta4,$con);
 			$fila4= mysql_fetch_array($result4);
-			
+
 			$mail= $fila4['email'];
-			
+
 		?>
 	</div>
-	
+
 	<section id="blog" class="container">
-        <div class="center"> 
+        <div class="center">
             <h2><?php echo htmlentities($fila['titulo']); ?></h2><!--titulo-->
-           
+
         </div>
 
         <div class="blog">
@@ -98,13 +98,13 @@
                         <?php echo "<img class='img-responsive img-blog' src='imagen.php?id=$id' id='imagenPub' />"; ?>
 						<div class="center" id="fotoPub">
 						<div class="row">
-						<?php 
+						<?php
 							$consul= "select id_imagen from imagenes where id_publicacion = $id";
 							$resul= mysql_query($consul,$con);
-							
+
 							while ($fils = mysql_fetch_array($resul)) {
 								$id1 = $fils['id_imagen'];
-						
+
 								echo "<div class='col-sm-3' id='imagenRow'>";
 								echo "<a href='#' title='Couchinn'><img class='thumbnail img-responsive>' src='imagenes.php?id=$id1'  /></a>";
 								echo "</div>";
@@ -112,12 +112,15 @@
 						?>
 							</div>
 							</div>
-                            <div class="row">  
+                            <div class="row">
                                 <div class="col-xs-12 col-sm-2 text-center">
                                     <div class="entry-meta">
                                         <strong>Disponible Desde:</strong> <?php echo htmlentities($fechaDesde); ?>
-										<strong>Disponible Hasta:</strong> <?php echo htmlentities($fechaHasta); ?>
-										<strong>Capacidad:</strong> <?php echo htmlentities($capacidad); ?>
+																				<strong>Disponible Hasta:</strong> <?php echo htmlentities($fechaHasta); ?>
+																				<strong>Capacidad:</strong> <?php echo htmlentities($capacidad); ?>
+																				<?php
+																					//include_once('reservar.php');
+																				?>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-10 blog-content">
@@ -128,7 +131,7 @@
 										<h2>Descripcion</h2>
 										<p> <?php echo htmlentities($fila['descripcion']); ?> </p>
 									</div>
-                                    
+
                                 </div>
                             </div>
 							<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
@@ -139,7 +142,7 @@
 											<h3 class="fotoMod modal-title">Heading</h3>
 										</div>
 										<div class="foto modal-body">
-		
+
 										</div>
 										<div class="modal-footer">
 											<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -148,38 +151,39 @@
 								</div>
 							</div>
                     </div><!--/.blog-item-->
-					 
-						
-				</div><!--/.col-md-8-->		
+
+
+				</div><!--/.col-md-8-->
 				<aside class="col-md-4">
 					<div class="widget categories"> <!--datos de usuario-->
 						<img class='img-circle imagen_perfil' src='imagenUsuario.php?id= <?php echo $usu ?> 'width="150" height="150" /><br><br>
 						<a href="perfil.php?mail=<?=$mail?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>
+						<!--<a href="ver_perfil_publicacion.php?mail=<?=$mail?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>-->
 					</div>
 					<div class="widget categories"> <!--puntuaciones usuario/publicacion-->
 						<h3>Puntuaciones</h3>
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="single_comments">
-									<p>Aqui va a estar la puntuacion del usuario </p>                                    
+									<p>Aqui va a estar la puntuacion del usuario </p>
 								</div>
 								<div class="single_comments">
-									<p>Aqui va a estar la puntuacion de la publicacion </p>                                    
-								</div>    							
+									<p>Aqui va a estar la puntuacion de la publicacion </p>
+								</div>
 							</div>
-						</div>                     
+						</div>
 					</div><!--/.recent comments-->
-				
+
 		    </div><!--/.row-->
 		</div><!--/.blog-->
 
-   
- <!-- ######################################## Comentarios ############################### -->                                              
+
+ <!-- ######################################## Comentarios ############################### -->
                         <?php
-		
+
 							//---Incluimos los comentarios
 							include_once('comentarios.php');
-							
+
 						?>
 <!-- ######################################### /comentarios ############################## -->
 		<?php 	if(isset($_SESSION['loggedin'])){
@@ -195,22 +199,22 @@
 						</fieldset>
 		<?php			}
 					}
-				}	
+				}
 		?>
-    </section><!--/section-->  
-	
+    </section><!--/section-->
+
 	<hr/>
-		
-	
+
+
 	<br>
 	<!-- /contenido -->
-	
+
 	<!-- Footer -->
 	<?php
-		
+
 			//---Incluimos el footer
 			include_once('view/footer.php');
-			
+
 	?>
 
     <script src="js/jquery.js"></script>

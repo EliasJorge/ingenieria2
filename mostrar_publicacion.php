@@ -30,6 +30,35 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+		<script>
+			$(function() {
+				$( "#datepicker, #datepicker2" ).datepicker({
+					showOn: "button",
+					buttonImage: "images/calender_green_16.png",
+					buttonImageOnly: true,
+					buttonText: "Select date"
+				});
+				$( "#datepicker, #datepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+			});
+		</script>
+		<script>
+			$(function() {
+				$.datepicker.setDefaults({
+					dateFormat: 'yy-mm-dd',
+					changeMonth: true,
+					changeYear: true,
+					yearRange:"c-80:c",
+					defaultDate:"m d y",
+									dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+									dayNamesShort: [ "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab" ],
+									monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+									"Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+									monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+									"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ]
+				});
+				$( "#fechaNacimiento" ).datepicker();
+			});
+		</script>
 
 </head><!--/head-->
 
@@ -106,24 +135,24 @@
 								$id1 = $fils['id_imagen'];
 
 								echo "<div class='col-sm-3' id='imagenRow'>";
-								echo "<a href='#' title='Couchinn'><img class='thumbnail img-responsive>' src='imagenes.php?id=$id1'  /></a>";
+							//	echo "<a href='#' title='Couchinn'><img class='thumbnail img-responsive>' src='imagenes.php?id=$id1'  /></a>"; NO ANDA LSDKWJERKL3QJWHGFADJK2QDHI
 								echo "</div>";
 							}
 						?>
 							</div>
 							</div>
                             <div class="row">
-                                <div class="col-xs-12 col-sm-2 text-center">
+                                <div class="col-xs-12 col-sm-5 text-center">
                                     <div class="entry-meta">
                                         <strong>Disponible Desde:</strong> <?php echo htmlentities($fechaDesde); ?>
-																				<strong>Disponible Hasta:</strong> <?php echo htmlentities($fechaHasta); ?>
-																				<strong>Capacidad:</strong> <?php echo htmlentities($capacidad); ?>
+																				<br><strong>Disponible Hasta:</strong> <?php echo htmlentities($fechaHasta); ?>
+																				<br><strong>Capacidad:</strong> <?php echo htmlentities($capacidad); ?>
 																				<?php
-																					//include_once('reservar.php');
+																					include_once('reservar.php');
 																				?>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-10 blog-content">
+                                <div class="col-xs-12 col-sm-5 blog-content">
 									<div class="post-tags">
                                         <?php echo "<h4>Ubicado en: </h4><p>".htmlentities($fila2['provincia']).", ".htmlentities($fila3['localidad'])."</p>"; ?>
                                     </div>
@@ -157,8 +186,8 @@
 				<aside class="col-md-4">
 					<div class="widget categories"> <!--datos de usuario-->
 						<img class='img-circle imagen_perfil' src='imagenUsuario.php?id= <?php echo $usu ?> 'width="150" height="150" /><br><br>
-						<a href="perfil.php?mail=<?=$mail?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>
-						<!--<a href="ver_perfil_publicacion.php?mail=<?=$mail?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>-->
+						<!--<a href="perfil.php?mail=<?=$mail?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>-->
+						<a href="ver_perfil_publicacion.php?id=<?=$id?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>
 					</div>
 					<div class="widget categories"> <!--puntuaciones usuario/publicacion-->
 						<h3>Puntuaciones</h3>

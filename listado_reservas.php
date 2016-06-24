@@ -1,41 +1,8 @@
 <?php
-	include 'funciones.php';
-	session_start();
-	$host_db = "localhost";
-	$user_db = "root";
-	$pass_db = "";
-	$db_name = "couchinn";
-	// Connect to server and select databse.
-	$con = mysqli_connect("$host_db", "$user_db", "$pass_db","$db_name")or die("Cannot Connect to Data Base.");
-	$id = $_REQUEST['id'];//no reconoce id ?
-	$consulta = "SELECT * FROM publicaciones WHERE id_publicacion = '$id'";
-	$result= mysqli_query($con,$consulta) or die(mysqli_error($con));
-	if(mysqli_num_rows($result))
-	{
-		$row = mysqli_fetch_array($result);
-		$idU=$row["id_usuario"];
-	}
-	$sql="SELECT * FROM usuarios WHERE id_usuario=$idU";
-	$perfil = mysqli_query($con,$sql) or die(mysqli_error($con));
-    if(mysqli_num_rows($perfil))
-    {
-        $row = mysqli_fetch_array($perfil);
-        $email = $row["email"];
-        $nameu = $row["nombre"];
-				$apellido=$row["apellido"];
-        $id=$row["id_usuario"];
-				$foto = $row["foto"];
-				$tel = $row["telefono"];
-    }
-    else
-    {
-		echo '<script type="text/javascript">
-					alert("El usuario no esta registrado o elimino su cuenta");
-					window.location="cambiar_contrasenia.php"
-				</script>';
-	}
-?>
 
+		session_start();
+		include 'funciones.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,35 +47,53 @@
     </header><!--/header-->
 	<!-- Contenido de la pagina -->
 
-	<section id="perfil">
-		<div class="center">
-			<h2>Perfil de <?=$nameu?> </h2>
+	<section>
+		<div>
+		<?php
+			$consulta = "SELECT * from reservas where estado = 'activo'";
+			$resultado = busqueda($consulta);
+		?>
+  			<table class="table table hover">
+  							<tr>
+  								<th>Titulo</th>
+  								<th>Usuario</th>
+  								<th></th>
+  							</tr>
+						<?php
+						$num = 27;
+						foreach ($resultado as $r)
+            {?>
+							<tr><?php
+								$idUser= $r['id_usuario'];
+								$sql = "SELECT * FROM usuarios WHERE id_usuario='$idUser'";
+								$result1 = busqueda($sql);
+                $idP= $r['id_publicacion'];
+                $sql="SELECT  * FROM publicaciones WHERE id_publicacion='$idP'";
+                $result2= busqueda($sql);
+								foreach($result2 as $array)
+                {
+	                  echo "<td><br><a>$array[titulo]</a></td>";
+								}
+                foreach($result1 as $r1)
+                {
+                    echo "<td><br><a href=ver_perfil_publicion.php?id=$r1[id_usuario]>$r1[email]</a></td>";
+                }
+								?>
+								<!--<td><br><div class="descripcion"><?php ?></div></td>-->
+								<td>
+									<div>
+										<br>
+										<input class="btn btn-primary btn-lg" type="button" value="Aceptar" onclick="">
+                    <input class="btn btn-primary btn-lg" type="button" value="Cancelar" onclick="window.location.href="">
+									</div>
+								</td>
+							</tr>
+							<?php
+						}?>
+						</table>
+			<hr/>
+
 		</div>
-			<div class="center">
-				<div id="perfil">
-						<img class='imagen_perfil' src='images/foto-de-perfil.png' />
-						<br>
-						<strong>Nombre:</strong> <?=$nameu?>
-						<strong> </strong> <?=$apellido?>
-						<br>
-						<strong>Email:</strong> <?=$email?>
-						<br>
-						<strong>Telefono:</strong> <?=$tel?>
-						</div>
-
-						 </section>
-
-			</div>
-		</div>
-	 <section id="listados">
-						<div class="center" id="listados">
-						<hr/>
-							<h2>Mis publicaciones </h2>
-						<hr/>
-
-						<?php include_once('listado.php'); ?>
-						</div>
-
     </section><!--/section-->
 
 	<!-- /contenido -->

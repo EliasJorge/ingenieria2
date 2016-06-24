@@ -2627,14 +2627,18 @@ select { width:220px; }
 	word-wrap:break-word;
 	width: 350px;
 }
+<<<<<<< Updated upstream
 .descripcion1{
 	word-wrap:break-word;
 	width: 500px;
 }
+=======
+>>>>>>> Stashed changes
 #imagenPub {
 	max-width: 400px;
 	max-height: 400px;
 	margin-left:30%;
+<<<<<<< Updated upstream
 }
 #imagenRow .thumbnail {
 	width: 100px;
@@ -2643,6 +2647,8 @@ select { width:220px; }
 }
 #fotoPub {
 	margin-left: 30%;
+=======
+>>>>>>> Stashed changes
 }
 #registrar {background:url(../images/footer-background.png);padding:10px 15px;height:20px;margin-bottom:10px;}
 #registrar > a {display:block;padding:0.90px;font-size:24px;color:#000000;text-align:center; text-decoration:none;line-height:20px}

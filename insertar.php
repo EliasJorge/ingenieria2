@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
-$con = conectar1();		
+$con = conectar1();
 include 'funciones.php';
 ?>
 
@@ -18,10 +18,10 @@ include 'funciones.php';
 </head>
 
 <body id="notas">
-<?php 
+<?php
 
 	$opcion = $_REQUEST['opcion'];
-	
+
 //************** insertar publicacion ***************************************************************************
 	if ($opcion == "publicacion")
 	{
@@ -34,27 +34,27 @@ include 'funciones.php';
 		$cantidadHuespedes= $_REQUEST['huespedes'];
 		$fechaDesde= $_REQUEST['fechaDesde'];
 		$fechaHasta= $_REQUEST['fechaHasta'];
-		
-		
+
+
 		if (($localidad) && ($titulo) && ($descripcion) && ($tipoHospedaje) && ($cantidadHuespedes) && ($fechaDesde) && ($fechaHasta))
 		{
 		$consulta= "INSERT INTO publicaciones(id_usuario,titulo,descripcion,id_provincia,id_localidad,capacidad,disp_desde,disp_hasta,id_talojamiento,estado) VALUES ('{$idU}','{$titulo}','{$descripcion}','{$provincia}','{$localidad}','{$cantidadHuespedes}','{$fechaDesde}','{$fechaHasta}','{$tipoHospedaje}','activo')";
-			
-			
-			
+
+
+
 		} else {
 			echo '<script type="text/javascript">
 									alert("se rompio todo");
 									window.location="crear_publicacion.php"
 								</script>';
 		}
-	 
+
 	}
 //************** insertar tipo de hospedaje ***************************************************************************
 	if ($opcion == "tipoHospehaje")
 	{
 		$tHospedaje= $_REQUEST['alojamiento'];
-		
+
 		if ($tHospedaje){
 			if (validar_tipoAlojamiento ($tHospedaje)){
 				$consulta = "INSERT INTO tipo_alojamiento(nombre) VALUES ('{$tHospedaje}')";
@@ -63,9 +63,9 @@ include 'funciones.php';
 									alert("el tipo de hospedaje ingresado ya existe");
 									window.location="agregar_hospedaje.php?msj=hospedaje"
 								</script>';
-				
+
 			}
-					
+
 		} else {
 				 echo '<script type="text/javascript">
 									alert("el campo tipo de hospedaje esta vacio");
@@ -81,30 +81,30 @@ include 'funciones.php';
 			$usuario= $_REQUEST['usu'];
 			$pass = $_REQUEST['contra1'];
 			if (($usuario) && ($pass))
-			{		
+			{
 				if (validar_usuarioalta($usuario))
 				{
 				$consulta = "INSERT INTO usuarios(nombreusuario, clave) VALUES ('{$usuario}','{$pass}')";
-				} 
+				}
 					else {$consulta = false;
 					echo "El nombre de usuario ingresado ya existe en la base de datos <br/>";
 
 				}
 			} else {
-				 header("location:usuario.php?opcion=alta");				
+				 header("location:usuario.php?opcion=alta");
 				}
 	}
 //************** insertar donación ***************************************************************************
 	if ($opcion == "donar")
 	{
-		$usuario = $_SESSION['idU'];	
+		$usuario = $_SESSION['idU'];
 		$monto = $_REQUEST['monto'];
 		$consulta = "INSERT INTO donaciones(id_usuario, monto, fecha_donacion) VALUES ('{$usuario}','{$monto}', CURRENT_DATE)";
 	}
 //************** insertar un comentario ***************************************************************************
 	if ($opcion == "pregunta")
 	{
-		$pregunta = $_REQUEST['pregunta'];	
+		$pregunta = $_REQUEST['pregunta'];
 		$idUsu = $_REQUEST['usuId'];
 		$idPub = $_REQUEST['idPub'];
 		$consulta = "insert into comentarios (id_usuario, id_publicacion, fecha, comentario) VALUES ('{$idUsu}','{$idPub}', CURRENT_DATE, '{$pregunta}' )";
@@ -113,18 +113,18 @@ include 'funciones.php';
 //************** insertar Respuesta a un comentario ***************************************************************************
 	if ($opcion == "respuesta")
 	{
-		$com = $_REQUEST['comentario'];	
+		$com = $_REQUEST['comentario'];
 		$resp = $_REQUEST['respuesta'];
 		$idPub = $_REQUEST['idPub'];
 		$consulta = "update comentarios set respuesta = '$resp' where id_comentario = '$com' ";
 	}
 //*************************************************************************************************************
 
-	
+
 	mysql_query($consulta);
-	
-	
-	
+
+
+
 	if ($opcion == "publicacion"){
 		if ($consulta)
 		{
@@ -147,11 +147,11 @@ include 'funciones.php';
 							//escapar los caracteres
 							$data = mysql_real_escape_string($data);
 							$resultado = @mysql_query("INSERT INTO imagenes (id_publicacion, imagen, tipo_imagen) VALUES ('$publicacion', '$data', '$tipo')") ;
-							
+
 						} else { ?>
 							<script type="text/javascript">
 									alert("archivo no permitido, es tipo de archivo prohibido o excede el tamano de $limite_kb Kilobytes");
-									window.location="mostrar_publicacion.php?id=<? =$publicacion?>"
+									window.location="mostrar_publicacion.php?id=<?=$publicacion?>"
 							</script>;
 <?php						}
 					} ?>
@@ -165,20 +165,20 @@ include 'funciones.php';
 		} else {
 			echo "No se pudo ingresar el registro - ";
 			echo "Error mysql:".mysql_error();
-		
-		}		
-	} 
+
+		}
+	}
 	elseif ($opcion == "tipoHospehaje"){
-			if ($consulta){ 
+			if ($consulta){
 				echo '<script type="text/javascript">
 						alert("el tipo de hospedaje fue agregado con exito");
 						window.location="listado_tHospedaje.php"
 					</script>';
-			} 
+			}
 			else {
 				echo "No se pudo ingresar el registro - ";
-				echo "Error mysql:".mysql_error();		
-			}		
+				echo "Error mysql:".mysql_error();
+			}
 	}
 	elseif ($opcion == "respuesta"){
 	?>
@@ -186,16 +186,16 @@ include 'funciones.php';
 									alert("Respuesta enviada con exito");
 									window.location="mostrar_publicacion.php?id=<?php echo $idPub?>"
 							</script>;
-<?php						
-	} 
+<?php
+	}
 	elseif ($opcion == "pregunta"){
 	?>
 							<script type="text/javascript">
 									alert("pregunta enviada con exito");
 									window.location="mostrar_publicacion.php?id=<?php echo $idPub?>"
 							</script>;
-<?php						
-	} 
+<?php
+	}
 	elseif ($opcion == "donar"){
 			echo '<script type="text/javascript">
 				alert ("Su donación se ha realizado correctamente");
@@ -204,8 +204,8 @@ include 'funciones.php';
 	}
 	else{
 		echo "<br/> <a href='usuario.php?opcion=alta'>volver</a>";
-	}	
-		
+	}
+
 	mysql_close($con);
 ?>
 

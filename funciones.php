@@ -50,7 +50,7 @@ function validar_usoAlojamiento ($id){
 //*****************************************************************************************************
 function validar_eliminarPub ($id){
 	
-	$consulta= "SELECT * FROM usuariosolicita WHERE id_publicacion = '$id' and estado = 'aceptada'";
+	$consulta= "SELECT * FROM reservas WHERE id_publicacion = '$id' and estado = 'aceptado'";
 	$resul= mysql_query($consulta);
 	
 	$fila= mysql_fetch_array($resul);

@@ -23,8 +23,6 @@
         $email = $row["email"];
         $nameu = $row["nombre"];
 				$apellido=$row["apellido"];
-        $id=$row["id_usuario"];
-				$foto = $row["foto"];
 				$tel = $row["telefono"];
     }
     else
@@ -86,7 +84,11 @@
 		</div>
 			<div class="center">
 				<div id="perfil">
-						<img class='imagen_perfil' src='images/foto-de-perfil.png' />
+						<?php if ($row['tipo_foto'] == null){
+							echo "<img class='img-circle' src='images/foto-de-perfil.png' width='150' height='150'/>";
+						}else{ ?>
+							<img src="imagenUsuario.php?id= <?php echo $idU ?>" class="img-circle" width="150" height="150" />
+					<?php } ?>
 						<br>
 						<strong>Nombre:</strong> <?=$nameu?>
 						<strong> </strong> <?=$apellido?>
@@ -103,10 +105,40 @@
 	 <section id="listados">
 						<div class="center" id="listados">
 						<hr/>
-							<h2>Mis publicaciones </h2>
+							<h2> Publicaciones </h2>
 						<hr/>
-
-						<?php include_once('listado.php'); ?>
+					<?php
+									$consulta = "SELECT * FROM publicaciones WHERE id_usuario='{$idU}'";
+									$resultado = busqueda($consulta);
+								?>
+									<table class="table table hover" id="listados">
+													<tr>
+														<th>Fotos</th>
+														<th>Titulo</th>
+														<th>Descripcion</th>
+														<th></th>
+													</tr>
+												<?php
+												if(!empty($resultado)){
+													foreach ($resultado as $r){?>
+														<tr><?php
+														if ($r['id_usuario'] == $idU){
+															echo "<td><img src=imagen.php?id=$r[id_publicacion] id='imagen_lista' class='img-rounded'></td>";
+															echo "<td><br><a href=mostrar_publicacion.php?id=$r[id_publicacion]>$r[titulo]</a></td>";
+														?>
+														<td><br><div class="descripcion"><?php echo $r['descripcion']; ?></div></td>
+														<td>
+															<div>
+																<br>
+																<input class="btn btn-primary btn-lg" type="button" value="Ver couch" onclick="window.location.href='mostrar_publicacion.php?id=<?php echo $r['id_publicacion'];?>'">
+															</div>
+														</td>
+													</tr>
+													<?php
+														}
+													}
+												}?>
+									</table>
 						</div>
 
     </section><!--/section-->

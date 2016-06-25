@@ -60,7 +60,7 @@
   								<th></th>
   							</tr>
 						<?php
-						$num = 27;
+						
 						foreach ($resultado as $r)
             {?>
 							<tr><?php
@@ -70,7 +70,8 @@
                 $idP= $r['id_publicacion'];
                 $sql="SELECT  * FROM publicaciones WHERE id_publicacion='$idP'";
                 $result2= busqueda($sql);
-								foreach($result2 as $array)
+				
+				foreach($result2 as $array)
                 {
 	                  echo "<td><br><a>$array[titulo]</a></td>";
 								}

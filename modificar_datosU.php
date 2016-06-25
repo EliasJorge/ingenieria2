@@ -88,27 +88,58 @@
 								$apellido= mysqli_real_escape_string($conexion,$_POST['apellido']);
 								$contrasenia= mysqli_real_escape_string($conexion,$_POST['contrasenia']);
 								$telefono= mysqli_real_escape_string($conexion,$_POST['telefono']);
-								$consulta= "UPDATE usuarios SET nombre='".$nombre."',contrasenia='".$contrasenia."',telefono='".$telefono."',apellido='".$apellido."',foto='"."' WHERE usuarios.id_usuario='".$id."'";
-								$sql = mysqli_query($conexion,$consulta);
-								if($sql)
-								{
-									echo '<script type="text/javascript">
-											alert("datos cambiados correctamente");
+								if ( !isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] > 0){
+										echo '<script type="text/javascript">
+											alert("ha ocurrido un error");
 											window.location="perfil.php"
-										</script>';
-								}
-								else
-								{
-									echo '<script type="text/javascript">
-												alert("error, no se pudieron cambiar los datos");
-												window.location="perfil.php"
 											</script>';
+								} else {
+								//ahora vamos a verificar si el tipo de archivo es un tipo de imagen permitido.
+								//y que el tamano del archivo no exceda los 16MB
+										$permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
+										$limite_kb = 16384;
+
+										if (in_array($_FILES['imagen']['type'], $permitidos) && $_FILES['imagen']['size'] <= $limite_kb * 1024){
+
+											//este es el archivo temporal
+											$imagen_temporal  = $_FILES['imagen']['tmp_name'];
+											//este es el tipo de archivo
+											$tipo = $_FILES['imagen']['type'];
+											//leer el archivo temporal en binario
+											$fp     = fopen($imagen_temporal, 'r+b');
+											$data = fread($fp, filesize($imagen_temporal));
+											fclose($fp);
+
+											//escapar los caracteres
+											$data = mysql_real_escape_string($data);
+											$consulta="update usuarios set nombre='$nombre',contrasenia='$contrasenia',telefono='$telefono',apellido='$apellido',foto = '$data', tipo_foto = '$tipo' where id_usuario = '$id'";
+								
+											$sql = mysqli_query($conexion,$consulta);
+											if($sql){
+												echo '<script type="text/javascript">
+													alert("datos cambiados correctamente");
+													window.location="perfil.php"
+													</script>';
+											}	
+												else
+											{
+													echo '<script type="text/javascript">
+														alert("error, no se pudieron cambiar los datos");
+														window.location="perfil.php"
+													</script>';
+											}
+										} else {
+												echo 	'<script type="text/javascript">
+															alert("archivo no permitido, es tipo de archivo prohibido o excede el tamano de $limite_kb Kilobytes");
+															window.location="perfil.php"
+														</script>';
+										}
 								}
 						}
 						else
 						{
 						?>
-							<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+							<form action="<?=$_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
 								<label for="nombre"> Nombre:</label>
 								<br>
 								<input type="text" name="nombre" value="<?=$nameu?>" required  onsubmit="return validateForm()"/>
@@ -130,7 +161,7 @@
 								<input type="text" name="telefono" value="<?=$telefono?>" required  />
 								<br><br>
 								<div class="center">
-								Incluir foto <input  type="file" name="foto" id="foto" />
+								Incluir foto <input  type="file" name="imagen" id="imagen" />
 								</div>
 								<br><br>
 								<input class="btn btn-primary btn-lg" type="submit" name="enviar" value="Guardar cambios" />

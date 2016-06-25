@@ -135,7 +135,7 @@
 								<td><b></b></td><!-- columna1  --->
 								<td><b></b>Total recaudado:</td><!-- columna2  --->
 								<td><b>" . $recaudacion . "</b></td><!-- columna3  --->
-								<!--<td><b></b></td>columna4  --->
+								<td><b></b></td><!-- columna4  --->
 								</tr>					
 								";
 							echo '</table><hr>';// Fin de tabla

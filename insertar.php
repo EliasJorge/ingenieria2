@@ -44,7 +44,7 @@ include 'funciones.php';
 
 		} else {
 			echo '<script type="text/javascript">
-									alert("se rompio todo");
+									alert("Ha ocurrido un error, intentelo nuevamente");
 									window.location="crear_publicacion.php"
 								</script>';
 		}
@@ -94,12 +94,26 @@ include 'funciones.php';
 				 header("location:usuario.php?opcion=alta");
 				}
 	}
+//************** insertar reserva ***************************************************************************
+if ($opcion == "reserva")
+{
+	$usuario = $_SESSION['idU'];
+	$publicacion = $_REQUEST['idPub'];
+	$desde=$_REQUEST['fechaDesde'];
+	$hasta=$_REQUEST['fechaHasta'];
+	$consulta = "INSERT INTO donaciones(id_publicacion, id_usuario, estado,fecha_desde,fecha_hasta) VALUES ('{$publicacion}','{$usuario}','activo','$desde','$hasta')";
+}
 //************** insertar donación ***************************************************************************
 	if ($opcion == "donar")
 	{
 		$usuario = $_SESSION['idU'];
 		$monto = $_REQUEST['monto'];
 		$consulta = "INSERT INTO donaciones(id_usuario, monto, fecha_donacion) VALUES ('{$usuario}','{$monto}', CURRENT_DATE)";
+		if ($_SESSION['tipoUsuario']=='normal')
+		{
+			$consul= "UPDATE usuarios SET tipo='premium' WHERE id_usuario='{$usuario}'";
+			mysql_query($consul,$con);
+		}
 	}
 //************** insertar un comentario ***************************************************************************
 	if ($opcion == "pregunta")
@@ -121,7 +135,7 @@ include 'funciones.php';
 //*************************************************************************************************************
 
 
-	mysql_query($consulta);
+	mysql_query($consulta,$con);
 
 
 
@@ -198,7 +212,13 @@ include 'funciones.php';
 	}
 	elseif ($opcion == "donar"){
 			echo '<script type="text/javascript">
-				alert ("Su donación se ha realizado correctamente");
+				alert ("Su donacion se ha realizado correctamente");
+				window.location="index.php"
+				</script>';
+	}
+	elseif ($opcion == "reserva"){
+			echo '<script type="text/javascript">
+				alert ("Su reserva se ha realizado correctamente");
 				window.location="index.php"
 				</script>';
 	}

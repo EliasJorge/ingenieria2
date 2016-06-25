@@ -175,7 +175,7 @@ function generaTipoHospedaje()
 				
 				
 			<br>
-			<input class="btn btn-primary btn-lg" id="enviar1" name="siguiente" type="submit" value="siguiente" />
+			<input class="btn btn-primary btn-lg" id="enviar1" name="siguiente" type="submit" value="buscar" />
 			<input class="btn btn-primary btn-lg" id="enviar2" name="cancelar" type="button" value="cancelar" onClick="location.href = 'admin.php'"/>
 			</div>
 		</fieldset>

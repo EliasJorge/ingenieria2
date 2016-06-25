@@ -127,6 +127,11 @@ body > section {
  
 }
 
+.derecha {
+	float:right;
+	text-align:right;
+}
+
 .scaleIn {
   -webkit-animation-name: scaleIn;
   animation-name: scaleIn;
@@ -2603,7 +2608,12 @@ shortcodes page css
 #foto {
 	margin-left: 38%;
 }
-
+#imagen {
+	margin-left: 38%;
+}
+#foto2 {
+	margin-left: 11%;
+}
 #demoDer { float:right; }
 
 select { width:220px; }
@@ -2613,7 +2623,7 @@ select { width:220px; }
 }
 
 #subeFotos {
-	margin-left: 20%;
+	margin-left: 16%;
 }
 
 #columnaa {
@@ -2627,18 +2637,14 @@ select { width:220px; }
 	word-wrap:break-word;
 	width: 350px;
 }
-<<<<<<< Updated upstream
 .descripcion1{
 	word-wrap:break-word;
-	width: 500px;
+	width: 380px;
 }
-=======
->>>>>>> Stashed changes
 #imagenPub {
-	max-width: 400px;
-	max-height: 400px;
-	margin-left:30%;
-<<<<<<< Updated upstream
+	max-width: 450px;
+	max-height: 450px;
+	margin-left:15%;
 }
 #imagenRow .thumbnail {
 	width: 100px;
@@ -2646,9 +2652,8 @@ select { width:220px; }
 	
 }
 #fotoPub {
-	margin-left: 30%;
-=======
->>>>>>> Stashed changes
+	margin-left: 13%;
+	margin-bottom: 5%;
 }
 #registrar {background:url(../images/footer-background.png);padding:10px 15px;height:20px;margin-bottom:10px;}
 #registrar > a {display:block;padding:0.90px;font-size:24px;color:#000000;text-align:center; text-decoration:none;line-height:20px}

@@ -167,7 +167,7 @@ function generaTipoHospedaje()
 				<input class="caja" name="huespedes" id="capacidad" type="number" size="30" maxlength="30" /> 
 				<br><br>
 				<div class="izquierda">
-				<div class="form-group">
+					<div class="form-group">
 						<label for="fecha">Disponible desde:</label>
 						<input class="" type="text" id="datepicker" name="fechaDesde" placeholder="Ingrese la fecha desde" readonly>
 					</div>
@@ -180,11 +180,11 @@ function generaTipoHospedaje()
 				<div class="form-group">
 					<label> Sube fotos de tu couch: </label>
 					<div class="center" id="subeFotos">
-							<input type="file" name="imagen[]" id="foto" value="" multiple>
+							<input type="file" name="imagen[]" id="foto1" value="" multiple>
 					</div>
 				</div>
 			<br>
-			<input class="btn btn-primary btn-lg" id="enviar1" name="siguiente" type="submit" value="siguiente" />
+			<input class="btn btn-primary btn-lg" id="enviar1" name="publicar" type="submit" value="publicar" />
 			<input class="btn btn-primary btn-lg" id="enviar2" name="cancelar" type="button" value="cancelar" onClick="location.href = 'index.php'"/>
 			</div>
 		</fieldset>

@@ -5,23 +5,15 @@ function validarCouch(){
 	var prov = document.getElementById("provincias").selectedIndex;
 	var loc = document.getElementById("localidades").selectedIndex;
 	var plazas = document.getElementById("capacidad");
-	var desde = document.getElementById("datepicker");
-	var hasta = document.getElementById("datepicker2");
+	
 	var tipo = document.getElementById("alojamiento").selectedIndex;
-	var foto = document.getElementById("foto");
+	var foto = document.getElementById("foto1");
+	var fechainicio= document.getElementById("datepicker");
+	var fechalimite= document.getElementById("datepicker2");
 	var expr = /^(?:[\w]\:|\\)(\\[a-z_\-\s0-9\.]+)+\.(png|gif|jpg|jpeg)$/;
 	
 	
-	if(desde.value != null){
-		if(hasta.value != null){
-			if(hasta.value.length > 0){
-				if(desde.value > hasta.value){
-					alert('La fecha desde es mayor que la fecha hasta.');
-					return false;
-				}
-			}
-		}
-	}
+	
 	if(titulo.value == null || titulo.value == ""){
 		alert('El campo titulo esta vacio.');
 		return false;
@@ -63,6 +55,38 @@ function validarCouch(){
 		alert('Debe seleccionar al menos una foto.');
 		return false;
 	}
+	
+	
+		if(fechainicio.value != ""){
+			if(fechalimite.value != ""){
+				if(fechalimite.value.length > 0){
+					if(fechainicio.value > fechalimite.value){
+						alert('La fecha de inicio es mayor que la fecha limite.');
+						return false;
+					}
+				}
+			}else{
+			alert('Complete el campo fecha fin');
+			return false;
+		}
+		}else{
+			alert('Complete el campo fecha inicio');
+			return false;
+		}
+			
+		if((fechainicio.value == null || fechainicio.value.length == 0)){
+			alert('Complete el campo fecha inicio');
+			return false;
+		}
+		if((fechalimite.value == null || fechalimite.value.length == 0)){
+			alert('Complete el campo fecha limite');
+			return false;
+		}
+		return true
+	
+	
+	
+	
 }
 
 function validarBusqueda(){

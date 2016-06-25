@@ -26,39 +26,14 @@
     <script src="js/respond.min.js"></script>
     <![endif]-->
     <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-		<script>
-			$(function() {
-				$( "#datepicker, #datepicker2" ).datepicker({
-					showOn: "button",
-					buttonImage: "images/calender_green_16.png",
-					buttonImageOnly: true,
-					buttonText: "Select date"
-				});
-				$( "#datepicker, #datepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-			});
-		</script>
-		<script>
-			$(function() {
-				$.datepicker.setDefaults({
-					dateFormat: 'yy-mm-dd',
-					changeMonth: true,
-					changeYear: true,
-					yearRange:"c-80:c",
-					defaultDate:"m d y",
-									dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
-									dayNamesShort: [ "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab" ],
-									monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
-									"Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-									monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-									"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ]
-				});
-				$( "#fechaNacimiento" ).datepicker();
-			});
-		</script>
+   
+	<link rel="stylesheet" href="css/smoothness/jquery-ui.css">
+	<script src="js/jquery.js"></script>	
+    <script src="js/bootstrap.min.js"></script>
+
+	
+	
+	
 
 </head><!--/head-->
 
@@ -135,7 +110,7 @@
 								$id1 = $fils['id_imagen'];
 
 								echo "<div class='col-sm-3' id='imagenRow'>";
-							//	echo "<a href='#' title='Couchinn'><img class='thumbnail img-responsive>' src='imagenes.php?id=$id1'  /></a>"; NO ANDA LSDKWJERKL3QJWHGFADJK2QDHI
+								echo "<a href='#' title='Couchinn'><img class='thumbnail img-responsive>' src='imagenes.php?id=$id1'  /></a>"; //NO ANDA LSDKWJERKL3QJWHGFADJK2QDHI
 								echo "</div>";
 							}
 						?>
@@ -145,11 +120,11 @@
                                 <div class="col-xs-12 col-sm-5 text-center">
                                     <div class="entry-meta">
                                         <strong>Disponible Desde:</strong> <?php echo htmlentities($fechaDesde); ?>
-																				<br><strong>Disponible Hasta:</strong> <?php echo htmlentities($fechaHasta); ?>
-																				<br><strong>Capacidad:</strong> <?php echo htmlentities($capacidad); ?>
-																				<?php
-																					include_once('reservar.php');
-																				?>
+										<br><strong>Disponible Hasta:</strong> <?php echo htmlentities($fechaHasta); ?>
+										<br><strong>Capacidad:</strong> <?php echo htmlentities($capacidad); ?>
+										<?php
+												include_once('reservar.php');
+										?>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-5 blog-content">
@@ -185,7 +160,11 @@
 				</div><!--/.col-md-8-->
 				<aside class="col-md-4">
 					<div class="widget categories"> <!--datos de usuario-->
+						<?php if ($fila4['tipo_foto'] == null){
+						echo "<img class='img-circle imagen_perfil' src='images/foto-de-perfil.png' width='150' height='150'/><br><br>";
+					}else{ ?>
 						<img class='img-circle imagen_perfil' src='imagenUsuario.php?id= <?php echo $usu ?> 'width="150" height="150" /><br><br>
+						<?php } ?>
 						<!--<a href="perfil.php?mail=<?=$mail?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>-->
 						<a href="ver_perfil_publicacion.php?id=<?=$id?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>
 					</div>
@@ -223,7 +202,7 @@
 							<h3> <strong>Opciones de la publicacion</strong></h3>
 							<div class="derecha">
 								<input class="btn btn-primary btn-lg" id="eliminar" name="eliminar" type="button" value="eliminar" onClick="location.href = 'eliminarPub.php?id=<?php echo $id; ?>'"/>
-								<input class="btn btn-primary btn-lg" id="modificar" name="modificar" type="button" value="modificar" onClick="location.href = 'modificarPub.php'"/>
+								<input class="btn btn-primary btn-lg" id="modificar" name="modificar" type="button" value="modificar" onClick="location.href = 'error.php'"/>
 							</div>
 						</fieldset>
 		<?php			}
@@ -237,21 +216,14 @@
 
 	<br>
 	<!-- /contenido -->
-
-	<!-- Footer -->
-	<?php
-
-			//---Incluimos el footer
-			include_once('view/footer.php');
-
-	?>
-
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/jquery.isotope.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/wow.min.js"></script>
+	
+	
+	<script src="js/jquery-ui.js"></script> 
+	<script src="js/validar.js"></script> 
 	<script language="javascript">
 		$('.thumbnail').click(function(){
 			$('.foto').empty();
@@ -261,5 +233,27 @@
 			$('#myModal').modal({show:true});
 		});
 	</script>
+	
+	<script>
+		$(function() {
+			$( "#datepicker, #datepicker2" ).datepicker({
+				showOn: "button",
+				buttonImage: "images/calender_green_16.png",
+				buttonImageOnly: true,
+				buttonText: "Select date"
+			});
+			$( "#datepicker, #datepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+		});
+	</script>
+	<!-- Footer -->
+	<?php
+
+			//---Incluimos el footer
+			include_once('view/footer.php');
+
+	?>
+
+    
+	
 </body>
 </html>

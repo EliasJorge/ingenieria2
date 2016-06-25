@@ -60,7 +60,7 @@
 				}
 				else{
 					$con="SELECT * FROM publicaciones WHERE ";
-					$con2="SELECT id_publicacion FROM usuariosolicita WHERE ";
+					$con2="SELECT id_publicacion FROM reservas WHERE ";
 					$sub="";
 					if(isset($_POST['provincias'])){
 						if(!empty($_POST['provincias'])){
@@ -90,7 +90,7 @@
 						if(!empty($_POST['fechaDesde']) and !empty($_POST['fechaHasta'])){
 							$desde=$_POST['fechaDesde'];
 							$hasta=$_POST['fechaHasta'];
-							$con2=$con2."fecha_desde = '$desde' AND fecha_hasta = '$hasta' AND estado = 'aceptada' ";
+							$con2=$con2."fecha_desde = '$desde' AND fecha_hasta = '$hasta' AND estado = 'aceptado' ";
 							$sub=$sub."AND id_publicacion NOT IN (".$con2.")";
 						}                    
 						else{

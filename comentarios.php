@@ -26,8 +26,12 @@
 						?>
 									<div class="media comment_section">
 										<div class="pull-left post_comments">
-											
-											<img src="imagenUsuario.php?id= <?php echo $usua ?>" class="img-circle" width="100" height="100" />
+											<?php 	if ($fil2['tipo_foto'] == null){
+														echo "<img class='img-circle' src='images/foto-de-perfil.png' width='100' height='100'/>";
+													}else{ 
+											?>
+														<img src="imagenUsuario.php?id= <?php echo $usua ?>" class="img-circle" width="100" height="100" />
+											<?php } ?>
 										</div>
 										<div class="media-body post_reply_comments">
 											<strong><h2><?php  echo htmlentities($fil2['apellido']).", ".htmlentities($fil2['nombre'])."</h2>"; ?></strong>                                

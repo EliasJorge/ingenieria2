@@ -30,7 +30,7 @@ if ( !isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] > 0)
                 //escapar los caracteres
                 $data = mysql_real_escape_string($data);
 				
-		$consulta="update usuarios set foto = '$data', tipo_foto = '$tipo' where id_usuario = '6'";
+		$consulta="update usuarios set foto = '$data', tipo_foto = '$tipo' where id_usuario = '7'";
 		$resultado = @mysql_query($consulta) ;
 
 		if ($resultado){

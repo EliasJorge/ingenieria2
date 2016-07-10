@@ -1,5 +1,4 @@
 <?php
-	// cargar a git todas las modificaciones desde las 21.30
 	session_start();
 	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
 	$con = conectar1();
@@ -201,17 +200,24 @@
 						<fieldset>
 							<h3> <strong>Opciones de la publicacion</strong></h3>
 							<div class="derecha">
-								<input class="btn btn-primary btn-lg" id="eliminar" name="eliminar" type="button" value="eliminar" onClick="location.href = 'eliminarPub.php?id=<?php echo $id; ?>'"/>
-								<input class="btn btn-primary btn-lg" id="modificar" name="modificar" type="button" value="modificar" onClick="location.href = 'error.php'"/>
+								<form class="" name="eliminaPub" id="eliminaPub" method="post" action="eliminarPub.php">
+									<input type="hidden" name="pubID" id="pubID" value="<?php echo $id; ?>">
+									<input class="btn btn-primary btn-lg" id="eliminar" name="eliminar" type="button" value="eliminar" onClick="preguntaEliminar()"/>
+									<input class="btn btn-primary btn-lg" id="modificar" name="modificar" type="button" value="modificar" onClick="location.href = 'modificarPub.php?id=<?php echo $id; ?>'"/>
+								<form>
+								
+								</form>
+								</form>
 							</div>
 						</fieldset>
 		<?php			}
 					}
 				}
 		?>
+		<hr/>
     </section><!--/section-->
 
-	<hr/>
+	
 
 
 	<br>
@@ -245,6 +251,7 @@
 			$( "#datepicker, #datepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 		});
 	</script>
+
 	<!-- Footer -->
 	<?php
 

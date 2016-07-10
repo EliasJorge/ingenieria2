@@ -132,3 +132,43 @@ function validarBusquedaAvanzada(){
 	}
 	return true;
 }
+
+function preguntaEliminar (){
+	
+			if (confirm('¿Esta seguro que desea eliminar la publicacion?')){
+				
+				document.eliminaPub.submit()
+				
+			}
+			
+}
+
+function preguntaModificar (){
+	
+			if (confirm('¿Esta seguro que desea modificar la publicacion?')){
+				
+				document.modificaPub.submit()
+				
+			}
+			
+}
+
+function preguntaFotoMod (){
+	
+			if (confirm('¿Esta seguro que desea agregar las imagenes seleccionadas a la publicacion?')){
+				
+				document.subeFotos.submit()
+				
+			}
+			
+}
+
+function preguntaFotoElim (){
+	
+			if (confirm('¿Esta seguro que desea eliminar las imagenes seleccionadas de la publicacion?')){
+				
+				document.eliminaFotos.submit()
+				
+			}
+			
+}

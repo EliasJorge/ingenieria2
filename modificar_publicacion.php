@@ -25,6 +25,7 @@ include 'funciones.php';
 		$provincia=$_REQUEST['provincias'];
 		$titulo=$_REQUEST['titulo'];
 		$descripcion=$_REQUEST['descripcion'];
+		echo $descripcion;
 		$tipoHospedaje=$_REQUEST['alojamiento'];
 		$cantidadHuespedes= $_REQUEST['huespedes'];
 		
@@ -54,12 +55,12 @@ include 'funciones.php';
 					}
 					$consulta= $consulta. " where id_publicacion = '$pub'"; // se completa la consulta
 			
-			} else {
-					echo 	'<script type="text/javascript"> 
-								alert("Ha ocurrido un error, intentelo nuevamente");
-								window.location="crear_publicacion.php"
-							</script>'; // si ocurrio algun error con los valores del formulario se informa del error
-			}
+			} else { // si ocurrio algun error con los valores del formulario se informa del error   ?>
+							<script type="text/javascript"> 
+								alert("Complete todos los campos e intentelo nuevamente");
+								window.location="modificarPub.php?id=<?php echo $pub?>"
+							</script>; 
+<?php			}
 			
 
 		mysql_query($consulta,$con); // se realiza la consulta

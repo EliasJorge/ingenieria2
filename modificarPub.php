@@ -128,7 +128,7 @@ function generaTipoHospedaje()
 						<legend>
 							<h4>Modifica la ubicacion </h4>
 						</legend>
-						<form action="modificar_publicacion.php" method="POST" onsubmit=" return validarCouch(this)" name="modificaPub" enctype="multipart/form-data">
+						<form action="modificar_publicacion.php" method="POST" onsubmit=" return validarMod(this)" name="modificaPub" enctype="multipart/form-data">
 							<div class="dependientes" id="demo" style="width:700px;">
 								<div id="demoDer">
 									<label for="localidad">*Localidad:</label>
@@ -248,7 +248,7 @@ function generaTipoHospedaje()
 								</div>
 								<div class="modal-body">
 									<div class="form-group">
-										<form action="subirFotos.php" method="POST" onsubmit=" return validarCouch(this)" id="subeFotos" name="subeFotos" enctype="multipart/form-data">
+										<form action="subirFotos.php" method="POST" id="subeFotos" name="subeFotos" enctype="multipart/form-data">
 											<div class="center" id="subeFotos">
 												<input type="file" name="imagen[]" id="foto1" value="" multiple>
 												<input type="hidden" name="idPub" id="idPub" value="<?php echo $id; ?>">
@@ -274,7 +274,7 @@ function generaTipoHospedaje()
 									<h4 class="modal-title" id="myModalLabel2">Sube fotos de tu couch:</h4>
 								</div>
 								<div class="modal-body">
-									<form action="eliminarFotos.php" method="POST" onsubmit=" return validarCouch(this)" id="eliminaFotos" name="eliminaFotos" enctype="multipart/form-data">
+									<form action="eliminarFotos.php" method="POST" id="eliminaFotos" name="eliminaFotos" enctype="multipart/form-data">
 									<table>
 									<tr>
 									<div class="center">

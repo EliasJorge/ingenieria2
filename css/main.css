@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,300,800);
+/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,300,800);
 
 
 /*************************
@@ -1993,6 +1993,20 @@ textarea#message{
   margin-top: 5px;
 }
 
+.single_comments  {
+  /*text-align: right;*/
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.comentario {
+	word-wrap: break-word;
+	background:#d7d7d7;
+	border-radius: 4px;
+	padding: 30px;
+	margin-bottom: 10px;
+}
+	
+}
 .single_comments p {
   margin-bottom: 0;
 }
@@ -2605,6 +2619,12 @@ shortcodes page css
 #listados th {
 	text-align: center;
 }
+#listados tr {
+	text-align: center;
+}
+#listados td {
+	text-align: center;
+}
 #foto {
 	margin-left: 38%;
 }
@@ -2627,7 +2647,7 @@ select { width:220px; }
 }
 
 #columnaa {
-	margin-top: 20px; 
+	margin-top: 50px; 
 }
 .izquierda {
 	margin-left:-80px;
@@ -2635,7 +2655,8 @@ select { width:220px; }
 }
 .descripcion{
 	word-wrap:break-word;
-	width: 350px;
+	width: 400px;
+	
 }
 .descripcion1{
 	word-wrap:break-word;

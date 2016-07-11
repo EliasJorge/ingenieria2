@@ -7,26 +7,25 @@
 
 <body class="homepage">
 	
-	<h1 id="comments_title">Preguntas y comentarios de la publicacion</h1> <!--preguntas/comentarios-->
+	<h1 id="comments_title">Preguntas de la publicacion</h1> <!--preguntas/comentarios-->
                        
 						<?php 
-							$busq = "select * from comentarios where id_publicacion = '$id'";
-							$res= mysql_query($busq,$con);
-							if(mysql_num_rows($res) > 0){
+							$busq = "select * from comentarios where id_publicacion = '$id' and comentario is not null";
+							$res= busqueda($busq);
+							
+							if(count($res) > 0){
 								
-								while ($fila = mysql_fetch_assoc($res)) {
-								$row[] = $fila;
-								}
-								foreach ($row as $r){
+								
+								foreach ($res as $r){
 									$com = $r['id_comentario'];
 									$usua = $r['id_usuario'];
 									$busq2 = "select * from usuarios where id_usuario = '$usua'";
-									$res2= mysql_query($busq2,$con);
-									$fil2= mysql_fetch_array($res2);
+									$fil2= busqueda($busq2);
+									
 						?>
 									<div class="media comment_section">
 										<div class="pull-left post_comments">
-											<?php 	if ($fil2['tipo_foto'] == null){
+											<?php 	if ($fil2[0]['tipo_foto'] == null){
 														echo "<img class='img-circle' src='images/foto-de-perfil.png' width='100' height='100'/>";
 													}else{ 
 											?>
@@ -34,7 +33,7 @@
 											<?php } ?>
 										</div>
 										<div class="media-body post_reply_comments">
-											<strong><h2><?php  echo htmlentities($fil2['apellido']).", ".htmlentities($fil2['nombre'])."</h2>"; ?></strong>                                
+											<strong><h2><?php  echo htmlentities($fil2[0]['apellido']).", ".htmlentities($fil2[0]['nombre'])."</h2>"; ?></strong>                                
 											<p><?php echo htmlentities($r['comentario']); ?></p>
 									<?php 	if ($r['respuesta'] == NULL){
 												if(isset($_SESSION['loggedin'])){

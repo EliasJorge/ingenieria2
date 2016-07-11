@@ -168,18 +168,15 @@
 						<a href="ver_perfil_publicacion.php?id=<?=$id?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>
 					</div>
 					<div class="widget categories"> <!--puntuaciones usuario/publicacion-->
-						<h3>Puntuaciones</h3>
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="single_comments">
-									<p>Aqui va a estar la puntuacion del usuario </p>
-								</div>
-								<div class="single_comments">
-									<p>Aqui va a estar la puntuacion de la publicacion </p>
-								</div>
-							</div>
-						</div>
-					</div><!--/.recent comments-->
+						 <!-- ######################################## puntuaciones ############################### -->
+                        <?php
+
+							//---Incluimos las puntuaciones 
+							include_once('puntuaciones.php');
+
+						?>
+						<!-- ######################################### /puntuaciones ############################## -->
+					</div><!--/.puntuaciones-->
 
 		    </div><!--/.row-->
 		</div><!--/.blog-->

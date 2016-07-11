@@ -22,7 +22,9 @@ include 'funciones.php';
 			$publicacion = $_REQUEST['idPub'];
 			$permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
 			$limite_kb = 16384;
+			
 			if (isset($_FILES["imagen"])){
+				if (!empty ($_FILES[0]["imagen"]) and $_FILES [0]["imagen"]["tmp_name"] != ""){
 					$cantidad= count($_FILES["imagen"]["tmp_name"]);
 					for ($i=0; $i<$cantidad; $i++){
 						if (in_array($_FILES['imagen']['type'][$i], $permitidos) && $_FILES['imagen']['size'][$i] <= $limite_kb * 1024){
@@ -42,7 +44,7 @@ include 'funciones.php';
 						} else { ?>
 							<script type="text/javascript">
 									alert("archivo no permitido, es tipo de archivo prohibido o excede el tamano de $limite_kb Kilobytes");
-									window.location="mostrar_publicacion.php?id=<?=$publicacion?>"
+									window.location="modificarPub.php?id=<?=$publicacion?>"
 							</script>;
 <?php						}
 					} ?>
@@ -50,8 +52,14 @@ include 'funciones.php';
 									alert("la publicacion se modifico correctamente");
 									window.location="mostrar_publicacion.php?id=<?php echo $publicacion?>"
 								</script>';
-<?php 		} else {
-				echo "no hay imagen";
+<?php 			} else {
+					?>
+							<script type="text/javascript">
+									alert("No se ha seleccionado ninguna imagen, intentelo de nuevo");
+									window.location="modificarPub.php?id=<?=$publicacion?>"
+							</script>;
+<?php
+				}
 			}
 		
 ?>

@@ -31,7 +31,7 @@ include 'funciones.php';
 						?>
 							<script type="text/javascript"> //se alerta de la situcacion
 								alert("No se completo la operacion, la publicacion debe contener al menos una imagen");
-								window.location="mostrar_publicacion.php?id=<?php echo $pub?>"
+								window.location="modificarPub.php?id=<?php echo $pub?>"
 							</script>';
 <?php				}else{ // si no se seleccionaron todas o si elegi subir una foto nueva
 							for ($i = 0; $i < $count; $i++) {
@@ -45,11 +45,11 @@ include 'funciones.php';
 							</script>';
 <?php						
 					}
-				}else{ // si no se seleccionaron todas o si elegi subir una foto nueva
+				}else{ // si no se seleccionaron 
 						?>
 							<script type="text/javascript"> //se alerta de la situcacion
 								alert("No se seleccionaron imagenes para eliminar");
-								window.location="mostrar_publicacion.php?id=<?php echo $pub?>"
+								window.location="modificarPub.php?id=<?php echo $pub?>"
 							</script>';
 <?php			}
 			}

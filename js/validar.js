@@ -236,7 +236,7 @@ function preguntaModificar (){
 	
 			if (confirm('¿Esta seguro que desea modificar la publicacion?')){
 				
-				document.modificaPub.submit()
+				return true;
 				
 			}
 			

@@ -95,17 +95,15 @@ include 'funciones.php';
 				}
 	}
 //************** insertar reserva ***************************************************************************
-if ($opcion == "reserva")
-{
-	$usuario = $_SESSION['idU'];
-	$publicacion = $_REQUEST['idPub'];
-	$desde=$_REQUEST['fechaDesde'];
-	$hasta=$_REQUEST['fechaHasta'];
-	$consulta = "INSERT INTO donaciones(id_publicacion, id_usuario, estado,fecha_desde,fecha_hasta) VALUES ('{$publicacion}','{$usuario}','activo','$desde','$hasta')";
-}
+	if ($opcion == "reserva"){
+		$usuario = $_SESSION['idU'];
+		$publicacion = $_REQUEST['idPub'];
+		$desde=$_REQUEST['fechaDesde'];
+		$hasta=$_REQUEST['fechaHasta'];
+		$consulta = "INSERT INTO donaciones(id_publicacion, id_usuario, estado,fecha_desde,fecha_hasta) VALUES ('{$publicacion}','{$usuario}','activo','$desde','$hasta')";
+	}
 //************** insertar donación ***************************************************************************
-	if ($opcion == "donar")
-	{
+	if ($opcion == "donar"){
 		$usuario = $_SESSION['idU'];
 		$monto = $_REQUEST['monto'];
 		$consulta = "INSERT INTO donaciones(id_usuario, monto, fecha_donacion) VALUES ('{$usuario}','{$monto}', CURRENT_DATE)";
@@ -116,8 +114,7 @@ if ($opcion == "reserva")
 		}
 	}
 //************** insertar un comentario ***************************************************************************
-	if ($opcion == "pregunta")
-	{
+	if ($opcion == "pregunta"){
 		$pregunta = $_REQUEST['pregunta'];
 		$idUsu = $_REQUEST['usuId'];
 		$idPub = $_REQUEST['idPub'];
@@ -132,6 +129,37 @@ if ($opcion == "reserva")
 		$idPub = $_REQUEST['idPub'];
 		$consulta = "update comentarios set respuesta = '$resp' where id_comentario = '$com' ";
 	}
+//************** Eliminar cuenta ***************************************************************************
+	if ($opcion == "eliminarCuenta"){
+		$idCuenta = $_GET['cuenta'];
+		$consulta = " update usuarios set estado = 'eliminado' where id_usuario = '$idCuenta' ";
+	}
+//************** recuperar cuenta ***************************************************************************
+	if ($opcion == "recuperarCuenta"){
+		if($_GET['resp']){
+			$idCuenta = $_SESSION['idU'];
+			$consulta = " update usuarios set estado = 'activo' where id_usuario = '$idCuenta' ";
+		}
+		else{
+			session_unset();
+			session_destroy();
+			echo '
+				<script type="text/javascript">
+					window.location="index.php"
+				</script>
+			';
+		}
+	}
+//************** cambiar estado de la publicacion ***************************************************************************
+	if ($opcion == "pausarPublicacion"){
+		$idPublicacion = $_GET['publicacion'];
+		$consulta = " update publicaciones set estado = 'pausada' where id_publicacion = '$idPublicacion' ";
+	}
+	if ($opcion == "activarPublicacion"){
+		$idPublicacion = $_GET['publicacion'];
+		$consulta = " update publicaciones set estado = 'activo' where id_publicacion = '$idPublicacion' ";
+	}
+	
 //*************************************************************************************************************
 
 
@@ -221,6 +249,42 @@ if ($opcion == "reserva")
 				alert ("Su reserva se ha realizado correctamente");
 				window.location="index.php"
 				</script>';
+	}
+	elseif ($opcion == "eliminarCuenta"){
+		session_unset();
+        session_destroy();
+		echo '
+			<script type="text/javascript">
+				alert("Acabas de borrar tu cuenta, si queres recuperarla inicia sesion con tu mail y tu ultima contraseña. ");
+				window.location="index.php"
+			</script>
+		';
+	}
+	elseif ($opcion == "recuperarCuenta"){
+		if($_GET['resp']){
+			echo '
+				<script type="text/javascript">
+					alert("Ya podes disfrutar de Couchinn");
+					window.location="index.php"
+				</script>
+			';
+		}
+	}
+	elseif ($opcion == "pausarPublicacion"){
+		echo '
+			<script type="text/javascript">
+				alert("La publicacion ya esta pausada, sino la vuelves a activar solo la podras ver en tu perfil");
+				window.location="mostrar_publicacion.php?id=', $idPublicacion, '"
+			</script>
+		';
+	}
+	elseif ($opcion == "activarPublicacion"){
+		echo '
+			<script type="text/javascript">
+				alert("La publicacion ya esta activa y disponible para futuras busquedas");
+				window.location="mostrar_publicacion.php?id=', $idPublicacion, '"
+			</script>
+		';
 	}
 	else{
 		echo "<br/> <a href='usuario.php?opcion=alta'>volver</a>";

@@ -2005,8 +2005,25 @@ textarea#message{
 	padding: 30px;
 	margin-bottom: 10px;
 }
+
+.puntuacion {
+	background:#E1FA7B;
+	border-radius: 4px;
+	padding: 30px;
 	
 }
+
+.noPuntuacion {
+	background:#C5C1E3;
+	border-radius: 4px;
+	padding: 30px;
+	
+}
+.botonPub {
+	text-align: right;
+	
+}
+
 .single_comments p {
   margin-bottom: 0;
 }

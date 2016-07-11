@@ -164,8 +164,8 @@
 					}else{ ?>
 						<img class='img-circle imagen_perfil' src='imagenUsuario.php?id= <?php echo $usu ?> 'width="150" height="150" /><br><br>
 						<?php } ?>
-						<!--<a href="perfil.php?mail=<?=$mail?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>-->
-						<a href="ver_perfil_publicacion.php?id=<?=$id?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>
+						
+						<a href="ver_perfil_publicacion.php?id=<?php echo $id?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>
 					</div>
 					<div class="widget categories"> <!--puntuaciones usuario/publicacion-->
 						 <!-- ######################################## puntuaciones ############################### -->

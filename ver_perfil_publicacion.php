@@ -96,13 +96,29 @@
 						<strong>Email:</strong> <?=$email?>
 						<br>
 						<strong>Telefono:</strong> <?=$tel?>
-						</div>
-
-						 </section>
-
+						<br>
+				<?php 	
+						$bus= "select AVG(valoracion) as puntuacion from valoracion_usuario where id_huesped = '$idU'";
+						$res= busqueda($bus);
+						if ($res[0]['puntuacion'] > 0){
+								echo "<strong>Puntuacion: </strong>".number_format($res[0]['puntuacion'],2);
+				?>
+								<form method="POST" action='listado_puntuacionesU.php'>
+									<div class="center">
+										<input type="hidden" name="idU" id="idU" value="<?php echo $idU; ?>">
+										<input type="hidden" name="idPub" id="idPub" value="<?php echo $id; ?>">
+										<input class="btn btn-primary btn-md" id="valoracion" name="valoracion" type="submit" value="ver todas las calificaciones"/>
+									</div>
+						</form>
+				<?php
+						}else{
+							echo "<strong>Puntuacion:</strong><p>El usuario no posee calificaciones</p>";
+						}
+				?>
+				</div>
 			</div>
-		</div>
-	 <section id="listados">
+	</section>	
+	<section id="listados">
 						<div class="center" id="listados">
 						<hr/>
 							<h2> Publicaciones </h2>

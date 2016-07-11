@@ -1,4 +1,5 @@
 <?php
+	// cargar a git todas las modificaciones desde las 21.30
 	session_start();
 	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
 	$con = conectar1();
@@ -69,7 +70,7 @@
 			$idLoc= $fila['id_localidad'];
 			$capacidad= $fila['capacidad'];
 			$usu= $fila['id_usuario'];
-			$est= $fila['estado'];
+			$est= $fila['estado']; // lleva el estado de la publicacion [eliminada, activo, pausado]
 
 			$consulta2 = "select * from lista_provincias where id = '$idProv'";
 			$result2= mysql_query($consulta2,$con);
@@ -121,9 +122,6 @@
                                         <strong>Disponible Desde:</strong> <?php echo htmlentities($fechaDesde); ?>
 										<br><strong>Disponible Hasta:</strong> <?php echo htmlentities($fechaHasta); ?>
 										<br><strong>Capacidad:</strong> <?php echo htmlentities($capacidad); ?>
-										<?php
-												include_once('reservar.php');
-										?>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-5 blog-content">
@@ -168,20 +166,29 @@
 						<a href="ver_perfil_publicacion.php?id=<?php echo $id?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>
 					</div>
 					<div class="widget categories"> <!--puntuaciones usuario/publicacion-->
-						 <!-- ######################################## puntuaciones ############################### -->
-                        <?php
-
-							//---Incluimos las puntuaciones 
-							include_once('puntuaciones.php');
-
-						?>
-						<!-- ######################################### /puntuaciones ############################## -->
-					</div><!--/.puntuaciones-->
-
+						<h3>Puntuaciones</h3>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="single_comments">
+									<p>Aqui va a estar la puntuacion del usuario </p>
+								</div>
+								<div class="single_comments">
+									<p>Aqui va a estar la puntuacion de la publicacion </p>
+								</div>
+							</div>
+						</div>
+					</div><!--/.recent comments-->
+				</aside>
 		    </div><!--/.row-->
 		</div><!--/.blog-->
-
-
+				<hr>
+				<h3 class="center"><strong>Opciones de la publicacion</strong></h3>
+				<fieldset>
+					<?php
+						include_once('opciones_publicacion.php');
+					?>
+				</fieldset>
+				<hr>
  <!-- ######################################## Comentarios ############################### -->
                         <?php
 
@@ -189,32 +196,11 @@
 							include_once('comentarios.php');
 
 						?>
+				<hr>
 <!-- ######################################### /comentarios ############################## -->
-		<?php 	if(isset($_SESSION['loggedin'])){
-					if ($usu == $_SESSION['idU']){
-						if ($est != 'eliminada'){?>
-						<hr/>
-						<fieldset>
-							<h3> <strong>Opciones de la publicacion</strong></h3>
-							<div class="derecha">
-								<form class="" name="eliminaPub" id="eliminaPub" method="post" action="eliminarPub.php">
-									<input type="hidden" name="pubID" id="pubID" value="<?php echo $id; ?>">
-									<input class="btn btn-primary btn-lg" id="eliminar" name="eliminar" type="button" value="eliminar" onClick="preguntaEliminar()"/>
-									<input class="btn btn-primary btn-lg" id="modificar" name="modificar" type="button" value="modificar" onClick="location.href = 'modificarPub.php?id=<?php echo $id; ?>'"/>
-								<form>
-								
-								</form>
-								</form>
-							</div>
-						</fieldset>
-		<?php			}
-					}
-				}
-		?>
-		<hr/>
     </section><!--/section-->
 
-	
+	<hr/>
 
 
 	<br>
@@ -248,7 +234,6 @@
 			$( "#datepicker, #datepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 		});
 	</script>
-
 	<!-- Footer -->
 	<?php
 

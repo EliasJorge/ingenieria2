@@ -24,8 +24,7 @@
 				$sql= "SELECT*FROM $tbl_name WHERE email='$mail' and contrasenia='$contrasenia'";
 				$result= mysqli_query($conexion,$sql) or die(mysqli_error($conexion));
 				$row = mysqli_fetch_array($result);
-				if (!$result || mysqli_num_rows($result) == 1)
-				{
+				if (!$result || mysqli_num_rows($result) == 1){
 					$_SESSION['loggedin'] = true;
 					$_SESSION['mail'] = $mail;
 					$_SESSION['nombre']= $row["nombre"];
@@ -33,7 +32,16 @@
 					$_SESSION['idU'] = $row["id_usuario"];
 					$_SESSION['foto'] = $row["foto"];
 					$_SESSION['tipo_foto'] = $row["tipo_foto"];
-					header("location:index.php");	 
+					if($row["estado"] != 'eliminado'){						
+						header("location:index.php");
+					}
+					else {
+						echo '<script type="text/javascript">
+								if(confirm("Su cuenta fue eliminada, desea recuperarla?")){
+									window.location.href = "insertar.php?opcion=recuperarCuenta&resp=true";
+								}else window.location.href = "insertar.php?opcion=recuperarCuenta&resp=false";
+							</script>';
+					}
 				}
 				else 
 				{

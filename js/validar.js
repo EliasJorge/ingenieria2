@@ -178,6 +178,42 @@ function validarMod(){
 	
 }
 
+function validaFechas(){
+	var fechainicio= document.getElementById("datepicker");
+	var fechalimite= document.getElementById("datepicker2");
+	
+	if(fechainicio.value != ""){
+			if(fechalimite.value != ""){
+				if(fechalimite.value.length > 0){
+					if(fechainicio.value > fechalimite.value){
+						alert('La fecha de inicio es mayor que la fecha limite.');
+						return false;
+					}
+				}
+			}else{
+			alert('Complete el campo fecha fin');
+			return false;
+			}
+	}else{
+			alert('Complete el campo fecha inicio');
+			return false;
+	}
+			
+	if((fechainicio.value == null || fechainicio.value.length == 0)){
+			alert('Complete el campo fecha inicio');
+			return false;
+	}
+	if((fechalimite.value == null || fechalimite.value.length == 0)){
+			alert('Complete el campo fecha limite');
+			return false;
+	}
+		return true
+	
+
+	
+}
+
+
 function validarBusqueda(){
 
 	var busqueda = document.getElementById("busqueda");
@@ -260,4 +296,14 @@ function preguntaFotoElim (){
 				
 			}
 			
+}
+
+function validaCalificacion(){
+	
+	var calificacion = document.getElementById("calificacion").selectedIndex;
+	if(calificacion == null || calificacion == 0){
+		alert('Debe seleccionar un valor para calificar.');
+		return false;
+	}
+	
 }

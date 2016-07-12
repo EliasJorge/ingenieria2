@@ -158,6 +158,7 @@
 
 				</div><!--/.col-md-8-->
 				<aside class="col-md-4">
+					<div class="center">
 					<div class="widget categories"> <!--datos de usuario-->
 						<?php if ($fila4['tipo_foto'] == null){
 						echo "<img class='img-circle imagen_perfil' src='images/foto-de-perfil.png' width='150' height='150'/><br><br>";
@@ -166,6 +167,7 @@
 						<?php } ?>
 						
 						<a href="ver_perfil_publicacion.php?id=<?php echo $id?>"><strong> <?php echo htmlentities($fila4['apellido']).", ".htmlentities($fila4['nombre'])."</p>"; ?></strong></a>
+					</div>
 					</div>
 					<div class="widget categories"> <!--puntuaciones usuario/publicacion-->
 						 <!-- ######################################## puntuaciones ############################### -->
@@ -198,27 +200,7 @@
 
 						?>
 <!-- ######################################### /comentarios ############################## -->
-		<?php 	if(isset($_SESSION['loggedin'])){
-					if ($usu == $_SESSION['idU']){
-						if ($est != 'eliminada'){?>
-						<hr/>
-						<fieldset>
-							<h3> <strong>Opciones de la publicacion</strong></h3>
-							<div class="derecha">
-								<form class="" name="eliminaPub" id="eliminaPub" method="post" action="eliminarPub.php">
-									<input type="hidden" name="pubID" id="pubID" value="<?php echo $id; ?>">
-									<input class="btn btn-primary btn-lg" id="eliminar" name="eliminar" type="button" value="eliminar" onClick="preguntaEliminar()"/>
-									<input class="btn btn-primary btn-lg" id="modificar" name="modificar" type="button" value="modificar" onClick="location.href = 'modificarPub.php?id=<?php echo $id; ?>'"/>
-								<form>
-								
-								</form>
-								</form>
-							</div>
-						</fieldset>
-		<?php			}
-					}
-				}
-		?>
+		
 		<hr/>
     </section><!--/section-->
 

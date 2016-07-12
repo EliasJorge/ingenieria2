@@ -100,7 +100,11 @@ include 'funciones.php';
 		$publicacion = $_REQUEST['idPub'];
 		$desde=$_REQUEST['fechaDesde'];
 		$hasta=$_REQUEST['fechaHasta'];
-		$consulta = "INSERT INTO donaciones(id_publicacion, id_usuario, estado,fecha_desde,fecha_hasta) VALUES ('{$publicacion}','{$usuario}','activo','$desde','$hasta')";
+		
+		$consulta = "INSERT INTO reservas(id_publicacion, id_usuario, estado,fecha_desde,fecha_hasta) VALUES ('{$publicacion}','{$usuario}','activo','$desde','$hasta')";
+					
+				
+		
 	}
 //************** insertar donación ***************************************************************************
 	if ($opcion == "donar"){
@@ -158,6 +162,21 @@ include 'funciones.php';
 	if ($opcion == "activarPublicacion"){
 		$idPublicacion = $_GET['publicacion'];
 		$consulta = " update publicaciones set estado = 'activo' where id_publicacion = '$idPublicacion' ";
+	}
+	
+//************** insertar un valoracion en una publicacion ***************************************************************************
+	if ($opcion == "valoraPub"){
+		$idRes = $_REQUEST['idRes'];
+		$idUsu = $_REQUEST['idUsu'];
+		$idPub = $_REQUEST['idPub'];
+		$val = $_REQUEST['calificacion'];
+		if (isset($_REQUEST['comentario']) and !empty($_REQUEST['comentario'])){
+			$com = $_REQUEST['comentario'];
+		}else{
+			$com = null;
+		}
+		$consulta = "INSERT INTO `valoracion_publicacion`(`id_reserva`, `id_publicacion`, `id_usuario`, `valoracion`, `comentario`) VALUES ('{$idRes}','{$idPub}','{$idUsu}','{$val}','{$com}')";
+		
 	}
 	
 //*************************************************************************************************************
@@ -222,6 +241,14 @@ include 'funciones.php';
 				echo "Error mysql:".mysql_error();
 			}
 	}
+	elseif ($opcion == "valoraPub"){
+	?>
+							<script type="text/javascript">
+									alert("Valoracion cargada con exito");
+									window.location="dondeMeQuede.php"
+							</script>;
+<?php
+	}
 	elseif ($opcion == "respuesta"){
 	?>
 							<script type="text/javascript">
@@ -245,10 +272,12 @@ include 'funciones.php';
 				</script>';
 	}
 	elseif ($opcion == "reserva"){
-			echo '<script type="text/javascript">
-				alert ("Su reserva se ha realizado correctamente");
-				window.location="index.php"
-				</script>';
+			?>
+							<script type="text/javascript">
+									alert("Su reserva ha sido realizada con exito");
+									window.location="mostrar_publicacion.php?id=<?php echo $publicacion?>"
+							</script>;
+<?php
 	}
 	elseif ($opcion == "eliminarCuenta"){
 		session_unset();

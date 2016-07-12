@@ -22,9 +22,7 @@ function reportado($publicacion){
 if(isset($_SESSION['loggedin']))
 {
 	if ($_SESSION['idU'] == $usu){
-		echo '
-		<input class="btn btn-primary btn-lg" type="button" name="reservas" value="Ver reservas"/>
-	';
+		
 		if ($est != 'eliminada'){
 			echo '
 				<div class="derecha">
@@ -49,18 +47,7 @@ if(isset($_SESSION['loggedin']))
 		}
 	}
 	else{
-		echo '
-			<div>
-				<strong>Ingrese las fechas para su viaje:</strong><br><br>
-				<label for="fecha">Desde:</label>
-				<input class="" type="text" id="datepicker" name="fechaDesde" placeholder="Ingrese la fecha desde" readonly>
-			</div>
-			<div>
-				<label for="fecha">Hasta:</label>
-				<input class="" type="text" id="datepicker2" name="fechaHasta" placeholder="Ingrese la fecha hasta" readonly>
-			</div>
-			<label for="Reservar"></label>
-			<input class="btn btn-primary btn-lg" type="submit" name="Reservar" value="Reservar"/>';
+		
 		/****** codigo reportar ****/
 		if(reportado($id))
 			echo '

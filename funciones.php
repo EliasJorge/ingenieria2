@@ -1,4 +1,5 @@
 <?php
+
 //*****************************************************************************************************
 function busqueda($consulta){
 		require_once('abrir_conexion.php');
@@ -14,6 +15,22 @@ function busqueda($consulta){
 		else{
 			$row=[];
 			return $row;
+		}
+	}
+
+//*****************************************************************************************************
+function actualizar($consulta){
+		require_once('abrir_conexion.php');
+		$con = conectar1();
+		$res = mysql_query($consulta,$con);
+		mysql_close($con);
+		if(!$res){
+			
+			return false;
+		}
+		else{
+			
+			return true;
 		}
 	}
 //*****************************************************************************************************
@@ -143,8 +160,32 @@ function validar_usuariomod ($usuario, $id){
 	} else {return true;}
 }
 
+//*****************************************************************************************************
+function verificarFechaDesde ($fecha, $idPub){
+	
+	$consulta= "SELECT * FROM publicaciones WHERE id_publicacion = '$idPub'";
+	$resul= busqueda($consulta);
+	
+	if ($resul[0]['disp_desde'] > $fecha){
+		
+		return false;
+		
+		
+	} else return true;
+}
 
-
-
+//*****************************************************************************************************
+function verificarFechaHasta ($fecha, $idPub){
+	
+	$consulta= "SELECT * FROM publicaciones WHERE id_publicacion = '$idPub'";
+	$resul= busqueda($consulta);
+	
+	if ($resul[0]['disp_hasta'] < $fecha){
+		
+		return false;
+		
+		
+	} else return true;
+}
 ?>
 

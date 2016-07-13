@@ -1,5 +1,4 @@
 <?php
-	
 	session_start();
 	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
 	$con = conectar1();	
@@ -11,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Couch Inn</title>
+    <title>Couch Inn | Contactenos</title>
 	
 	<!-- core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +23,7 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->       
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="shortcut icon" href="images/ico/sillon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
@@ -46,12 +45,23 @@
 		?>
 		
     </header><!--/header-->
-	<!-- Contenido de la pagina -->
-	
-	<section id="error" class="container text-center">
-        <h1>404, No se encontro la pagina</h1>
-        <p>Ocurrio un error o la pagina que esta buscando no existe .</p>
-        <a class="btn btn-primary" href="index.php">VOLVER AL INICIO</a>
+	<!-- Contenido de la pagina -->	
+	<section class="text-center">
+		<font size="5">
+			<strong>Deja tu pregunta o comentario</strong><hr>
+		</font><br><br>
+		<form id="contacto" class="contact-form" name="contacto" method="post" action="insertar.php?opcion=contacto" role="form">
+			<div class="row">				
+				<div class="col-sm-12">
+					<label>E-Mail:</label>
+					<input name='mail' type="text" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" size='50'required="required" placeholder="example@example.com"/><br><br>
+					<label>Ingresa tu comentario/pregunta:</label>
+					<textarea name="comentario" id="comentario" required="required" class="form-control" rows="8"></textarea>
+					<button type="submit" class="btn btn-primary btn-lg">Enviar comentario</button>
+					<button type="button" class="btn btn-primary btn-lg" onclick="location.href='index.php'">Cancelar</button>
+				</div>
+			</div>
+		</form>
     </section><!--/#error-->
 	
 	<!-- /contenido -->

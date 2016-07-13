@@ -1,31 +1,45 @@
 <?php
-	include 'funciones.php';
 	session_start();
+	include 'funciones.php';
 	$host_db = "localhost";
 	$user_db = "root";
 	$pass_db = "";
 	$db_name = "couchinn";
 	$tbl_name = "usuarios";
 	// Connect to server and select databse.
-	$conexion = mysqli_connect("$host_db", "$user_db", "$pass_db","$db_name")or die("Cannot Connect to Data Base.");
-	$mail= $_SESSION['mail'];
-	$sql="SELECT * FROM usuarios WHERE email='$mail'";
-	$perfil = mysqli_query($conexion,$sql) or die(mysqli_error($conexion));
-    if(mysqli_num_rows($perfil))
-    {
-        $row = mysqli_fetch_array($perfil);
-        $email = $row["email"];
-        $nameu = $row["nombre"];
-		$apellido=$row["apellido"];
-        $id=$row["id_usuario"];
-		$tel = $row["telefono"];
-    }
-    else
-    {
+	$con = mysqli_connect("$host_db", "$user_db", "$pass_db","$db_name")or die("Cannot Connect to Data Base.");	
+	if(!isset($_SESSION['loggedin'])){
 		echo '<script type="text/javascript">
-					alert("El usuario no esta registrado o elimino su cuenta");
-					window.location="cambiar_contrasenia.php"
-				</script>';
+				alert("no esta autorizado para ver esta seccion");
+				window.location="index.php"
+			</script>';
+	}
+	else {
+		if(isset($_GET['mail'])) {
+			$mail = $_GET['mail'];
+			$sql="SELECT * FROM usuarios WHERE email='$mail' and estado <> 'eliminado'";
+			$perfil = mysqli_query($con, $sql) or die(mysqli_error($con));
+			if($row = mysqli_fetch_assoc($perfil)){
+				$email = $row["email"];
+				$nameu = $row["nombre"];
+				$apellido=$row["apellido"];
+				$idVisitante=$row["id_usuario"];
+				$tel = $row["telefono"];
+			}
+			else {
+				echo '<script type="text/javascript">
+						alert("El usuario fue eliminado");
+						window.location="history.back()"
+					</script>';
+			}
+		}
+		else {
+			$email = $_SESSION['mail'];
+			$nameu = $_SESSION['nombre'];
+			$apellido = $_SESSION['idU'];
+			$idVisitante = $_SESSION['idU'];
+			$tel = $_SESSION['telefono'];
+		}
 	}
 ?>
 
@@ -57,7 +71,7 @@
 	<script type="text/javascript">
 		function preguntaEliminarCuenta(){
 			if (confirm('¿Esta seguro que desea eliminar la cuenta?')){
-				window.location.href = "insertar.php?opcion=eliminarCuenta&cuenta=<?php echo $id ?>";
+				window.location.href = "insertar.php?opcion=eliminarCuenta&cuenta=<?php echo $idVisitante ?>";
 			}			
 		}
 	</script>
@@ -89,7 +103,7 @@
 				<?php if ($row['tipo_foto'] == null){
 					echo "<img class='img-circle' src='images/foto-de-perfil.png' width='150' height='150'/>";
 				}else{ ?>
-					<img src="imagenUsuario.php?id= <?php echo $id ?>" class="img-circle" width="150" height="150" />
+					<img src="imagenUsuario.php?id= <?php echo $idVisitante ?>" class="img-circle" width="150" height="150" />
 				<?php } ?>
 					<br>
 					<strong>Nombre:</strong> <?=$nameu?>
@@ -99,19 +113,35 @@
 					<br>
 					<strong>Telefono:</strong> <?=$tel?>
 					<br>
-					<input class="btn btn-primary btn-lg" id="EliminarCuenta" name="EliminarCuenta" type="button" value="Eliminar cuenta" onClick="preguntaEliminarCuenta()"/>
-					<input class="btn btn-primary btn-lg" id="modificarMisDatos" name="modificarMisDatos" type="button" value="Modificar mis datos" onClick="location.href = 'modificar_datosU.php?mail=<?=$email?>'"/>
 					<br>
+					<?php
+					if($_SESSION['idU'] == $idVisitante){	
+						echo '
+							<input class="btn btn-primary btn-lg" id="EliminarCuenta" name="EliminarCuenta" type="button" value="Eliminar cuenta" onClick="preguntaEliminarCuenta()"/>
+							<input class="btn btn-primary btn-lg" id="modificarMisDatos" name="modificarMisDatos" type="button" value="Modificar mis datos" onClick="location.href = \'modificar_datosU.php?mail=', $email, '\'"/>
+							<br>';
+					}
+					?>
 			</div>
 		</div>
 	</section>
 	<section id="listados">
 		<div class="center" id="listados">
+	<?php 
+		if($_SESSION['idU'] == $idVisitante){	
+			echo '
 			<h2>Mis publicaciones </h2>
-		<hr/>
-
-		<?php include_once('listado.php'); ?>
-		
+			<hr/>';
+			include_once('listado.php');  //******* incluyo las publicaciones
+		}
+		else {
+			echo '
+			<h2>Comentarios y valoración como huesped</h2>
+			<hr/>
+			Incluir aca comentarios y valoración del usuario como huesped
+			';			
+		}
+		?>
 		</div>
     </section><!--/section-->
 

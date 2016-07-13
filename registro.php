@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Couch Inn</title>
+    <title>Couch Inn | Registrase</title>
 	
 	<!-- core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +56,7 @@
 						<br>
 						<label for="mail">Correo Electronico:</label> 							
 						<br>
-						<input type="e-mail" name="mail" required placeholder="example@example.com">
+						<input type="email" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" name="mail" required placeholder="example@example.com">
 						<br>
 						<label for="nombre">Nombre:</label> 
 						<br>

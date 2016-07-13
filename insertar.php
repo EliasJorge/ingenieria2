@@ -172,20 +172,24 @@ include 'funciones.php';
 		$val = $_REQUEST['calificacion'];
 		if (isset($_REQUEST['comentario']) and !empty($_REQUEST['comentario'])){
 			$com = $_REQUEST['comentario'];
-		}else{
+		}
+		else{
 			$com = null;
 		}
 		$consulta = "INSERT INTO `valoracion_publicacion`(`id_reserva`, `id_publicacion`, `id_usuario`, `valoracion`, `comentario`) VALUES ('{$idRes}','{$idPub}','{$idUsu}','{$val}','{$com}')";
-		
+	}	
+//************** insertar un comentario en tabla contacto ***************************************************************************
+	if ($opcion == "contacto"){
+		$mail = $_REQUEST['mail'];
+		$comentario = $_REQUEST['comentario'];
+		$consulta = "INSERT INTO `contacto`(`comentario`, `email`) VALUES ('{$comentario}','{$mail}')";
 	}
 	
-//*************************************************************************************************************
-
-
+//*************Consulta************************************************************************************************
+	
 	mysql_query($consulta,$con);
-
-
-
+	
+//*************************************************************************************************************	
 	if ($opcion == "publicacion"){
 		if ($consulta)
 		{
@@ -315,8 +319,13 @@ include 'funciones.php';
 			</script>
 		';
 	}
-	else{
-		echo "<br/> <a href='usuario.php?opcion=alta'>volver</a>";
+	elseif ($opcion == "contacto"){
+		echo '
+			<script type="text/javascript">
+				alert("Tu comentario/pregunta fue guardada correctamente, recibiras una respuesta en los proximos dias");
+				window.location="index.php"
+			</script>
+		';
 	}
 
 	mysql_close($con);

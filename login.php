@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Couch Inn</title>
+    <title>Couch Inn | Ingresar</title>
 	
 	<!-- core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->       
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="shortcut icon" href="images/ico/sillon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
@@ -60,7 +60,7 @@
                     <div class="center">
 						<div class="form-group">
 							<label>Correo Electronico:</label>
-							<input type="e-mail" name="mail" class="form-control"   required placeholder="example@example.com">
+							<input type="text" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" name="mail" class="form-control"   required placeholder="example@example.com">
 						</div>
 						<div class="form-group">
 							<label>Contraseña:</label>
@@ -68,7 +68,7 @@
 						</div>
 						<div class="form-group">
                             <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Iniciar Sesion</button>
-							<button type="submit" name="submit" class="btn btn-primary btn-lg" OnClick= "self.location.href = 'index.php'" >Cancelar</button>
+							<button type="button" name="cancelar" class="btn btn-primary btn-lg" OnClick= "self.location.href = 'index.php'" >Cancelar</button>
                         </div>
 						
 						<div class="form-group">

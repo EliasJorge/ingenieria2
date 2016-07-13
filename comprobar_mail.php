@@ -1,5 +1,4 @@
-<?php
-	
+<?php	
 	session_start();
 	include 'abrir_conexion.php'; 	 // busca los datos de conexion en el archivo abrir_conexion.php
 	$con = conectar1();	
@@ -12,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Couch Inn</title>
+    <title>Couch Inn | Recuperar contraseña</title>
 	
 	<!-- core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +24,7 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->       
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="shortcut icon" href="images/ico/sillon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
@@ -58,7 +57,7 @@
 						<form name="form1" method="POST" action="recuperar_contrasenia.php">
 							<label>Correo Electronico:</label>
 							<br>
-							<input type="e-mail" name="mail" required placeholder="example@example.com">
+							<input type="email" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" name="mail" required placeholder="example@example.com">
 							<br><br>
 							<input class="btn btn-primary btn-lg" type="submit" value="Enviar">
 							<input class="btn btn-primary btn-lg" type="button" name="Cancelar" value="Cancelar" OnClick= "self.location.href = 'index.php'">

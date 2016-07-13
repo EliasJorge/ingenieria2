@@ -4,7 +4,19 @@
 /*************************
 *******Typography******
 **************************/
-
+input:invalid {
+ 
+border: 1px solid red;
+ 
+}
+ 
+/* Estilo por defecto */
+ 
+input:valid {
+ 
+border: 1px solid green;
+ 
+}
 body {
   background: #fff;
   font-family: 'Open Sans', sans-serif;

@@ -1,6 +1,6 @@
 <?php
 //cancelar todas las solicitudes en ese intervalo de fechas
-//cambia el estado de la soli en la bd
+//cambia el estado de la solicitud en la bd
 //session_start();
 include 'abrir_conexion.php';
 $con = conectar1();
@@ -16,24 +16,23 @@ if($resultado)
     $fechaDesde= $r['fecha_desde'];
     $fechaHasta= $r['fecha_hasta'];
     $idP= $r['id_publicacion'];
-    $sql="SELECT  * FROM reservas WHERE estado='activo' AND id_publicacion='$idP'";
-    $result= busqueda($sql);
-    foreach ($resultado as $res)
+    $sql="SELECT  * FROM reservas WHERE estado='activo' AND id_publicacion='$idP' and (fecha_desde between '$fechaDesde' and '$fechaHasta' or fecha_hasta between '$fechaDesde' and '$fechaHasta') and id_reserva != '$idRes' ";
+   
+	$result= busqueda($sql);
+    foreach ($result as $res)
     {
-      $fechaDRes= $res['fecha_desde'];
-      $fechaHRes= $res['fecha_hasta'];
-      if(($fechaDRes >= $fechaDesde) || ($fechaHasta >= $fechaHRes))
-      {
-        $consulta= "UPDATE reservas SET estado='rechazado' WHERE id_reserva='{$idRes}'";
+		$reserva=$res['id_reserva'];
+		
+        $consulta= "UPDATE reservas SET estado='rechazado' WHERE id_reserva='$reserva'";
         $re = actualizar($consulta);
-      }
+      
     }
   }
   $consulta= "UPDATE reservas SET estado='aceptado' WHERE id_reserva='{$idRes}'";
   $act = actualizar($consulta);
 	if ($act){ ?>
 			<script type="text/javascript">
-						alert("la reserva se acepto correctamente");
+						alert("la solicitud se acepto correctamente");
 						window.location="listado_reservas.php?id=<?php echo $idP?>"
 			</script>';
 		<?php

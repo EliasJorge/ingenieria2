@@ -138,6 +138,12 @@ include 'funciones.php';
 		$idCuenta = $_GET['cuenta'];
 		$consulta = " update usuarios set estado = 'eliminado' where id_usuario = '$idCuenta' ";
 	}
+//************** Rechazar solicitud ***************************************************************************
+	if ($opcion == "rechazar"){
+		$idR = $_REQUEST['idR'];
+		$idPub = $_REQUEST['idP'];
+		$consulta = " update reservas set estado = 'rechazado' where id_reserva = '$idR' ";
+	}
 //************** recuperar cuenta ***************************************************************************
 	if ($opcion == "recuperarCuenta"){
 		if($_GET['resp']){
@@ -164,7 +170,7 @@ include 'funciones.php';
 		$consulta = " update publicaciones set estado = 'activo' where id_publicacion = '$idPublicacion' ";
 	}
 	
-//************** insertar un valoracion en una publicacion ***************************************************************************
+//************** insertar una valoracion en una publicacion ***************************************************************************
 	if ($opcion == "valoraPub"){
 		$idRes = $_REQUEST['idRes'];
 		$idUsu = $_REQUEST['idUsu'];
@@ -172,24 +178,35 @@ include 'funciones.php';
 		$val = $_REQUEST['calificacion'];
 		if (isset($_REQUEST['comentario']) and !empty($_REQUEST['comentario'])){
 			$com = $_REQUEST['comentario'];
-		}
-		else{
+		}else{
 			$com = null;
 		}
 		$consulta = "INSERT INTO `valoracion_publicacion`(`id_reserva`, `id_publicacion`, `id_usuario`, `valoracion`, `comentario`) VALUES ('{$idRes}','{$idPub}','{$idUsu}','{$val}','{$com}')";
-	}	
-//************** insertar un comentario en tabla contacto ***************************************************************************
-	if ($opcion == "contacto"){
-		$mail = $_REQUEST['mail'];
-		$comentario = $_REQUEST['comentario'];
-		$consulta = "INSERT INTO `contacto`(`comentario`, `email`) VALUES ('{$comentario}','{$mail}')";
+		
 	}
 	
-//*************Consulta************************************************************************************************
+//************** insertar una valoracion para un usuario ***************************************************************************
+	if ($opcion == "valoraUsu"){
+		$idRes = $_REQUEST['idRes'];
+		$idUsu = $_REQUEST['idUsu'];
+		$idHu = $_REQUEST['idHu'];
+		$val = $_REQUEST['calificacion'];
+		if (isset($_REQUEST['comentario']) and !empty($_REQUEST['comentario'])){
+			$com = $_REQUEST['comentario'];
+		}else{
+			$com = null;
+		}
+		$consulta = "INSERT INTO `valoracion_usuario`(`id_host`, `id_huesped`, `id_reserva`, `valoracion`, `comentario`) VALUES ('{$idUsu}','{$idHu}','{$idRes}','{$val}','{$com}')";
+		
+	}
 	
+//*************************************************************************************************************
+
+
 	mysql_query($consulta,$con);
-	
-//*************************************************************************************************************	
+
+
+
 	if ($opcion == "publicacion"){
 		if ($consulta)
 		{
@@ -253,11 +270,27 @@ include 'funciones.php';
 							</script>;
 <?php
 	}
+	elseif ($opcion == "valoraUsu"){
+	?>
+							<script type="text/javascript">
+									alert("Valoracion cargada con exito");
+									window.location="misHuespedes.php"
+							</script>;
+<?php
+	}
 	elseif ($opcion == "respuesta"){
 	?>
 							<script type="text/javascript">
 									alert("Respuesta enviada con exito");
 									window.location="mostrar_publicacion.php?id=<?php echo $idPub?>"
+							</script>;
+<?php
+	}
+	elseif ($opcion == "rechazar"){
+	?>
+							<script type="text/javascript">
+									alert("La solicitud ha sido rechazada");
+									window.location="listado_reservas.php?id=<?php echo $idPub?>"
 							</script>;
 <?php
 	}
@@ -319,13 +352,8 @@ include 'funciones.php';
 			</script>
 		';
 	}
-	elseif ($opcion == "contacto"){
-		echo '
-			<script type="text/javascript">
-				alert("Tu comentario/pregunta fue guardada correctamente, recibiras una respuesta en los proximos dias");
-				window.location="index.php"
-			</script>
-		';
+	else{
+		echo "<br/> <a href='usuario.php?opcion=alta'>volver</a>";
 	}
 
 	mysql_close($con);

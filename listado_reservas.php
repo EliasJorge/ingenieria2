@@ -48,53 +48,58 @@
 	<!-- Contenido de la pagina -->
 
 	<section>
-		<div>
+		<div class="center">
 		<?php
 			$consulta = "SELECT * FROM reservas WHERE estado = 'activo' AND id_publicacion='$idP'";
 			//ademas de esto deben ser solo de la publicacion seleccionada
 			$resultado = busqueda($consulta);
 			if($resultado){
-		?>
-  			<table class="table table hover">
-  							<tr>
-  								<th>Titulo</th>
-  								<th>Usuario</th>
-  								<th>Reserva</th>
-									<th>Desde</th>
-									<th>Hasta</th>
-									<th></th>
-  							</tr>
-						<?php
-						foreach ($resultado as $r)
-            {?>
-							<tr><?php
-								$fechaDesde= $r['fecha_desde'];
-								$fechaHasta= $r['fecha_hasta'];
-								$idR=$r['id_reserva'];
-								$idUser= $r['id_usuario'];
-								$sql = "SELECT * FROM usuarios WHERE id_usuario='$idUser'";
-								$result1 = busqueda($sql);
-                $idP= $r['id_publicacion'];
-                $sql="SELECT  * FROM publicaciones WHERE id_publicacion='$idP'";
-                $result2= busqueda($sql);
-								foreach($result2 as $array)
-                {
-	                  echo "<td><br><a>$array[titulo]</a></td>";
-								}
-                foreach($result1 as $r1)
-                {
-                    echo "<td><br><a href=ver_perfil_publicion.php?id=$r1[id_usuario]>$r1[email]</a></td>";
-										echo "<td><br><a></a></td>";
-										echo "<td><br><a> $fechaDesde</a></td>";
-										echo "<td><br><a> $fechaHasta</a></td>";
-                }
-								//en el form necesito mandar el idR para el aceptar la reserva... como?!!!! deberia haber hecho el action al reves XD
+				
+				$sql="SELECT  * FROM publicaciones WHERE id_publicacion='$idP'";
+				$result2= busqueda($sql);
+				
+		?>	
+				<div class="center">
+					<strong>Solicitudes de la publicacion: <?php echo $result2[0]['titulo']; ?></strong> <br>
+				</div>
+				<br><br>
+				<div>
+				<table class="table table hover" id="listados">
+					<tr>
+  						
+  						<th>Usuario</th>
+  						<th></th>
+						<th>Desde</th>
+						<th>Hasta</th>
+						<th></th>
+  					</tr>
+			<?php
+					foreach ($resultado as $r)
+					{?>
+						<tr><?php
+							$fechaDesde= $r['fecha_desde'];
+							$fechaHasta= $r['fecha_hasta'];
+							$idR=$r['id_reserva'];
+							$idUser= $r['id_usuario'];
+							$sql = "SELECT * FROM usuarios WHERE id_usuario='$idUser'";
+							$result1 = busqueda($sql);
+							
+							
+							foreach($result1 as $r1)
+							{
+								echo "<td><br><a href=ver_perfil.php?id=$r1[id_usuario]>$r1[email]</a></td>";
+								echo "<td><br><a></a></td>";
+								echo "<td><h3> $fechaDesde</h3></td>";
+								echo "<td><h3> $fechaHasta</h3></td>";
+							}
+								
 								?>
 								<td>
 									<div>
-										<br>
+										
 										<form action="insertar.php?opcion=rechazar" method="post">
 											<input class="" type="hidden" id="idR" name="idR" value="<?php echo $idR;?>">
+											<input class="" type="hidden" id="idP" name="idP" value="<?php echo $idP;?>">
 											<input class="btn btn-primary btn-lg" type="button" value="Aceptar" onclick="location.href = 'aceptar_reserva.php?idR=<?php echo $idR;?>'">
 											<input class="btn btn-primary btn-lg" type="submit" value="Rechazar">
 										</form>
@@ -102,20 +107,33 @@
 								</td>
 							</tr>
 							<?php
-						}
-					}else{
-						echo '<script type="text/javascript">
-							alert ("Aun no hay reservas");
-							window.location="index.php"
+					}
+			}else{?>
+							<script type="text/javascript">
+							alert ("No hay solicitudes para esta publicacion");
+							window.location="mostrar_publicacion.php?id=<?php echo $idP?>"
 							</script>';
-					}?>
+	<?php				}?>
+							<tr>
+								<td></td>
+								<td></td>
+								
+								<td></td>
+								<td></td>
+							<td><div class="botonPub">	
+								<input class="btn btn-primary btn-lg" id="regresar" name="regresar" type="button" value="volver a la publicacion" onClick="location.href = 'mostrar_publicacion.php?id=<?php echo $idP ?>'"/>
+							</div>
+							</td>
+							</tr>
 						</table>
+						</div>
+			
 			<hr/>
 
 		</div>
     </section><!--/section-->
 
-	<!-- /contenido -->
+	<!-- /contenido -->	
 
 	<!-- Footer -->
 	<?php

@@ -1,22 +1,19 @@
 
 <?php
-if(isset($_SESSION['loggedin']))
-{
-	if ($_SESSION['idU'] == $usu)
-	{
-  ?>
+if(isset($_SESSION['loggedin'])){
+	if ($_SESSION['idU'] == $usu){
+	?>
     <form action="listado_reservas.php" method="post">
-			<input class="" type="hidden" id="id" name="id" value="<?php echo $id;?>">
-      <label for="reservas"></label>
-      <input class="btn btn-primary btn-lg" type="submit" name="reservas" value="ver reservas"/>
+		<input class="" type="hidden" id="id" name="id" value="<?php echo $id;?>">
+		<label for="reservas"></label>
+		<input class="btn btn-primary btn-lg" type="submit" name="reservas" value="Ver reservas"/>
     </form>
-  <?php
-  }
-  else
-  {
+	<?php
+	}
+	else{
 			$id = $_REQUEST['id'];
     ?>
-    <form action="insertar.php?opcion=reserva" method="post" onsubmit="return validaFechas(this)">
+    <form action="insertar.php?opcion=reserva" method="post" onsubmit="return validarFechasReserva(this)">
 		<div class="form-group">
 			<br><strong>Reservar:</strong><br><br>
 			<label for="fecha">Desde:</label>
@@ -29,9 +26,9 @@ if(isset($_SESSION['loggedin']))
 		</div>
 
 		<label for="reservar"></label>
-		<input class="btn btn-primary btn-lg" type="submit" name="reservar" value="Aceptar"/>
+		<input class="btn btn-primary btn-lg" type="submit" name="reservar" value="Reservar"/>
 	</form>
     <?php
     }
- }
-    ?>
+}
+?>

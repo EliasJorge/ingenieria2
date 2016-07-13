@@ -179,40 +179,69 @@ function validarMod(){
 }
 
 function validaFechas(){
+	//fechas de la reserva
 	var fechainicio= document.getElementById("datepicker");
-	var fechalimite= document.getElementById("datepicker2");
-	
+	var fechalimite= document.getElementById("datepicker2");	
 	if(fechainicio.value != ""){
 			if(fechalimite.value != ""){
 				if(fechalimite.value.length > 0){
 					if(fechainicio.value > fechalimite.value){
-						alert('La fecha de inicio es mayor que la fecha limite.');
+						alert('Fecha desde debe ser una fecha inferior o igual a fecha hasta');
+						return false;
+					}return true;
+				}
+			}
+			else{
+				alert('Complete el campo fecha fin');
+				return false;
+			}
+	
+	}else{
+		alert('Complete el campo fecha inicio');
+		return false;
+	}
+}
+function validarFechasReserva(){
+	
+	if(!validaFechas()) return false; //las fechas no son validas
+	else{ //fechas validas, verifica que esten entre las fechas desde y hasta de la publicacion
+		//fechas de la reserva
+		var fechaDesdeReserva = document.getElementById("datepicker").value;
+		var fechaHastaReserva = document.getElementById("datepicker2").value;
+		//fechas de la publicacion
+		var fechaDesdePublicacion = document.getElementById("fechaDesde").placeholder;
+		var fechaHastaPublicacion = document.getElementById("fechaHasta").placeholder;
+		if((fechaDesdeReserva >= fechaDesdePublicacion) && (fechaDesdeReserva <= fechaHastaPublicacion)){
+				if((fechaHastaReserva >= fechaDesdePublicacion) && (fechaHastaReserva <= fechaHastaPublicacion)){
+					alert('OK');
+					return true;
+				}
+				else{
+					if(fechaHastaReserva > fechaHastaPublicacion){
+						alert('Fecha hasta de la reserva no debe ser superior a la fecha disponible hasta de la publicacion: ' + fechaDesdePublicacion);
+						return false;
+					}
+					else{
+						//este caso no llega ya si las fechas se cruzan
+						alert('Fecha hasta de la reserva no debe ser inferior a la fecha disponible desde de la publicacion: ', fechaDesdePublicacion);
 						return false;
 					}
 				}
-			}else{
-			alert('Complete el campo fecha fin');
-			return false;
+		
+		}
+		else{
+			if(fechaDesdeReserva < fechaDesdePublicacion){
+				alert('Fecha desde de la reserva no debe ser inferior a la fecha disponible desde de la publicacion: ' + fechaDesdePublicacion);
+				return false;
 			}
-	}else{
-			alert('Complete el campo fecha inicio');
-			return false;
+			else{
+				//este caso no llega ya si las fechas se cruzan
+				alert('Fecha desde de la reserva no debe ser superior a la fecha disponible hasta de la publicacion: ', fechaDesdePublicacion);
+				return false;
+			}
+		}
 	}
-			
-	if((fechainicio.value == null || fechainicio.value.length == 0)){
-			alert('Complete el campo fecha inicio');
-			return false;
-	}
-	if((fechalimite.value == null || fechalimite.value.length == 0)){
-			alert('Complete el campo fecha limite');
-			return false;
-	}
-		return true
-	
-
-	
 }
-
 
 function validarBusqueda(){
 

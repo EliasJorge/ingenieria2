@@ -118,9 +118,15 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-5 text-center">
                                     <div class="entry-meta">
-                                        <strong>Disponible Desde:</strong> <?php echo htmlentities($fechaDesde); ?>
-										<br><strong>Disponible Hasta:</strong> <?php echo htmlentities($fechaHasta); ?>
-										<br><strong>Capacidad:</strong> <?php echo htmlentities($capacidad); ?>
+										<label>Disponible Desde:</label>
+										<input class="btn" type="text" size="10" id="fechaDesde" name="fechaDesde" placeholder="<?php echo htmlentities($fechaDesde); ?>" readonly disabled="false">
+                                        <label>Disponible Hasta:</label>
+										<input class="btn" type="text" size="10" id="fechaHasta" name="fechaHasta" placeholder="<?php echo htmlentities($fechaHasta); ?>" readonly disabled="false">
+                   						<br><label>Capacidad:</label>
+										<input class="btn" type="text" size="5" id="capacidad" name="capacidad" placeholder="<?php echo htmlentities($capacidad); ?>" readonly disabled="false">
+										<!--strong>Disponible Desde:</strong> <?php /* echo htmlentities($fechaDesde);  */?>
+										<br><strong>Disponible Hasta:</strong> <?php /* echo htmlentities($fechaHasta); */ ?>
+										<br><strong>Capacidad:</strong> <?php /* echo htmlentities($capacidad); */ ?>--->
 										<?php
 												include_once('reservar.php');
 										?>
@@ -225,8 +231,7 @@
 			$($(this).parents('div').html()).appendTo('.foto');
 			$('#myModal').modal({show:true});
 		});
-	</script>
-	
+	</script>	
 	<script>
 		$(function() {
 			$( "#datepicker, #datepicker2" ).datepicker({

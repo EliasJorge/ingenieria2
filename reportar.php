@@ -7,7 +7,7 @@
 	$sql = "insert into reportes (id_publicacion, id_usuario) values ('$id','$idUser')";
 	if (mysql_query($sql,$con)){
 	echo '<script type="text/javascript">
-			alert("ver si cambio");
+			alert("El reporte se guardo correctamente");
 			window.location="mostrar_publicacion.php?id=',$id,'"
 		</script>';
 	}

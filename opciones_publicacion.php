@@ -5,7 +5,7 @@
 		}
 	}
 	function confirmarActivar(){
-		if (confirm('¿Esta seguro que desea pausar la publicacion?')){
+		if (confirm('¿Esta seguro que desea volver a activar la publicacion?')){
 			window.location.href = "insertar.php?opcion=activarPublicacion&publicacion=<?php echo $id ?>";
 		}
 	}
@@ -13,6 +13,7 @@
 		var redes = document.getElementById("redes").selectedIndex;
 		if(redes == null || redes == 0){
 			alert('Debe seleccionar una rede social.');
+			pepe.setAttribute("data-dismiss", ""); // cerrar modal agregando valor al atributo data-dismiss
 			return false;
 		}else {
 			alert('La publicacion se compartio en: ' + document.getElementById("redes").value);
@@ -75,4 +76,9 @@ if(isset($_SESSION['loggedin']))
 		/******************************/
 	}
  }
- else echo 'Tenes que registrarte para poder accceder a las opciones';
+ else echo '
+			<div class="derecha">
+				<label for"login" size="5">Inicia secion para acceder a mas opciones:</label>
+				<input class="btn btn-primary btn-lg" type="button" id="login" value="Iniciar sesion" onclick="window.location.href= \'login.php\'"/>
+			</div>
+			';

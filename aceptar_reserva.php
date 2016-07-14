@@ -23,12 +23,12 @@ if($resultado)
     {
 		$reserva=$res['id_reserva'];
 		
-        $consulta= "UPDATE reservas SET estado='rechazado' WHERE id_reserva='$reserva'";
+        $consulta= "UPDATE reservas SET estado='rechazado', aceptada_fecha=CURRENT_DATE WHERE id_reserva='$reserva'";
         $re = actualizar($consulta);
       
     }
   }
-  $consulta= "UPDATE reservas SET estado='aceptado' WHERE id_reserva='{$idRes}'";
+  $consulta= "UPDATE reservas SET estado='aceptado', aceptada_fecha=CURRENT_DATE  WHERE id_reserva='{$idRes}'";
   $act = actualizar($consulta);
 	if ($act){ ?>
 			<script type="text/javascript">

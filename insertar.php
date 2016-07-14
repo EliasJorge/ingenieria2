@@ -142,7 +142,7 @@ include 'funciones.php';
 	if ($opcion == "rechazar"){
 		$idR = $_REQUEST['idR'];
 		$idPub = $_REQUEST['idP'];
-		$consulta = " update reservas set estado = 'rechazado' where id_reserva = '$idR' ";
+		$consulta = " update reservas set estado = 'rechazado', aceptada_fecha=CURRENT_DATE where id_reserva = '$idR' ";
 	}
 //************** recuperar cuenta ***************************************************************************
 	if ($opcion == "recuperarCuenta"){

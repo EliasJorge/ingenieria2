@@ -9,14 +9,14 @@
 							{
 							?>
 								
-								<font color = "899d36">Bienvenido </font><a href="perfil.php?mail=<?=$_SESSION['mail']?>"> <strong><?=$_SESSION['nombre']?></strong></a><font color = "899d36"> !</font>  
+								<font color = "899d36">Bienvenido </font><a href="perfil.php?mail=<?=$_SESSION['mail']?>"> <strong><?=$_SESSION['nombre']?></strong></a><font color = "899d36"> || </font>  
 								<a href="cerrar_sesion.php">Cerrar Sesión</a>
 							<?php
 							}
 							else 
 							{
 							?>
-							<a href="registro.php">Registrarse</a> <font color = "899d36"> | </font><a href="login.php">Iniciar Sesion</a>
+							<a href="registro.php">Registrarse</a> <font color = "899d36"> || </font><a href="login.php">Iniciar Sesion</a>
 							<?php
 							}
 							?>

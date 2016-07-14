@@ -9,8 +9,21 @@
 			window.location.href = "insertar.php?opcion=activarPublicacion&publicacion=<?php echo $id ?>";
 		}
 	}
+	function compartirEnRedes(pepe){
+		var redes = document.getElementById("redes").selectedIndex;
+		if(redes == null || redes == 0){
+			alert('Debe seleccionar una rede social.');
+			return false;
+		}else {
+			alert('La publicacion se compartio en: ' + document.getElementById("redes").value);
+			document.getElementById("redes").selectedIndex = 0;
+			pepe.setAttribute("data-dismiss", "modal"); // cerrar modal agregando valor al atributo data-dismiss
+			return true;
+		}
+	}
 </script>
 <?php
+include 'compartir_enredes.html'; 
 function reportado($publicacion){
 	$link = conectar1();
 	$consul = "select * from reportes where id_publicacion = '$publicacion'";
@@ -19,6 +32,9 @@ function reportado($publicacion){
 		return true;
 	else return false;
 }
+echo '
+	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#compartir">Compartir en redes</button>
+	';
 if(isset($_SESSION['loggedin']))
 {
 	if ($_SESSION['idU'] == $usu){

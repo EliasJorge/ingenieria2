@@ -44,9 +44,9 @@ include 'funciones.php';
 
 		} else {
 			echo '<script type="text/javascript">
-									alert("Ha ocurrido un error, intentelo nuevamente");
-									window.location="crear_publicacion.php"
-								</script>';
+					alert("Ha ocurrido un error, intentelo nuevamente");
+					window.location="crear_publicacion.php"
+				</script>';
 		}
 
 	}
@@ -169,8 +169,7 @@ include 'funciones.php';
 		$idPublicacion = $_GET['publicacion'];
 		$consulta = " update publicaciones set estado = 'activo' where id_publicacion = '$idPublicacion' ";
 	}
-	
-//************** insertar una valoracion en una publicacion ***************************************************************************
+//************** insertar un valoracion en una publicacion ***************************************************************************
 	if ($opcion == "valoraPub"){
 		$idRes = $_REQUEST['idRes'];
 		$idUsu = $_REQUEST['idUsu'];
@@ -178,13 +177,12 @@ include 'funciones.php';
 		$val = $_REQUEST['calificacion'];
 		if (isset($_REQUEST['comentario']) and !empty($_REQUEST['comentario'])){
 			$com = $_REQUEST['comentario'];
-		}else{
+		}
+		else{
 			$com = null;
 		}
 		$consulta = "INSERT INTO `valoracion_publicacion`(`id_reserva`, `id_publicacion`, `id_usuario`, `valoracion`, `comentario`) VALUES ('{$idRes}','{$idPub}','{$idUsu}','{$val}','{$com}')";
-		
-	}
-	
+	}	
 //************** insertar una valoracion para un usuario ***************************************************************************
 	if ($opcion == "valoraUsu"){
 		$idRes = $_REQUEST['idRes'];
@@ -199,14 +197,19 @@ include 'funciones.php';
 		$consulta = "INSERT INTO `valoracion_usuario`(`id_host`, `id_huesped`, `id_reserva`, `valoracion`, `comentario`) VALUES ('{$idUsu}','{$idHu}','{$idRes}','{$val}','{$com}')";
 		
 	}
+//************** insertar un comentario en tabla contacto ***************************************************************************
+	if ($opcion == "contacto"){
+		$mail = $_REQUEST['mail'];
+		$comentario = $_REQUEST['comentario'];
+		$consulta = "INSERT INTO `contacto`(`comentario`, `email`) VALUES ('{$comentario}','{$mail}')";
+	}
 	
-//*************************************************************************************************************
-
-
+//*************Consulta************************************************************************************************
+	
 	mysql_query($consulta,$con);
-
-
-
+	
+//*************************************************************************************************************	
+	
 	if ($opcion == "publicacion"){
 		if ($consulta)
 		{
@@ -349,6 +352,14 @@ include 'funciones.php';
 			<script type="text/javascript">
 				alert("La publicacion ya esta activa y disponible para futuras busquedas");
 				window.location="mostrar_publicacion.php?id=', $idPublicacion, '"
+			</script>
+		';
+	}
+	elseif ($opcion == "contacto"){
+		echo '
+			<script type="text/javascript">
+				alert("Tu comentario/pregunta fue guardada correctamente, recibiras una respuesta en los proximos dias");
+				window.location="index.php"
 			</script>
 		';
 	}

@@ -103,7 +103,7 @@
 						$sql = "SELECT	p.id_usuario dueño, p.titulo titulo, r.aceptada_fecha as fecha,
 										r.id_usuario as invitado, p.id_publicacion as publicacion
 								FROM reservas r INNER JOIN publicaciones p ON r.id_publicacion = p.id_publicacion
-								WHERE r.estado = 'aceptado'";
+								WHERE r.estado = 'aceptado' and (aceptada_fecha BETWEEN '{$fechaInicio}' AND '{$fechaFin}')";
 						$registro = mysql_query($sql, $con); /* envio la consulta a la BBDD */
 						if(mysql_num_rows($registro) == 0) echo '<hr>No hay couchs aceptados para las fechas indicadas<hr>';
 						else { 

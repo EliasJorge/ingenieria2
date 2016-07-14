@@ -1,0 +1,36 @@
+	<!-- Contenido de la pagina -->
+	<section id="main-slider" class="center">
+		<div class="center">
+			<div id="compartir" class="modal fade" role="dialog">
+				<div class="modal-dialog" id="pepe">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Compartir en una red social</h4>
+						</div>
+						<div class="modal-body">
+							<div class="">  
+								<label> Redes sociales:</label>
+								<SELECT name= 'redes' id="redes" required>
+									<OPTION VALUE=0 selected>Seleccione...</option>
+									<OPTION >Facebook</option>
+									<OPTION >Twitter</option>
+									<OPTION >Instagram</option>			
+								</SELECT>
+							</div>
+						
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Cancelar</button>
+							<button type="button" class="btn btn-primary btn-lg" onclick=" return compartirEnRedes(this)">Compartir</button>
+						<!--data-dismiss="modal"-->
+						</div>
+					</div>
+				</div>	
+			</div>
+			<br>
+			
+		</div>
+    </section><!--/section-->	
+	<!-- /contenido -->

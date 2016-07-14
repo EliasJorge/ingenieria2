@@ -93,7 +93,7 @@
 						echo
 							'<p>
 								<font size="5">
-									<strong>Donaciones para las fecha inicio: ' . $_REQUEST['fechaInicio'] . '<br>
+									<strong>Couchs aceptados para las fecha inicio: ' . $_REQUEST['fechaInicio'] . '<br>
 										 y la fecha fin: ' . $_REQUEST['fechaFin'] . '
 									</strong>
 								</font>
@@ -105,7 +105,7 @@
 								FROM reservas r INNER JOIN publicaciones p ON r.id_publicacion = p.id_publicacion
 								WHERE r.estado = 'aceptado'";
 						$registro = mysql_query($sql, $con); /* envio la consulta a la BBDD */
-						if(mysql_num_rows($registro) == 0) echo '<hr>No hay donaciones para las fechas indicadas<hr>';
+						if(mysql_num_rows($registro) == 0) echo '<hr>No hay couchs aceptados para las fechas indicadas<hr>';
 						else { 
 							echo	//<!-- encabezado de la tabla y la fila0 ---> 
 								'

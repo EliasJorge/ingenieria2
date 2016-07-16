@@ -1,8 +1,10 @@
 <section>
 		<div class="center">
 		<?php		
-			$consulta = "select * from publicaciones order by titulo asc";
-			$resultado = busqueda($consulta);			
+			$idU= $_SESSION['idU'];
+			$consulta = "select * from publicaciones where id_usuario = '$idU' order by titulo asc";
+			$resultado = busqueda($consulta);
+			if ($resultado){
 		?>
 			<table class="table table hover" id="listados">
 							<tr>
@@ -13,10 +15,10 @@
 							</tr>
 						<?php
 						if(!empty($resultado)){
-							$idU= $_SESSION['idU'];
+							
 							foreach ($resultado as $r){?>
 								<tr><?php
-								if ($r['id_usuario'] == $idU){
+								
 									echo "<td><img src=imagen.php?id=$r[id_publicacion] id='imagen_lista' class='img-rounded'></td>";
 									echo "<td><br><a href=mostrar_publicacion.php?id=$r[id_publicacion]>$r[titulo]</a></td>";
 								?>
@@ -29,11 +31,14 @@
 								</td>
 							</tr>
 							<?php
-								}
+								
 							}
 						}?>
 			</table>
 			
-	
+			<?php } else {
+				
+				echo "<h3> Todavia no tienes publicaciones para mostrar</h3>";
+			} ?>
 		</div>       
     </section>

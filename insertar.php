@@ -9,7 +9,7 @@ include 'funciones.php';
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 
 	<title>insertar</title>
 
@@ -44,9 +44,9 @@ include 'funciones.php';
 
 		} else {
 			echo '<script type="text/javascript">
-					alert("Ha ocurrido un error, intentelo nuevamente");
-					window.location="crear_publicacion.php"
-				</script>';
+									alert("Ha ocurrido un error, intentelo nuevamente");
+									window.location="crear_publicacion.php"
+								</script>';
 		}
 
 	}
@@ -136,14 +136,32 @@ include 'funciones.php';
 //************** Eliminar cuenta ***************************************************************************
 	if ($opcion == "eliminarCuenta"){
 		$idCuenta = $_GET['cuenta'];
-		$consulta = " update usuarios set estado = 'eliminado' where id_usuario = '$idCuenta' ";
+		$val = validar_eliminarUsu ($idCuenta);
+		if($val){
+			$consulta = " update usuarios set estado = 'eliminado' where id_usuario = '$idCuenta' ";
+		} else 	{
+					$mail = $_SESSION['mail'];?>
+					<script type="text/javascript">
+									alert("Tienes publicaciones activas, elimina primero las publicaciones para continuar");
+									window.location="perfil.php?mail=<?php echo $mail; ?>"
+								</script>';
+<?php 			}
+			
+		
 	}
 //************** Rechazar solicitud ***************************************************************************
 	if ($opcion == "rechazar"){
 		$idR = $_REQUEST['idR'];
 		$idPub = $_REQUEST['idP'];
-		$consulta = " update reservas set estado = 'rechazado', aceptada_fecha=CURRENT_DATE where id_reserva = '$idR' ";
+		$consulta = " update reservas set estado = 'rechazado' where id_reserva = '$idR' ";
 	}
+
+//************** Cancelar solicitud ***************************************************************************
+	if ($opcion == "cancelar"){
+		$idR = $_REQUEST['idR'];
+		$consulta = " update reservas set estado = 'cancelado' where id_reserva = '$idR' ";
+	}
+	
 //************** recuperar cuenta ***************************************************************************
 	if ($opcion == "recuperarCuenta"){
 		if($_GET['resp']){
@@ -169,7 +187,8 @@ include 'funciones.php';
 		$idPublicacion = $_GET['publicacion'];
 		$consulta = " update publicaciones set estado = 'activo' where id_publicacion = '$idPublicacion' ";
 	}
-//************** insertar un valoracion en una publicacion ***************************************************************************
+	
+//************** insertar una valoracion en una publicacion ***************************************************************************
 	if ($opcion == "valoraPub"){
 		$idRes = $_REQUEST['idRes'];
 		$idUsu = $_REQUEST['idUsu'];
@@ -177,12 +196,13 @@ include 'funciones.php';
 		$val = $_REQUEST['calificacion'];
 		if (isset($_REQUEST['comentario']) and !empty($_REQUEST['comentario'])){
 			$com = $_REQUEST['comentario'];
-		}
-		else{
+		}else{
 			$com = null;
 		}
 		$consulta = "INSERT INTO `valoracion_publicacion`(`id_reserva`, `id_publicacion`, `id_usuario`, `valoracion`, `comentario`) VALUES ('{$idRes}','{$idPub}','{$idUsu}','{$val}','{$com}')";
-	}	
+		
+	}
+	
 //************** insertar una valoracion para un usuario ***************************************************************************
 	if ($opcion == "valoraUsu"){
 		$idRes = $_REQUEST['idRes'];
@@ -197,6 +217,7 @@ include 'funciones.php';
 		$consulta = "INSERT INTO `valoracion_usuario`(`id_host`, `id_huesped`, `id_reserva`, `valoracion`, `comentario`) VALUES ('{$idUsu}','{$idHu}','{$idRes}','{$val}','{$com}')";
 		
 	}
+	
 //************** insertar un comentario en tabla contacto ***************************************************************************
 	if ($opcion == "contacto"){
 		$mail = $_REQUEST['mail'];
@@ -209,7 +230,7 @@ include 'funciones.php';
 	mysql_query($consulta,$con);
 	
 //*************************************************************************************************************	
-	
+
 	if ($opcion == "publicacion"){
 		if ($consulta)
 		{
@@ -297,6 +318,14 @@ include 'funciones.php';
 							</script>;
 <?php
 	}
+	elseif ($opcion == "cancelar"){
+	?>
+							<script type="text/javascript">
+									alert("La solicitud ha sido cancelada");
+									window.location="consultarReservas.php"
+							</script>;
+<?php
+	}
 	elseif ($opcion == "pregunta"){
 	?>
 							<script type="text/javascript">
@@ -320,6 +349,7 @@ include 'funciones.php';
 <?php
 	}
 	elseif ($opcion == "eliminarCuenta"){
+		if($val){
 		session_unset();
         session_destroy();
 		echo '
@@ -328,7 +358,7 @@ include 'funciones.php';
 				window.location="index.php"
 			</script>
 		';
-	}
+	}}
 	elseif ($opcion == "recuperarCuenta"){
 		if($_GET['resp']){
 			echo '

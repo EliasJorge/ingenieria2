@@ -8,7 +8,7 @@
 	// Connect to server and select databse.
 	$con = mysqli_connect("$host_db", "$user_db", "$pass_db","$db_name")or die("Cannot Connect to Data Base.");
 	$id = $_REQUEST['id'];//no reconoce id ?
-	echo $id;
+	
 	$consulta = "SELECT * FROM publicaciones WHERE id_publicacion = '$id'";
 	$result= mysqli_query($con,$consulta) or die(mysqli_error($con));
 	if(mysqli_num_rows($result))

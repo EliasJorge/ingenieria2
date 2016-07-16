@@ -58,6 +58,7 @@
 			$resultado = busqueda($consulta);			
 		?>
 		<div class="center">
+		<?php if ($resultado){ ?>
 			<table class="table table hover " id="listados">
 				<div class="center">
 							<tr>
@@ -132,7 +133,9 @@
 						}?>
 						</table>
 			<hr/>
-	
+		<?php }else{
+			echo "<h3>Todavia no te has quedado en ningun couch</h3>";
+		} ?>
 		</div>       
     </section><!--/#error-->
 	

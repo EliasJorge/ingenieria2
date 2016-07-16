@@ -5,14 +5,14 @@
 		}
 	}
 	function confirmarActivar(){
-		if (confirm('¿Esta seguro que desea volver a activar la publicacion?')){
+		if (confirm('¿Esta seguro que desea pausar la publicacion?')){
 			window.location.href = "insertar.php?opcion=activarPublicacion&publicacion=<?php echo $id ?>";
 		}
 	}
 	function compartirEnRedes(pepe){
 		var redes = document.getElementById("redes").selectedIndex;
 		if(redes == null || redes == 0){
-			alert('Debe seleccionar una rede social.');
+			alert('Debe seleccionar una red social.');
 			pepe.setAttribute("data-dismiss", ""); // cerrar modal agregando valor al atributo data-dismiss
 			return false;
 		}else {
@@ -24,20 +24,19 @@
 	}
 </script>
 <?php
-include 'compartir_enredes.html'; 
-function reportado($publicacion){
+include 'compartir_enredes.html';
+function reportado($publicacion, $idUsuario){
 	$link = conectar1();
-	$consul = "select * from reportes where id_publicacion = '$publicacion'";
+	$consul = "select * from reportes where id_publicacion = '$publicacion' and id_usuario = '$idUsuario'";
 	$resulta = mysql_query($consul,$link);
 	if(mysql_affected_rows($link) > 0)
 		return true;
 	else return false;
 }
-echo '
-	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#compartir">Compartir en redes</button>
-	';
+echo '<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#compartir">Compartir en redes</button>';
+
 if(isset($_SESSION['loggedin']))
-{
+{	$usuario= $_SESSION['idU'];
 	if ($_SESSION['idU'] == $usu){
 		
 		if ($est != 'eliminada'){
@@ -66,7 +65,7 @@ if(isset($_SESSION['loggedin']))
 	else{
 		
 		/****** codigo reportar ****/
-		if(reportado($id))
+		if(reportado($id, $usuario))
 			echo '
 				<input class=" derecha btn btn-primary btn-lg" type="button" disabled="true" value="Reportado">
 			';
@@ -76,9 +75,4 @@ if(isset($_SESSION['loggedin']))
 		/******************************/
 	}
  }
- else echo '
-			<div class="derecha">
-				<label for"login" size="5">Inicia secion para acceder a mas opciones:</label>
-				<input class="btn btn-primary btn-lg" type="button" id="login" value="Iniciar sesion" onclick="window.location.href= \'login.php\'"/>
-			</div>
-			';
+ else echo 'Tenes que registrarte para poder accceder a las opciones';

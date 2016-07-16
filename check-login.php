@@ -28,6 +28,7 @@
 					$_SESSION['loggedin'] = true;
 					$_SESSION['mail'] = $mail;
 					$_SESSION['nombre']= $row["nombre"];
+					$_SESSION['telefono']= $row["telefono"];
 					$_SESSION['tipoUsuario']= $row["tipo"];
 					$_SESSION['idU'] = $row["id_usuario"];
 					$_SESSION['foto'] = $row["foto"];

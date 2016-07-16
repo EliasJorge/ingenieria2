@@ -79,6 +79,19 @@ function validar_eliminarPub ($id){
 		
 	} else return true;
 }
+//**********************************************************************************************************//*****************************************************************************************************
+function validar_eliminarUsu ($idU){
+	
+	$consulta= "SELECT * FROM publicaciones WHERE id_usuario = '$idU' and estado = 'activo'";
+	$resul= mysql_query($consulta);
+	$fila= mysql_fetch_array($resul);
+	
+	if ($fila){
+		
+		return false;
+		
+	} else return true;
+}
 //**********************************************************************************************************
 	function mostrar_notas($result)
 	{

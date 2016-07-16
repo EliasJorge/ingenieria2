@@ -22,9 +22,11 @@ include 'funciones.php';
 			$publicacion = $_REQUEST['idPub'];
 			$permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
 			$limite_kb = 16384;
-			
+			//print_r ($_FILES["imagen"]);
 			if (isset($_FILES["imagen"])){
-				if (!empty ($_FILES[0]["imagen"]) and $_FILES [0]["imagen"]["tmp_name"] != ""){
+				
+				if (!empty ($_FILES["imagen"]) and $_FILES["imagen"]["tmp_name"] != ""){
+					if ($_FILES["imagen"]["error"][0] != 4){
 					$cantidad= count($_FILES["imagen"]["tmp_name"]);
 					for ($i=0; $i<$cantidad; $i++){
 						if (in_array($_FILES['imagen']['type'][$i], $permitidos) && $_FILES['imagen']['size'][$i] <= $limite_kb * 1024){
@@ -60,7 +62,7 @@ include 'funciones.php';
 							</script>;
 <?php
 				}
-			}
+			}}
 		
 ?>
 

@@ -36,7 +36,7 @@
 		else {
 			$email = $_SESSION['mail'];
 			$nameu = $_SESSION['nombre'];
-			$apellido = $_SESSION['idU'];
+			$apellido = $_SESSION['apellido'];
 			$idVisitante = $_SESSION['idU'];
 			$tel = $_SESSION['telefono'];
 		}
@@ -112,8 +112,26 @@
 					<strong>Email:</strong> <?=$email?>
 					<br>
 					<strong>Telefono:</strong> <?=$tel?>
+					
 					<br>
-					<br>
+					<?php 	
+						$bus= "select AVG(valoracion) as puntuacion from valoracion_usuario where id_huesped = '$idVisitante'";
+						$res= busqueda($bus);
+						if ($res[0]['puntuacion'] > 0){
+								echo "<strong>Puntuacion: </strong>".number_format($res[0]['puntuacion'],2);
+				?>
+								<form method="POST" action='listado_puntuacionesUs.php'>
+									<div class="center">
+										<input type="hidden" name="idU" id="idU" value="<?php echo $idVisitante; ?>">
+										
+										<input class="btn btn-primary btn-md" id="valoracion" name="valoracion" type="submit" value="ver todas las calificaciones"/>
+									</div>
+						</form>
+				<?php
+						}else{
+							echo "<strong>Puntuacion:</strong><p>El usuario no posee calificaciones</p>";
+						}
+				?>
 					<?php
 					if($_SESSION['idU'] == $idVisitante){	
 						echo '

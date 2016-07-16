@@ -54,9 +54,12 @@
 			$usuario = $_SESSION['idU'];
 			$fecha=date('o-m-d');
 			$consulta = "select * from publicaciones where id_usuario = '$usuario'";
+			$resultado = busqueda($consulta);
+			$cons="SELECT * FROM reservas r inner join publicaciones p on (r.id_publicacion = p.id_publicacion) where p.id_usuario ='$usuario'";
+			$res=busqueda($cons);
 			
-			$resultado = busqueda($consulta);			
-		?>
+						
+		if ($res){?>
 		<div class="center">
 			<table class="table table hover " id="listados">
 				<div class="center">
@@ -155,7 +158,12 @@
 						</table>
 			<hr/>
 	
-		</div>       
+		</div> 
+		<?php 
+		} else {
+			
+			echo "<div class='center'> <h3>Todavia no has tenido huespedes</h3></div>";
+		}?>		
     </section><!--/#error-->
 	
 	<!-- /contenido -->

@@ -25,7 +25,7 @@ include 'funciones.php';
 		$provincia=$_REQUEST['provincias'];
 		$titulo=$_REQUEST['titulo'];
 		$descripcion=$_REQUEST['descripcion'];
-		echo $descripcion;
+		
 		$tipoHospedaje=$_REQUEST['alojamiento'];
 		$cantidadHuespedes= $_REQUEST['huespedes'];
 		

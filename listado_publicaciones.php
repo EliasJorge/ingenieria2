@@ -50,7 +50,7 @@
 	<section>
 		<div>
 		<?php		
-			$consulta = "select * from publicaciones where estado = 'activo' order by titulo asc";
+			$consulta = "select * from publicaciones p inner join usuarios u on (p.id_usuario = u.id_usuario) where p.estado = 'activo' order by titulo asc";
 			$resultado = busqueda($consulta);			
 		?>
 			<table class="table table hover">
@@ -61,27 +61,22 @@
 								<th></th>
 							</tr>
 						<?php
-						$num = 27;
+						
 						foreach ($resultado as $r){?>
 							<tr><?php
-								$idUser= $r['id_usuario'];
-								$sql = "SELECT * FROM usuarios WHERE id_usuario='$idUser'";
-								$result1 = busqueda($sql);
-								//if(!empty($result1)){
-								foreach($result1 as $array){
-										if(($array['tipo'] == 'premium') or ($array['tipo'] == 'admin')){
+								
+										if(($r['tipo'] == 'premium') or ($r['tipo'] == 'admin')){
 											echo "<td><img src=imagen.php?id=$r[id_publicacion] id='imagen_lista' class='img-rounded'></td>";
 										}
 										else{
-											//echo "<td><img src=imagen.php?id=$num id='imagen_lista' class='img-rounded'></td>";
-											?>
+								?>
 											<td><img src="images/sillon.png" id='imagen_lista' class='img-rounded'></td>
-											<?php
+								<?php
 											
 										}
 									echo "<td><br><a href=mostrar_publicacion.php?id=$r[id_publicacion]>$r[titulo]</a></td>";
-									}
-								//}
+									
+								
 								?>
 								<td><br><div class="descripcion"><?php echo $r['descripcion']; ?></div></td>
 								<td>

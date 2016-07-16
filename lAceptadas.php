@@ -46,24 +46,7 @@
 			$( "#datepicker, #datepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 		});
 	</script>
-	<script>
-		$(function() {
-			$.datepicker.setDefaults({ 
-				dateFormat: 'yy-mm-dd',
-				changeMonth: true,
-				changeYear: true,
-				yearRange:"c-80:c",
-				defaultDate:"m d y",
-                dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
-                dayNamesShort: [ "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab" ],
-                monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
-                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-                monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ]
-			});
-			$( "#fechaNacimiento" ).datepicker();
-		});
-	</script>
+	
 	
 </head><!--/head-->
 
@@ -93,11 +76,10 @@
 						echo
 							'<p>
 								<font size="5">
-									<strong>Couchs aceptados para las fecha inicio: ' . $_REQUEST['fechaInicio'] . '<br>
-										 y la fecha fin: ' . $_REQUEST['fechaFin'] . '
+									<strong>Solicitudes aceptadas entre las fechas: <br>' . $_REQUEST['fechaInicio'] . ' y ' . $_REQUEST['fechaFin'] . '
 									</strong>
 								</font>
-							</p>';
+							</p><br>';
 						echo '<table class="table">'; //inicio de tabla						
 						/* consulta sql de donde saco los datos */
 						$sql = "SELECT	p.id_usuario dueño, p.titulo titulo, r.aceptada_fecha as fecha,
@@ -123,14 +105,14 @@
 								echo "<tr>"; // abro una nueva fila
 								echo " <td>" . $numero . "</td>"; // imprimo numero de fila
 								echo '<td> 
-									<input class="btn btn-primary btn-lg" id="verPerfil" name="verPerfil" type="button" value="Perfil invitado " onClick=\'location.href = "ver_perfil.php?id=', $row["invitado"], '"\'/>
+									<input class="btn btn-primary btn-md" id="verPerfil" name="verPerfil" type="button" value="Perfil dueño " onClick=\'location.href = "ver_perfil.php?id=', $row["dueño"], '"\'/>
 								</td>';
 								echo "<td>
-									<a href=mostrar_publicacion.php?id=" ,$row['publicacion'], ">" . $row['titulo'] . "</a>
+									<h3><a href=mostrar_publicacion.php?id=" ,$row['publicacion'], ">" . $row['titulo'] . "</a><h3>
 								</td>"; // imprimo el valor correspondiente a columna1 fila $numero
-								echo "<td>" . $row["fecha"] . "</td>"; // imprimo el valor correspondiente a columna3 fila $numero
+								echo "<td><h3>" . $row["fecha"] . "</h3></td>"; // imprimo el valor correspondiente a columna3 fila $numero
 								echo '<td> 
-									<input class="btn btn-primary btn-lg" id="verPerfil" name="verPerfil" type="button" value="Perfil invitado " onClick=\'location.href = "ver_perfil.php?id=', $row["dueño"], '"\'/>
+									<input class="btn btn-primary btn-md" id="verPerfil" name="verPerfil" type="button" value="Perfil invitado " onClick=\'location.href = "ver_perfil.php?id=', $row["invitado"], '"\'/>
 								</td>';
 								echo "</tr>"; // cierro la fila
 								$numero++; // incremento numero de filas hechas

@@ -48,19 +48,23 @@
 	<!-- Contenido de la pagina -->
 
 	<section>
-		<div>
+		<div class="center">
 		<?php
-			$consulta = "SELECT * FROM reservas WHERE estado = 'activo' AND id_usuario='$idU'";
+			$consulta = "SELECT * FROM reservas WHERE id_usuario='$idU'";
 			//ademas de esto deben ser solo de la publicacion seleccionada
 			$resultado = busqueda($consulta);
 			if($resultado){?>
-  			<table class="table table hover">
+			
+					<strong><h4>Mis reservas</h4></strong> <br>
+				
+				<br><br>
+  			<table class="table table hover" id="listados">
   							<tr>
   								<th>Publicacion</th>
-								<th>Reservado:</th>
+								<th></th>
 								<th>Desde</th>
 								<th>Hasta</th>
-  								<th>Estado</th>
+  								
 								<th></th>
   							</tr>
 						<?php
@@ -74,34 +78,96 @@
 							$idP= $r['id_publicacion'];
 							$sql="SELECT  * FROM publicaciones WHERE id_publicacion='$idP'";
 							$result2= busqueda($sql);
-							foreach($result2 as $array)
-							{
-								echo "<td><br><a>$array[titulo]</a></td>";
-								echo "<td><br><a></a></td>";
-								echo "<td><br><a>$fechaDesde</a></td>";
-								echo "<td><br><a>$fechaHasta</a></td>";
-								echo "<td><br><a>$est</a></td>";
-							}?>
+							if ($est == 'activo'){
+								foreach($result2 as $array)
+								{
+									echo "<td><h3><a href=mostrar_publicacion.php?id=$idP>$array[titulo]</a></h3></td>";
+									echo "<td><h3></h3></td>";
+									echo "<td><h3>$fechaDesde</h3></td>";
+									echo "<td><h3>$fechaHasta</h3></td>";
+								
+								}?>
 								<td>
-									<div>
-										<br>
-										<form action="insertar.php?opcion=cancelr" method="post">
+								
+									<div class="center">
+										
+										<form action="insertar.php?opcion=cancelar" method="post">
 											<input class="" type="hidden" id="idR" name="idR" value="<?php echo $idR;?>">
 											<input class="btn btn-primary btn-lg" type="submit" value="Cancelar Reserva">
 										</form>
 									</div>
+								
 								</td>
 							</tr>
-				<?php 	}
-			}else{
-						echo '<script type="text/javascript">
-							alert ("Aun no realizo reservas");
-							window.location="index.php"
-							</script>';
-					}?>
+			<?php 			}
+						}
+						foreach ($resultado as $r)
+						{?>
+							<tr><?php
+							$fechaDesde= $r['fecha_desde'];
+							$fechaHasta= $r['fecha_hasta'];
+							$est= $r['estado'];
+							$idR=$r['id_reserva'];
+							$idP= $r['id_publicacion'];
+							$sql="SELECT  * FROM publicaciones WHERE id_publicacion='$idP'";
+							$result2= busqueda($sql);
+							if ($est == 'aceptado'){
+								foreach($result2 as $array)
+								{
+									echo "<td><h3><a href=mostrar_publicacion.php?id=$idP>$array[titulo]</a></h3></td>";
+									echo "<td><h3></h3></td>";
+									echo "<td><h3>$fechaDesde</h3></td>";
+									echo "<td><h3>$fechaHasta</h3></td>";
+								
+								}?>
+								<td>
+								
+									<div class="center">
+										<h3>Esta reserva ha sido aceptada</h3>
+									</div>
+								
+								</td>
+							</tr>
+			<?php 			}
+						}
+						foreach ($resultado as $r)
+						{?>
+							<tr><?php
+							$fechaDesde= $r['fecha_desde'];
+							$fechaHasta= $r['fecha_hasta'];
+							$est= $r['estado'];
+							$idR=$r['id_reserva'];
+							$idP= $r['id_publicacion'];
+							$sql="SELECT  * FROM publicaciones WHERE id_publicacion='$idP'";
+							$result2= busqueda($sql);
+							if ($est == 'rechazado'){
+								foreach($result2 as $array)
+								{
+									echo "<td><h3><a href=mostrar_publicacion.php?id=$idP>$array[titulo]</a></h3></td>";
+									echo "<td><h3></h3></td>";
+									echo "<td><h3>$fechaDesde</h3></td>";
+									echo "<td><h3>$fechaHasta</h3></td>";
+								
+								}?>
+								<td>
+								
+									<div class="center">
+										<h3>Esta reserva ha sido rechazada</h3>
+									</div>
+								
+								</td>
+							</tr>
+			<?php 			}
+						}
+			
+			?>
 			</table>
 			<hr/>
-
+			<?php } else {
+				
+				echo "<h3>Todavia no tienes reservas</h3>";
+				
+			}?>
 		</div>
     </section><!--/section-->
 
